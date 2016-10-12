@@ -1,1 +1,1 @@
-# reputation-survey
+# sybil-survey

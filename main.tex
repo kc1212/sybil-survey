@@ -1,0 +1,39 @@
+\documentclass[12pt]{article}
+
+\usepackage{hyperref} % for autoref
+\usepackage[
+    backend=biber,
+    sortlocale=en_GB
+]{biblatex}
+\addbibresource{ref.bib}
+
+\title{Literature Survey:\\The Sybil-Attack in Reputation Systems}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\begin{abstract}
+\end{abstract}
+
+\section{Introduction}
+\input{intro.tex}
+
+\section{Reputation Systems}\label{sec:reputation}
+\input{reputation.tex}
+
+\section{The Sybil-Attack}\label{sec:sybil}
+\input{sybil.tex}
+
+\section{Defences}\label{sec:defences}
+\input{defences.tex}
+
+\section{Summary}
+
+\printbibliography
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
