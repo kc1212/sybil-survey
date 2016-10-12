@@ -1,38 +1,41 @@
-Reputation systems (described in \autoref{sec:reputation}) allow entites,
+Reputation systems (described in \autoref{sec:reputation}) allow entities,
 usually humans, to trust each other in the cyberspace based on their prior
 interactions (logical) or knowledge from other entities. For instance, online
-marketplaces such as Aamazon or eBay often use a reputation system, causing new
-buyers to have a higher likelihood to buy goods from merchents with a high
+marketplaces such as Amazon or eBay often use a reputation system, causing new
+buyers to have a higher likelihood to buy goods from merchants with a high
 rating (a metric for reputation) because a lot of other buyers left a positive
 feedback.
 
 However, reputation systems are vulnerable to many types of attacks. The
-sybil-attack, first described by Douceur\cite{douceur2002sybil}, is an attack
-where an entity can assume multiple identities or sybils, and then attack either
+Sybil-attack, first described by Douceur\cite{douceur2002sybil}, is an attack
+where an entity can assume multiple identities or Sybils, and then attack either
 another entity or undermine the whole reputation system (we discuss it in more
-details in \autoref{sec:sybil}). In the marketplace example, the merchent could
+details in \autoref{sec:sybil}). In the marketplace example, the merchant could
 create multiple fake accounts and submitting a lot of positive feedback to the
 real account to boost the rating. It is one of the most important attacks
 because it leads to a large number of consequences including but not limited to
 spreading false information, ballot stuffing\cite{bhattacharjee2005avoiding} and
-eclipse attacks\cite{singh2006eclipse}. Thus, preventing the sybil-attack is
-likely to significantly increase the credibility of reputaiton systems.
+eclipse attacks\cite{singh2006eclipse}. Thus, preventing the Sybil-attack is
+likely to significantly increase the credibility of reputation systems.
 
 Sybil-defence mechanisms come in various shapes and sizes. Some rely on a
 trusted third party (\autoref{sec:trusted_party}), some introduce a cost in
 identity creation (\autoref{sec:costly_id}), some exploit the graph
 characteristics (\autoref{sec:graph}) and so on. To the best our knowledge,
 there does not exist a recent and comprehensive survey that focuses on the
-sybil-attack in reputation systems.
+Sybil-attack in reputation systems.
 
+% to this end?
 % scope of this work
-In this work, we survey the defence mechanisms proposed by various reputation
-systems to eliminate or minimise sybil-attacks as well as general approaches
-that do not depend on any specific reputation system. Sybil-attacks do not only
-exist in reputation systems. Wireless sensor networks for example are also
-vulnerable, the attacker can cripple the routing algorithm or defeat distributed
-storage mechanisms\cite{newsome2004sybil}. However, wireless sensor networks do
-not usually involve reputation systems, thus it is not covered.
+To this end, we survey the defence mechanisms proposed by various reputation
+systems to eliminate or minimise Sybil-attacks as well as general approaches
+that do not depend on any specific reputation systems. Note that Sybil-attacks
+do not only exist in reputation systems. Wireless sensor networks for example
+are also vulnerable, the attacker can cripple the routing algorithm or defeat
+distributed storage mechanisms\cite{newsome2004sybil}. Thus defence mechanisms
+that do not apply to reputation systems are outside the scope of this work and
+are not covered. On the other hand, since reputation systems are often also
+peer-to-peer systems, we do cover the more general defence mechanisms.
 
 Our main contributions are the following.
 \begin{enumerate}
