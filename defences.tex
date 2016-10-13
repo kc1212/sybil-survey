@@ -1,10 +1,34 @@
 % TODO expand, better intro
 In this section we categorise various defence techniques against the
-sybil-attack for reputation systems.
+sybil-attack in reputation systems.
 
 \subsection{Trusted Third Party}\label{sec:trusted_party}
-TrustMe\cite{singh2003trustme}
-eBay\cite{resnick2002trust}
+One of the earliest and best known reputation system is
+eBay\cite{resnick2002trust}. The buyers and sellers rely on a trusted third
+party, in this case eBay, to gather and distribute feedbacks after every
+transaction. Even when there are no incentives to provide feedback, Resnick and
+Zeckhauser observed that feedback was provided more than half of the
+time\cite{resnick2002trust}, making eBay one of the most well-known online
+marketplaces.
+
+In general, trusted third parties manage the issurance and verification of
+identities. Thus they can apply a fee on the peer for creating a new
+identity\cite{resnick2001social} or rate-limit the creation of new
+identities\cite{douceur2002sybil}, making sybil-attacks more difficult.
+Furthermore, trusted third parties often have the ability to manipulate the
+identities. For example they could punish the attackers by disabling all of
+their identity when caught, making the sybil-attack much riskier especially when
+identities are costly.
+
+Trusted third party is likely the most widely used technique in practice.
+Marketplaces such as Amazon or eBay, online forums such as Stackoverflow or
+Reddit, all use a form of trusted third party.
+
+Unfortunately, a trusted third party is often a single point of failure.
+Moreover, being a centralised system, it is difficult to scale up to suit
+increasing user demands. % TODO GIVE exmaples of failures
+In the remainder of this section, we focus on distributed techniques for
+preventing the sybil-attack.
 
 \subsection{Costly Identity Creation}\label{sec:costly_id}
 \subsubsection{IP Address}
@@ -31,6 +55,7 @@ Sybil-proof\cite{cheng2005sybilproof}
 Self-registration\cite{dinger2006defending}
 Secure-Overlay\cite{lua2007securing}
 SybilProof-DHT\cite{lesniewski2010whanau}
+TrustMe\cite{singh2003trustme} is a reputation that focuses on anonymity.
 
 Beth 94\cite{beth1994valuation}
 PGP (Zimmermann) 95\cite{zimmermann1995official}
@@ -75,7 +100,6 @@ ReDS
 Tulungan
 GRAft
 PerContRep
-
 
 
 %%% Local Variables:
