@@ -35,32 +35,51 @@ preventing the sybil-attack.
 \subsubsection{Low reputation for new users}
 
 \subsection{Graph Techniques}\label{sec:graph}
-BarterCast\cite{meulpolder2009bartercast}
 EigenTrust\cite{kamvar2003eigentrust}
-Social-network\cite{viswanath2010analysis}
-SybilGuard\cite{yu2006sybilguard}
-SybilLimit\cite{yu2008sybillimit}
 Theory\cite{seuken2011sybil}
 
+\subsubsection{Flow Based}
+BarterCast\cite{meulpolder2009bartercast}
+SybilRes\cite{delaviz2012sybilres}
+
+\subsubsection{Topology}
+SybilGuard\cite{yu2006sybilguard}
+SybilLimit\cite{yu2008sybillimit}
+SybilInfer\cite{danezis2009sybilinfer}
+SybilShield\cite{shi2013sybilshield} - assuming sybils have bad connectedness
+SumUp\cite{tran2009sybil}
+GateKeeper\cite{tran2011optimal} - based on SumUp
+Social-network\cite{viswanath2010analysis} - community detection
+
+Distributed Sparse Cut Monitoring\cite{}
+
+Other systems are built on top:
+ReDS\cite{akavipat2014reds} suggests to use sybilimit or sybilinfer
+SybilProof-DHT\cite{lesniewski2010whanau}
 \subsection{Reputation Transfer}
 Trust-transfer\cite{seigneur2005trust}
 
-\subsection{Blockchain Based Techniques?}
-Privacy-preserving\cite{schaub2016trustless}
+\subsection{Self Registration}
+P-GRID 01\cite{aberer2001p}
+Self-registration\cite{dinger2006defending} - distributed registration based on IP address
+
+\subsection{Cryptography Based Techniques?}
+Secure-Overlay\cite{lua2007securing} - ID crypto and SSS
+Privacy-preserving\cite{schaub2016trustless} - blockchain?
 Proof-of-stake\cite{dennis2016rep}
+SybilConf\cite{tegeler2010sybilconf}
+
+\subsection{Content Driven}
+\cite{chatterjee2008robust}
 
 \subsection{Unsorted?}
-SybilInfer\cite{danezis2009sybilinfer}
-Sybil-proof\cite{cheng2005sybilproof}
-Self-registration\cite{dinger2006defending}
-Secure-Overlay\cite{lua2007securing}
-SybilProof-DHT\cite{lesniewski2010whanau}
-TrustMe\cite{singh2003trustme} is a reputation that focuses on anonymity.
 
+Beth and PGP limits Sybil attack to some extent by using social graphs
 Beth 94\cite{beth1994valuation}
 PGP (Zimmermann) 95\cite{zimmermann1995official}
+
+
 Yu 00\cite{yu2000social}
-P-GRID 01\cite{aberer2001p}
 CORE 02\cite{michiardi2002core}
 XRep 02\cite{damiani2002reputation}
 Lee 03\cite{lee2003cooperative}
@@ -71,36 +90,37 @@ Guha 04\cite{guha2004propagation}
 Marti 04\cite{marti2004limited}
 ARA 05\cite{ham2005ara}
 Scrivener 05\cite{nandi2005scrivener}
-Song 05\cite{song2005trusted}
+FuzzyTrust Song 05\cite{song2005trusted}
 TrustGuard 05\cite{srivatsa2005trustguard}
 Xiong 05\cite{xiong2007countering}
 PowerTrust 06\cite{zhou2007powertrust}
 Credence 06\cite{walsh2006experience}
 P2PRep/Fuzzy 06\cite{aringhieri2006fuzzy}
+Regret\cite{sabater2001regret, sabater2002social}
 % Li 07 - MANETs
 
-Histos
-Sopras
-Regret
-Beta
-Confidant
-Gupta et al.
-PeerTrust
-Ismail et al.
-Pride
-FuzzyTrust
-Travos
-Gal-Oz et al.
-Coner et al.
-H-Trust
-RateWeb
-Tong and Zhang
-R2Trust
-ReDS
-Tulungan
-GRAft
-PerContRep
+Histos and Sopras\cite{zacharia2000collaborative}, doesn't really have structure?
+Beta\cite{jsang2002beta}
+Confidant\cite{buchegger2002performance} MANETs
+Gupta et al.\cite{gupta2003reputation}
+PeerTrust\cite{xiong2004peertrust}
+Pride\cite{dewan2004pride}
+Gal-Oz et al. \cite{gal2008robust} communities are collection of knots, sybils
+can create their own knot?
+R2Trust\cite{tian2011h2trust}
+PerContRep\cite{yan2014percontrep}
 
+Parental control\cite{tehale2012parental}
+DSybil\cite{yu2009dsybil}
+Sok\cite{alvisi2013sok}
+Symon\cite{jyothi2009symon}
+
+\subsection{Does not handle Sybil-attack?}
+TrustMe\cite{singh2003trustme} is a reputation that focuses on anonymity, no mention of sybil attack, not one of its focus?
+
+H-Trust\cite{zhao2009htrust} does not mention sybil
+
+Coner et al.\cite{conner2009trust} assumes clients cannot perform sybil attack
 
 %%% Local Variables:
 %%% mode: latex
