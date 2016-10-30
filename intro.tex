@@ -1,47 +1,33 @@
-Reputation systems (described in \autoref{sec:reputation}) allow entities,
-usually humans, to trust each other in the cyberspace based on their prior
-interactions (logical) or knowledge from other entities. For instance, online
-marketplaces such as Amazon or eBay often use a reputation system, and new
-buyers are more likely to buy goods from merchants with a high rating (a metric
-for reputation).
+Electronic commerce and online social networking are common events at the
+present time. They allow us to orchestrate many aspects of our lives in the
+comfort of our homes, behind the monitors of our devices. An online identity is
+often required to use such services, for examples we must create an account to
+use tweet\footnote{A message sent using Twitter is a tweet.} our friend who must
+also have an account. In this scenario, users can choose to remain psudonymous
+if they are careful, where their real-life identity is uncorrelated with their
+online identity. % privacy
 
-However, reputation systems are vulnerable to many types of attacks. The
-Sybil-attack, first described by Douceur\cite{douceur2002sybil}, is an attack
-where an entity can assume multiple identities or Sybils, and then attack either
-another entity or undermine the whole reputation system (we discuss it in more
-details in \autoref{sec:sybil}). In the marketplace example, the merchant could
-create multiple fake accounts and submitting a lot of positive feedback to the
-real account to boost the rating. It is one of the most important attacks
-because it leads to a large number of consequences including but not limited to
-spreading false information, ballot stuffing\cite{bhattacharjee2005avoiding} and
-eclipse attacks\cite{singh2006eclipse}. Thus, preventing the Sybil-attack is
-likely to significantly increase the credibility of reputation systems.
+While creating pseudonyms is a useful for protecting users' privacy, it also
+opens a alleyway for attackers. The Sybil attack, first described by
+Douceur\cite{douceur2002sybil}, is an attack where an entity can assume multiple
+identities or Sybils, and then attack either another entity or undermine the
+whole system. For example, a malicious twitter user can create many fake
+identities and have the fake identities follow his read identity, thus creating
+a false reputation. It is one of the most important attacks because it leads to
+a large number of consequences including but not limited to spreading false
+information, ballot stuffing\cite{bhattacharjee2005avoiding} and eclipse
+attacks\cite{singh2006eclipse}. Furthermore, to the best of our knowledge, there
+is no general solution for preventing the Sybil attack.
 
-Sybil-defence mechanisms come in various shapes and sizes. Some rely on a
-trusted third party (\autoref{sec:trusted_party}), some introduce a cost in
-identity creation (\autoref{sec:costly_id}), some exploit the graph
-characteristics (\autoref{sec:graph}) and so on. To the best our knowledge,
-there does not exist a recent and comprehensive survey that focuses on the
-Sybil-attack in reputation systems.
-
-% to this end?
-% scope of this work
-To this end, we survey the defence mechanisms proposed by various reputation
-systems to eliminate or minimise Sybil-attacks as well as general approaches
-that do not depend on any specific reputation systems. Note that Sybil-attacks
-do not only exist in reputation systems. Wireless sensor networks and more
-generally MANETs (mobile ad hoc networks) for example are also vulnerable, the
-attacker can cripple the routing algorithm or defeat distributed storage
-mechanisms\cite{newsome2004sybil}. Thus defence mechanisms that do not apply to
-reputation systems are outside the scope of this work and are not covered. On
-the other hand, since reputation systems are often also peer-to-peer systems, we
-do cover the more general defence mechanisms.
-
-Our main contributions are the following.
-\begin{enumerate}
-  \item TODO
-  \item TODO
-\end{enumerate}
+In this work, we survey both the theory and practical aspects of the
+Sybil attack. Section \ref{sec:sybil} describes the Sybil attack in more detail
+and outlines some of the theoretical results. Then we look at how researchers
+and black-hat hackers mounted the Sybil attack on real-world e-commerce and
+online social network systems. There is a large variety of Sybil attack defence
+mechanisms, from using trusted-third-party to exploiting the graph
+characteristics in online social networks, thus we classify those mechanisms
+by their ``main idea'' in \ref{sec:defences}. Finally we present the related
+work in this area in Section \ref{sec:related}.
 
 %%% Local Variables:
 %%% mode: latex
