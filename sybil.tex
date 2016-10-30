@@ -1,12 +1,60 @@
 The Sybil attack is coined by Douceur\cite{douceur2002sybil} in 2002 in the
-context of peer-to-peer systems. Preventing the Sybil attack is in fact a lot
-more difficult because peer-to-peer systems often do not have a central, trusted
-authority. So it is always possible to create new identities.
+context of peer-to-peer systems. In this section, we first introduce the Sybil
+attack using Douceur's original definition and outline the key (discouraging)
+theoretical results. Next, we review practical attacks in three types of systems
+(1) MANETs (mobile ad-hoc networks) such as sensor networks, (2) reputation
+systems such as eBay or PageRank\cite{page1999pagerank} and (3) OSN (online
+social networks) such as Twitter and Facebook. We hope our review illuminates
+the alarming consequences of the Sybil attack.
 
-Important theoretical results:
-Sybil-proof\cite{cheng2005sybilproof} - symmetric reputation functions cannot
-provide Sybil-proofness, must use asymmetric reputation functions.
+\subsection{Theoretical Results}
+Douceur defined the Sybil attack as forging multiple identities under the same
+entity\cite{douceur2002sybil}. An entity can be for example a physical user of
+the system and identities are how entities present themselves to the system.
+Thus a local entity has no direct knowledge of remote entities, only their
+identities. We use these terms in the remainder of the survey. The author
+modelled the system as a general distributed computing environment where there
+is no constraint on the topology, every node has limited computational resources
+and messages are guaranteed to be delivered. Under this model, the author proved
+that the Sybil attack is always possible without a central, trusted authority.
 
+% Preventing the Sybil attack is in fact a lot
+% more difficult because peer-to-peer systems often do not have a central, trusted
+% authority.
+
+Cheng and Friedman proved an important result regarding the Sybil attack in
+reputation systems\cite{cheng2005sybilproof}. Reputation systems are commonly
+used in MANETs, e-commerce and the internet in general, where entities are
+rewarded by their good behaviour and penalised otherwise. Google's
+PageRank\cite{page1999pagerank} is an example of a reputation system, where a
+large number of links to a website makes it more reputable. Cheng and Friedman
+classified reputation systems into two categories,
+\begin{enumerate}
+\item symmetric reputation systems where the reputation score only depends on
+  the network topology, popular reputation mechanisms such as
+  PageRank\cite{page1999pagerank} and EigenTrust\cite{kamvar2003eigentrust} are
+  examples of symmetric reputation systems, and
+    \item asymmetric reputation systems where there some nodes are trusted and
+      reputation scores are propogated through the trusted nodes, most OSN are
+      examples of asymmetric reputation systems.
+\end{enumerate}
+The authors formally proved that symmetric reputation systems are vulnerable to
+the Sybil attack. But in the asymmetric case, it is possible to construct a
+Sybil-proof reputation system.
+
+\subsection{The Sybil Attack in MANETs}
+% TODO should we include this?
+
+\subsection{The Sybil Attack in Reputation Systems}
+
+\subsubsection{Reputation Systems}
+\subsubsection{Attacks}
+
+\subsection{The Sybil Attack in Online Social Networks}
+\subsubsection{Online Social Networks}
+\subsubsection{Attacks}
+
+\subsection{TODO}
 a test bed for sybil attacks\cite{irissappane2012towards}
 
 Quantifying Sybil attack\cite{margolin2008quantifying}
