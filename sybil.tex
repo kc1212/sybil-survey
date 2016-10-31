@@ -54,39 +54,59 @@ OSN (online social networks) are vulnerable to the Sybil attack even when most
 of them use a central, trusted authority such as Facebook. In OSN, users create
 profiles and form relationships with friends. In contrast with real world
 relationships, it is much easier to create relationships in OSN even with
-strangers. Authors of \cite{sophos} created a Facebook profile and send friend
-requests to 200 random users, and 41\% of the users accepted the friend request.
-Combining with the ability to create new identities with very little cost, it is
-possible to perform many types of attacks which we outline below.
+strangers. In 2008, Sophos conducted an experiment where they created a Facebook
+profile and send friend requests to 200 random users, and 41\% of the users
+accepted the friend request\cite{sophos}. Combining with the ability to create
+new identities with very little cost, it is possible to perform many types of
+attacks which we outline below.
 
 \subsubsection{Identity Theft}
-Authors of \cite{bilge2009all} created two attacks on five social
-network sites including Facebook and LinkedIn - profile cloning and cross-site
-profile cloning. The iCloner, was created to automate these attacks.
+Authors of \cite{bilge2009all} created two attacks - profile cloning and
+cross-site profile cloning, targeting five social network sites including
+Facebook and LinkedIn. The iCloner system was created to automate these
+attacks.
 
-In profile cloning, iCloner used publicly available
-information to automatically create clones of the victim's profiles, effectively
-creating Sybils. iCloner then sent friend requests from the cloned profile
-to the friends of the victim. The fact that the victim may have many
-friends that they do not contact very often, e.g. friend from primary school
-living in another country, makes this attack highly effective. The authors found
-that the acceptance rate for cloned profiles was over 60\%. Much higher than the
-acceptance rate of 30\% for fictitious profiles. Once the friendship is
-established, it is possible to extract private information that is not available
-publicly and perform identity theft.
+In profile cloning, iCloner uses publicly available information to automatically
+create clones of the victim's profiles, effectively creating Sybils. iCloner
+then sent friend requests from the cloned profile to the friends of the victim.
+The fact that the victim may have many friends that they do not contact very
+often, e.g. friend from primary school living in another country, makes this
+attack highly effective. The authors found that the acceptance rate for cloned
+profiles was over 60\%. Much higher than the acceptance rate of 30\% for
+fictitious profiles. Once the friendship is established, it is possible to
+extract private information that is not available publicly and perform identity
+theft.
 
 The idea of cross-site profile cloning is similar, except the cloned profile is
 created on another social network site that the victim does not yet use. Once
 the cloned profile is created, iCloner attempts to identify friends of the
 victim and begins sending friend requests. Similarly, 56\% of the friend
-requests were accepted. These examples demonstrate that the carelessness of
-users and the ability to create Sybils makes makes OSN vulnerable to identity
-theft.
+requests were accepted. 
+
+A more recent study created SbN (Socialbot Network) targeting
+Facebook\cite{boshmaf2011socialbot}. Each socialbot is a Sybil created by the
+attack, it controls a forged profile and minic human behaviour to avoid
+detection. The attacker is the botmaster who coordinates the socialbots to
+achieve a common objective such as infiltrating the target OSN by creating
+friend relationships with real users. The authors found that infiltration
+success rate was as high as 80\% and the FIS\cite{stein2011facebook} (Facebook
+Immune System) was not sufficient to prevent the attack. Once the relationships
+are established, the botmaster can command the socialbots to start gathering
+private information which can then be used for identity theft.
+
+% authors also said that Sybil detection based on attack edges is not effective
+% because it's easy to create trust relationships with strangers
+
+These examples demonstrate that the carelessness of users and the ability to
+create Sybils makes OSN vulnerable to identity theft. Moreover, identity theft
+is only an entry point. Once trust relationships are established, the attacker
+can perform many other types of attacks such as spamming, phishing or
+astroturfing to gain advantage.
+
+\subsubsection{Spreading Misinformation}
 
 \subsubsection{Spam}
 Spam \cite{facebookspam}
-
-\subsubsection{Fake Friends?}
 
 \subsection{The Sybil Attack in Reputation Systems}
 
