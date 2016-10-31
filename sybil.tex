@@ -13,11 +13,17 @@ Douceur defined the Sybil attack as forging multiple identities under the same
 entity\cite{douceur2002sybil}. An entity can be for example a physical user of
 the system and identities are how entities present themselves to the system.
 Thus a local entity has no direct knowledge of remote entities, only their
-identities. We use these terms in the remainder of the survey. The author
-modelled the system as a general distributed computing environment where there
-is no constraint on the topology, every node has limited computational resources
-and messages are guaranteed to be delivered. Under this model, the author proved
-that the Sybil attack is always possible without a central, trusted authority.
+identities. The forged identities do not necessarily follow the protocol
+specified by the underlying network, they may deviate arbitrarily from the
+protocol, i.e. they assume the characteristics of Byzantine
+fault\cite{lamport1982byzantine}. We use these terms in the remainder of the
+survey.
+
+The author modelled the system as a general distributed computing
+environment where there is no constraint on the topology, every node has limited
+computational resources and messages are guaranteed to be delivered. Under this
+model, the author proved that the Sybil attack is always possible without a
+central, trusted authority.
 
 % Preventing the Sybil attack is in fact a lot
 % more difficult because peer-to-peer systems often do not have a central, trusted
@@ -36,24 +42,59 @@ classified reputation systems into two categories,
   PageRank\cite{page1999pagerank} and EigenTrust\cite{kamvar2003eigentrust} are
   examples of symmetric reputation systems, and
     \item asymmetric reputation systems where there some nodes are trusted and
-      reputation scores are propogated through the trusted nodes, most OSN are
+      reputation scores are propagated through the trusted nodes, most OSN are
       examples of asymmetric reputation systems.
 \end{enumerate}
 The authors formally proved that symmetric reputation systems are vulnerable to
 the Sybil attack. But in the asymmetric case, it is possible to construct a
 Sybil-proof reputation system.
 
-\subsection{The Sybil Attack in MANET}
-% TODO should we include this?
+\subsection{The Sybil Attack in Online Social Networks}
+OSN (online social networks) are vulnerable to the Sybil attack even when most
+of them use a central, trusted authority such as Facebook. In OSN, users create
+profiles and form relationships with friends. In contrast with real world
+relationships, it is much easier to create relationships in OSN even with
+strangers. Authors of \cite{sophos} created a Facebook profile and send friend
+requests to 200 random users, and 41\% of the users accepted the friend request.
+Combining with the ability to create new identities with very little cost, it is
+possible to perform many types of attacks which we outline below.
+
+\subsubsection{Identity Theft}
+Authors of \cite{bilge2009all} created two attacks on five social
+network sites including Facebook and LinkedIn - profile cloning and cross-site
+profile cloning. The iCloner, was created to automate these attacks.
+
+In profile cloning, iCloner used publicly available
+information to automatically create clones of the victim's profiles, effectively
+creating Sybils. iCloner then sent friend requests from the cloned profile
+to the friends of the victim. The fact that the victim may have many
+friends that they do not contact very often, e.g. friend from primary school
+living in another country, makes this attack highly effective. The authors found
+that the acceptance rate for cloned profiles was over 60\%. Much higher than the
+acceptance rate of 30\% for fictitious profiles. Once the friendship is
+established, it is possible to extract private information that is not available
+publicly and perform identity theft.
+
+The idea of cross-site profile cloning is similar, except the cloned profile is
+created on another social network site that the victim does not yet use. Once
+the cloned profile is created, iCloner attempts to identify friends of the
+victim and begins sending friend requests. Similarly, 56\% of the friend
+requests were accepted. These examples demonstrate that the carelessness of
+users and the ability to create Sybils makes makes OSN vulnerable to identity
+theft.
+
+\subsubsection{Spam}
+Spam \cite{facebookspam}
+
+\subsubsection{Fake Friends?}
 
 \subsection{The Sybil Attack in Reputation Systems}
 
 \subsubsection{Reputation Systems}
 \subsubsection{Attacks}
 
-\subsection{The Sybil Attack in Online Social Networks}
-\subsubsection{Online Social Networks}
-\subsubsection{Attacks}
+\subsection{The Sybil Attack in MANET}
+% TODO should we include this?
 
 \subsection{TODO}
 a test bed for sybil attacks\cite{irissappane2012towards}
