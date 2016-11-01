@@ -8,7 +8,7 @@ systems such as eBay and (3) OSN (online social networks) such as Twitter and
 Facebook. We hope our review illuminates the alarming consequences of the Sybil
 attack.
 
-\subsection{Theoretical Results}
+\subsection{Theoretical Results}\label{sec:sybil-theory}
 Douceur defined the Sybil attack as forging multiple identities under the same
 entity\cite{douceur2002sybil}. An entity can be for example a physical user of
 the system and identities are how entities present themselves to the system.
@@ -128,9 +128,28 @@ bot accounts that injected thousands of tweets to smear the Democratic candidate
 
 
 \subsection{The Sybil Attack in Reputation Systems}
+Reputation systems cultivate collaborative behaviour by allowing entities to
+trust each other based on community feedback, usually in the form of a
+reputation score. Entities decide whom to trust based on the reputation scores,
+thus entities are also incentivised to behave honestly. Reputation systems are
+found in many context. In e-commerce, namely eBay, researchers found that the
+merchant's reputation ``is a statistically and economically significant
+determinant of auction prices''\cite{houser2006reputation}, and ``buyers are
+willing to pay 8.1\% more'' for goods sold buy a reputable
+merchant\cite{resnick2006value}. The file sharing peer-to-peer network
+BitTorrent uses tit-for-tat as an ephemeral reputation system to encourage peers
+to upload in exchange for better download speeds\cite{cohen2003incentives}. The
+aforementioned PageRank\cite{page1999pagerank} is also a reputation system, used
+for ranking reputable websites higher in Google's search results. Some OSN can
+be considered as reputation systems too, Twitter accounts with a lot of
+followers may be more reputable than accounts with fewer followers.
 
-\subsubsection{Reputation Systems}
-\subsubsection{Attacks}
+Unfortunately, reputation systems are also vulnerable to the Sybil attack.
+Worryingly, there appears to an industry built around it, and their products are
+easily accessible in the clearnet. In this section, we describe practical
+attacks on reputation systems.
+
+\subsubsection{Reputation Manipulation}
 
 \subsection{The Sybil Attack in MANET}
 % TODO should we include this?
