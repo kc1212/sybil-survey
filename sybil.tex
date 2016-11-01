@@ -56,9 +56,10 @@ profiles and form relationships with friends. In contrast with real world
 relationships, it is much easier to create relationships in OSN even with
 strangers. In 2008, Sophos conducted an experiment where they created a Facebook
 profile and send friend requests to 200 random users, and 41\% of the users
-accepted the friend request\cite{sophos}. Combining with the ability to create
-new identities with very little cost, it is possible to perform many types of
-attacks which we outline below.
+accepted the friend request\cite{sophos}. A report by Facebook at the end of
+2011 stated 5-6\% of their accounts are fake\cite{facebookfake}. Combining with
+the ability to create new identities with very little cost, it is possible to
+perform many types of attacks which we outline below.
 
 \subsubsection{Identity Theft}
 Authors of \cite{bilge2009all} created two attacks - profile cloning and
@@ -103,10 +104,28 @@ is only an entry point. Once trust relationships are established, the attacker
 can perform many other types of attacks such as spamming, phishing or
 astroturfing to gain advantage.
 
-\subsubsection{Spreading Misinformation}
+\subsubsection{Astroturf}
+Astroturfing is an act of creating grassroot movement that are in reality
+carried out by a single entity, effectively spreading misinformation to
+legitimate users. It relies on the ability to create Sybils in the underlying
+social network. This type of attack is especially effective in social networks
+such as Twitter where a lot of the social interaction such as sending messages
+happen in the public.
 
-\subsubsection{Spam}
-Spam \cite{facebookspam}
+In the 2010 Massachusetts senate race, Mustafaraj and Metaxas found evidence
+that Republican campaingners created fake Twitter accounts and used them to send
+spam. The spam caused Google real-time search results to tip in their favour
+thus causing a spread of misinformation\cite{mustafaraj2010obscurity}.
+Ratkiewicz et el. suggest that this type of attack can be mounted cheaply and
+may have a larger influence than traditional
+adversiting\cite{ratkiewicz2011truthy}.
+
+The Truthy system\cite{ratkiewicz2011truthy} is a web service that perform
+real-time analysis of Twitter to detect political astroturf memes. In the 2010
+U.S. midterm election, the authors found accounts which generated a lot of
+retweets but no original tweets. More importantly, they uncovered a network of
+bot accounts that injected thousands of tweets to smear the Democratic candidate.
+
 
 \subsection{The Sybil Attack in Reputation Systems}
 
