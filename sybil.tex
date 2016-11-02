@@ -66,6 +66,10 @@ home users. The authors suggested that if Sybils are created to perform the same
 attack aimed at a single victim, then it could easily throttle links with much
 higher bandwidth\cite{el2007bottorrent}.
 
+% Gnutella?
+% \cite{daswani2002query}
+% \cite{daswani2004pong}
+
 \subsubsection{Index Poisoning}
 P2P networks often implement a DHT (distributed hash table). The DHT in
 BitTorrent is called Mainline-DHT, based on
@@ -234,13 +238,24 @@ investigate the properties of the fake followers, there is little doubt that
 many of accounts used in these services are Sybils.
 
 \subsubsection{Slandering}
-The goal of a slandering attack is to illegitimately produce negative feedback. 
+The goal of a slandering attack is to illegitimately produce negative feedback
+to undermine the reputation of the target. It is easy to imagine the improvement
+in effectiveness when using multiple Sybils. From the best of our knowledge,
+there are no published studies on real-world slandering. But
+research has shown having a negative feedback may harm the target's ability to
+do business\cite{ba2002evidence}.
 
 \subsubsection{Whitewashing}
-
+In whitewashing, attackers abuse the reputation system for temporary gain and
+then escape the consequences by joining the reputation system under a new
+identity to shed their bad reputation. Clearly, whitewashing is only possible
+when the Sybil attack is possible. Again, there are no studies on whitewashing
+in the real-world. But many have suggested that it is feasible
+attack\cite{hoffman2009survey, marti2006taxonomy}.
 
 \subsubsection{Denial of Service}
-
+The denial of service attack highly depends on the structure of the reputation
+system. 
 
 \subsection{The Sybil Attack in MANET}
 % TODO should we include this?
