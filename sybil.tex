@@ -49,7 +49,14 @@ The authors formally proved that symmetric reputation systems are vulnerable to
 the Sybil attack. But in the asymmetric case, it is possible to construct a
 Sybil-proof reputation system.
 
-\subsection{The Sybil Attack in P2P Networks}
+\subsection{The Sybil Attack in P2P FIle Sharing Networks}
+
+\subsubsection{Denial of Service}
+\cite{sia2006ddos}
+\cite{el2007bottorrent}
+
+\subsubsection{Index Poisoning}
+\cite{liang2006index}
 \cite{wang2012real}
 
 \subsection{The Sybil Attack in Online Social Networks}
@@ -124,10 +131,20 @@ may have a larger influence than traditional
 adversiting\cite{ratkiewicz2011truthy}.
 
 The Truthy system\cite{ratkiewicz2011truthy} is a web service that perform
-real-time analysis of Twitter to detect political astroturf memes. In the 2010
+real-time analysis of Twitter to detect political astroturfing. In the 2010
 U.S. midterm election, the authors found accounts which generated a lot of
 retweets but no original tweets. More importantly, they uncovered a network of
 bot accounts that injected thousands of tweets to smear the Democratic candidate.
+
+In 2012, Wang et el. investigated two of the largeset
+crowdturfing\footnote{Crowdsourced astroturfing.} platforms in China that brings
+together buyers and sellers - Zhubajie and Sandaha. One of their services is
+perform astroturfing on Weibo (The Chinese Twitter). The authors found that the
+5364 sellers collectively own 14151 Weibo accounts and the top 1\% of the
+sellers own over 100 accounts. Furthermore, the business is growing and more
+than \$4 million have been spent on these two platforms over five
+years\cite{wang2012serf}.
+
 
 \subsubsection{Spam}
 \cite{stringhini2010detecting}
@@ -156,11 +173,47 @@ Worryingly, there appears to an industry built around it, and their products are
 easily accessible in the clearnet. In this section, we describe practical
 attacks on reputation systems.
 
-\subsubsection{Reputation Manipulation}
-\cite{de2014paying}
-\cite{wang2012serf}
-\cite{soska2015measuring}
-\cite{christin2013traveling}
+\subsubsection{Self-promoting}
+In self-promotion, the goal of the attacker is to illegitimately raise its own
+reputation. A common way to perform self-promition is to create Sybils and have
+them create positive reputation for the attacker's main identity.
+
+Dini and Spagnolo studied the economics of buying reputation on eBay. The
+authors discovered many cheap items (around \euro{0.7}) for sell are simply there to
+boost feedback. For example, one of the item is titled ``Apple Cranberry Crisp
+Recipe + 100\% Positive Feedback''. The authors successfully boosted their
+feedback by purchasing such items. But they made an unsuccessful attempted to
+place a bid on their own good with a fake account\cite{dini2009buying}.
+
+% Christin crawed the Silk Road, the anonymous marketplace. The author
+% \cite{christin2013traveling}
+
+De Cristofaro et el. performed an emperical study on Facebook page promotion
+using like farms\cite{de2014paying}. Some of the farms such as
+\verb!SocialFormulae.com! are clearly operated by bots and the operator does not
+attempt to hide it, others such as \verb!BlostLikes.com! tries to minic human
+users. The authors purchased the ``1000 likes'' service on their empty Facebook pages.
+In under a month, many empty pages have accumulated almost 1000 likes as
+promised by the like farms. The authors empty accounts were not terminated. Only
+a small number of the liker's account were terminated.
+
+% \cite{soska2015measuring}
+
+SEOClerks and MyCheapJobs are also evidences of marketplaces for self-promotion.
+Some of the top services include ``1 million Twitter followers'' at \$849,
+``1000+ Instagram followers'' at \$10 and so on. The revenues of those two
+marketplaces are estimated to be at \$1.3 million and \$116 thousand,
+respectively\cite{farooqi2015characterizing}. Although the authors did not
+investigate the properties of the fake followers, there is little doubt that
+many of accounts used in these services are Sybils.
+
+\subsubsection{Slandering}
+The goal of a slandering attack is to illegitimately produce negative feedback. 
+
+\subsubsection{Whitewashing}
+
+
+\subsubsection{Denial of Service}
 
 
 \subsection{The Sybil Attack in MANET}
