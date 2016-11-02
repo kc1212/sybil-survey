@@ -50,14 +50,40 @@ the Sybil attack. But in the asymmetric case, it is possible to construct a
 Sybil-proof reputation system.
 
 \subsection{The Sybil Attack in P2P FIle Sharing Networks}
+P2P (peer-to-peer) file sharing networks are distributed computer networks that
+are built for discovering and sharing files. BitTorrent\cite{bep3} is likely the
+most popular P2P network at the time of writing. Due to their open and
+distributed nature, they are vulnerable to the Sybil attack.
 
 \subsubsection{Denial of Service}
-\cite{sia2006ddos}
-\cite{el2007bottorrent}
+By exploiting vulnerabilities in the BitTorrent network, denial of service
+attack can be directed at any machine connected to the internet, not just
+machines in the network\cite{sia2006ddos}. The main idea is to report the victim
+as the tracker (a server that coordinates the peers). El Defrawy, Gjoka and
+Markopoulou created a small scale proof-of-concept attack. Using only one
+machine, they could generate enough traffic to cripple small organisations and
+home users. The authors suggested that if Sybils are created to perform the same
+attack aimed at a single victim, then it could easily throttle links with much
+higher bandwidth\cite{el2007bottorrent}.
 
 \subsubsection{Index Poisoning}
-\cite{liang2006index}
-\cite{wang2012real}
+P2P networks often implement a DHT (distributed hash table). The DHT in
+BitTorrent is called Mainline-DHT, based on
+Kademlia\cite{maymounkov2002kademlia}. Keys are the infohashes (file
+identifiers) and values are the metadata of the files, these are distributed
+across all the participating peers. Every node stores a routing table and
+requests are routed iteratively to the node responsible for a particular
+key\cite{bep5}. The goal of index poisoning is to corrupt routing table so that
+honest peers fail to find the values they want. It can be mounted by injecting
+Sybils into the DHT that do not follow the protocol. Wang and Kangasharju
+created honeypots in the BitTorrent network and detected as many as 300,000
+Sybils\cite{wang2012real}. Similar attacks are possible in other P2P networks
+such as Overnet\cite{liang2006index}.
+
+% There are no concrete proof of malicious activities, but the Sybils can easily
+% sabotage the DHT if they choose to.
+
+% 
 
 \subsection{The Sybil Attack in Online Social Networks}
 OSN (online social networks) are vulnerable to the Sybil attack even when most
