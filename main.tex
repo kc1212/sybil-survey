@@ -48,6 +48,8 @@
 \documentclass{sig-alternate-05-2015}
 \usepackage[gen]{eurosym}
 \usepackage{hyperref} % for autoref
+\usepackage{graphicx}
+\graphicspath{{./figures/}}
 
 \begin{document}
 
@@ -140,6 +142,9 @@ Kelong Cong\\
 \section{Introduction}
 \input{intro.tex}
 
+\section{Motivation}\label{sec:motivation}
+\input{motivation.tex}
+
 \section{The Sybil Attack}\label{sec:sybil}
 \input{sybil.tex}
 
@@ -155,9 +160,3 @@ Kelong Cong\\
 \bibliography{ref}
 
 \end{document}
-
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: t
-%%% End:
