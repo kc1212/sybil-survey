@@ -1,11 +1,10 @@
-TODO!!!
-Next, we review practical attacks in three types of systems
-(1) MANET (mobile ad-hoc networks) such as sensor networks, (2) reputation
-systems such as PageRank\cite{page1999pagerank} but also include e-commerce
-systems such as eBay and (3) OSN (online social networks) such as Twitter and
-Facebook. We hope our review illuminates the alarming consequences of the Sybil
-attack.
-
+Sybil attacks can be mounted in different applications and cause a large array
+of consequences. This section categorises the attacks by the goal for four
+common applications. (1) P2P (peer-to-peer) file sharing networks such as
+BitTorrent, (2) OSN (online social networks) such as Twitter and Facebook, (3)
+reputation systems such as eBay and (4) WANET (wireless ad-hoc networks) such as
+sensor networks. We hope this section further illuminates the alarming
+consequences of the Sybil attack.
 
 \subsection{The Sybil Attack in P2P FIle Sharing Networks}
 P2P (peer-to-peer) file sharing networks are distributed computer networks that
@@ -45,9 +44,7 @@ such as Overnet\cite{liang2006index}.
 % There are no concrete proof of malicious activities, but the Sybils can easily
 % sabotage the DHT if they choose to.
 
-% 
-
-\subsection{The Sybil Attack in Online Social Networks}
+\subsection{The Sybil Attack in OSN}
 OSN (online social networks) are vulnerable to the Sybil attack even when most
 of them use a central, trusted authority such as Facebook. In OSN, users create
 profiles and form relationships with friends. In contrast with real world
@@ -58,6 +55,11 @@ accepted the friend request\cite{sophos}. A report by Facebook at the end of
 2011 stated 5-6\% of their accounts are fake\cite{facebookfake}. Combining with
 the ability to create new identities with very little cost, it is possible to
 perform many types of attacks which we outline below.
+
+Note that online social networks often have a reputation aspect as well, for
+example a Facebook page with a lot of fans may be considered to be more
+reputable than others. We discuss attacks specific to OSN in this section and
+attacks on reputation in \autoref{sec:reputation-attack}
 
 \subsubsection{Identity Theft}
 Authors of \cite{bilge2009all} created two attacks - profile cloning and
@@ -133,13 +135,18 @@ sellers own over 100 accounts. Furthermore, the business is growing and more
 than \$4 million have been spent on these two platforms over five
 years\cite{wang2012serf}.
 
-
 \subsubsection{Spam}
-\cite{stringhini2010detecting}
-\cite{gao2010detecting}
-\cite{yang2012analyzing}
+Spamming, much like in the context of email, is the act of sending unsolicited
+or undesire messages (spam). The goal of the attacker varies from advertisement
+to phishing and spreading malicious software\cite{twittermalware1,
+  twittermalware2}. Many studies have characterised the behaviour of the
+spammers and found that they either use fake accounts or stolen
+accounts\cite{stringhini2010detecting, yang2012analyzing, grier2010spam}. Some
+authors have worked with the service provide to close the spam accounts, but it
+is clearly not sufficient as we described in \autoref{sec:motivation}.
 
-\subsection{The Sybil Attack in Reputation Systems}
+
+\subsection{The Sybil Attack in Reputation Systems}\label{sec:reputation-attack}
 Reputation systems cultivate collaborative behaviour by allowing entities to
 trust each other based on community feedback, usually in the form of a
 reputation score. Entities decide whom to trust based on the reputation scores,
@@ -152,9 +159,7 @@ merchant\cite{resnick2006value}. The file sharing peer-to-peer network
 BitTorrent uses tit-for-tat as an ephemeral reputation system to encourage peers
 to upload in exchange for better download speeds\cite{cohen2003incentives}. The
 aforementioned PageRank\cite{page1999pagerank} is also a reputation system, used
-for ranking reputable websites higher in Google's search results. Some OSN can
-be considered as reputation systems too, Twitter accounts with a lot of
-followers may be more reputable than accounts with fewer followers.
+for ranking reputable websites higher in Google's search results.
 
 Unfortunately, reputation systems are also vulnerable to the Sybil attack.
 Worryingly, there appears to an industry built around it, and their products are
@@ -211,12 +216,54 @@ when the Sybil attack is possible. Again, there are no studies on whitewashing
 in the real-world. But many have suggested that it is feasible
 attack\cite{hoffman2009survey, marti2006taxonomy}.
 
-\subsubsection{Denial of Service}
-The denial of service attack highly depends on the structure of the reputation
-system. 
+% TODO
+% \subsubsection{Denial of Service}
+% The denial of service attack highly depends on the structure of the reputation
+% system. 
 
-\subsection{The Sybil Attack in MANET}
-% TODO should we include this?
+\subsection{The Sybil Attack in WANET}
+WANET (wireless ad-hoc networks) is a dynamic, self-configuring, self-healing
+wireless network. Ad-hoc in this case means it does not rely on existing
+infrastructure for the network to function. Each node in the network is
+responsible for some general tasks such as routing, and some application
+specific tasks such as gathering data from its sensors in the case of a sensor
+network.
+
+Akin to the other applications, an attacker in a WANET may own a single physical
+node, but it may behave as if it were a large number of nodes. Many WANET
+designs involve a reputation system\cite{ganeriwal2008reputation,
+  buchegger2003robust}, thus the same attacks from
+\autoref{sec:reputation-attack} applies here.
+In this section we describe the WANET specific attacks. 
+From the best of our knowledge WANET are not widely deployed in practice,
+thus there is little research on real-world attacks.
+
+\subsubsection{Unfair Resource Allocation}
+Nodes in WANET often have limited resources such as bandwidth of the radio
+channels. Resources such as these must be shared between the neighbours using
+time slices. When the neighbours are Sybils, then the attacker can receive an
+unfair amount of resource allocation and denies resources for the honest
+nodes\cite{newsome2004sybil}. In contrast with the other attacks, this works
+even when the Sybils are not behaving malicioiusly.
+
+\subsubsection{Routing Disruption}
+An important routing technique is multipath routing, data is routed using
+multiple paths in the network for better fault-tolerance and bandwidth. However,
+if Sybils are present in the network, then the different paths may in fact go
+through the Sybils owned by the same attacker. Another technique geographic
+routing, nodes route data depending on the geographic location of their
+neighbours. Sybils in the network can be in more than one place at a time, thus
+significant distrupting the routing algorithm\cite{karlof2003secure}.
+
+\subsubsection{Spreading False Information}
+Nodes often need to exchange information with each other to satisfy the
+underlying requirements of the application. Some of the common tasks include
+data aggregation, voting. With enough Sybils, it is possible to manipulate the
+aggregated data or the poll to benefit the attacker. For example, sensor
+networks may use a bollot to detect misbehaving nodes, the attack could use its
+Sybils to claim that a honest node is misbehaving and have the other nodes expel
+it from the network\cite{newsome2004sybil}.
+
 
 \subsection{TODO}
 a test bed for sybil attacks\cite{irissappane2012towards}
