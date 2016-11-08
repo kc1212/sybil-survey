@@ -1,45 +1,162 @@
 % TODO expand, better intro
 In this section we categorise various defence techniques against the
-sybil-attack in reputation systems.
+sybil-attack. Many of them are independent of the application, thus we classify
+them on their main idea, and state explicitly when the mechanism is application
+specific.
 
-\subsection{Trusted Third Party}\label{sec:trusted_party}
-One of the earliest and best known reputation system is
-eBay\cite{resnick2002trust}. The buyers and sellers rely on a trusted third
-party, in this case eBay, to gather and distribute feedbacks after every
-transaction. Even when there are no incentives to provide feedback, Resnick and
-Zeckhauser observed that feedback was provided more than half of the
-time\cite{resnick2002trust}, making eBay one of the most well-known online
-marketplaces.
+\subsection{Certificate Authority}\label{sec:cert-authority}
 
-In general, trusted third parties manage the issurance and verification of
-identities. Thus they can apply a fee on the peer for creating a new
-identity\cite{resnick2001social} or rate-limit the creation of new
-identities\cite{douceur2002sybil}, making sybil-attacks more difficult.
-Furthermore, trusted third parties often have the ability to manipulate the
-identities. For example they could punish the attackers by disabling all of
-their identity when caught, making the sybil-attack much riskier especially when
-identities are costly.
+CA (certificate authorities) check the users' identities and then issues
+certificates to benevolent users. The certificate can be tangible (trusted
+hardware\cite{newsome2004sybil}) or non-tangible (public key certificate)
+depending on the application. When an identity wishes to user the application,
+the CA must verify the validity of its certificate to ensure one-to-one
+correspondence. This mechanism prevents the Sybil attack as long as the CA does
+not make mistakes in the issuance stage.
 
-Trusted third party is likely the most widely used technique in practice.
-Marketplaces such as Amazon or eBay, online forums such as Stackoverflow or
-Reddit, all use a form of trusted third party.
+CA can prevent the Sybil attack but it also has a lot of downsides. (1) Users
+have different opinions and may not agree on a single CA. (2) Users living in
+authoritarian regimes may not have access to the CA in use. (3) It is difficult
+to scale up a CA to meet increasing users demands. (4) Anonymity is difficult to
+obtain because the CA has complete information of the entities. (5) It is a
+central point of failure; i.e. if the attacker obtains the private key to create
+certificates then he or she can easily generate Sybils, if the CA goes offline
+then the application ceases to function because it can no longer verify
+identites.
 
-Unfortunately, a trusted third party is often a single point of failure.
-Moreover, being a centralised system, it is difficult to scale up to suit
-increasing user demands. % TODO GIVE exmaples of failures
-In the remainder of this section, we focus on distributed techniques for
-preventing the sybil-attack.
+Many existing systems today use a form of CA.
+X.509 is a standard for certificates and is used in a large variety of
+applications, for example websites (TLS), email (S/MIME), smart cards and so on.
+Payment systems such as PayPal verifies identities using credit card billing addresses.
+% Credence\cite{walsh2006experience} is a distributed reputation system, but the
+% identities are created using a CA.
 
-Credence 06\cite{walsh2006experience} - uses central authority to sign key
+\subsection{Resource Testing}
+Every attacker can create multiple Sybils, but the attack cannot duplicate its
+resources the same way. In resource testing, the goal is to find identities that
+possess fewer than the expected amout of resources. The resource type can vary
+depending on the application. In wireless networks it may be using radio
+channels\cite{newsome2004sybil}, in online social networks it may be IP
+addresses\cite{freedman2002tarzan} and solving computationally demanding puzzles
+in P2P networks\cite{aspnes2005exposing}. Resource testing may deter casual
+attackers but its usefulness degrades for resourceful attackers.
 
-\subsection{Costly Identity Creation}\label{sec:costly_id}
-\subsubsection{IP Address}
-\subsubsection{Low reputation for new users}
-Feldman 04\cite{feldman2004robust} - adaptive stranger, low score on entry
+For example, in the Tarzan P2P network, neighbours are selected not from all
+known IP addresses, but from distinct IP prefixes\cite{freedman2002tarzan}. The
+effectiveness of the Sybil attack is reduced if the attackers cannot easily
+create Sybils in a large range of IP prefixes.
 
-\subsection{Indirect Information}
-EigenTrust\cite{kamvar2003eigentrust} - doesn't prevent sybils, suggests to add cost in ID creation
-R2Trust\cite{tian2011h2trust} - credibility, tackles colluders, time decay factor
+Another example for resource
+testing is self-registration\cite{dinger2006defending}. When a peer wish to join
+the network, it needs to compute a ID which is a hash of its own IP address and
+port number. While participating in the nettwork, other peers need to verify
+that the ID matches the peer's origin.
+
+Bitcoin is also resource testing...
+
+\subsection{Registration Fee}
+Using registration fee is similar to resource testing except it only happens on
+registration. Entities can be charged a fee for creating identities, often 
+facilitated by a central authority. The fee need to be set appropriately so that
+the cost of creating Sybils outweights the benefits. The fee does not need to be
+monetary. For instance, CAPTCHA\cite{von2003captcha} is a form of
+registration fee. It prevents programs from automatically creating new
+identities and limits the rate at which identities can be created.
+
+Feldman et el. proposed another form of registration fee for P2P networks - the
+adaptive stranger policy\cite{feldman2004robust}. When new peers join the
+network, they are treated using a policy that is adapted from previous
+newcomers. For example, the new peers may be expected to contribute to the
+network before they are allowed to receive benefits from the ``mature'' peers.
+The downside is that the policy may deter benevolent users from joining the network
+in the first place.
+
+% Identity creation can be rate limited\cite{douceur2002sybil}, especially in the
+% presence of a central authority. The limit can be set globally, or it can be
+% done regionally (i.e. based on IP address).
+
+\subsection{Network Flow Based Techniques}
+Network flow based techniques began with
+BarterCast\cite{meulpolder2009bartercast}. It was initially designed to combat
+freeriding in P2P file sharing networks, where users are selfish and do not
+share content, but its idea can be extended combat the Sybil attack. 
+
+The main idea comes from real-world social networks, where the reputation of a
+person can be from direct experiences, or information obtained frome someone
+else. The direct experience is always true, but the indirect information may not
+be, i.e. people can lie about their experiences. Humans solve the problem by
+treating the indirect information with a grain of salt unless the source of the
+information is highly trusted.
+
+BarterCast applies this idea in P2P file sharing networks. Peers all maintain a
+subjective graph which is created by exchanging messages with their neighbours.
+The direct experiences measured by the number of bytes uploaded and downloaded
+are represented by the outgoing and incoming edges from the peer, respectively.
+Indirect experiences are represented by edges that are not directly connected to
+the peer. For example in \autoref{fig:bartercast}, $A$ is the subject, it has
+direct experiences with $B$ and $B$ has told $A$ about $S$, so it has indirect
+information about $S$. But $A$ is unsure about the truthfulness of $S$'s
+contribution, so it only trusts $S$ as much as it trusts $B$. This idea is
+realised using a maximum flow algorithm and the final reputation metric is given
+in \autoref{eq:bartercast}.
+\begin{equation}\label{eq:bartercast}
+  R_i(j) = \frac{\arctan(\text{maxflow}(j, i) - \text{maxflow}(i, j))}{\pi / 2}
+\end{equation}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.3\textwidth]{bartercast}
+  \caption{Subjective graph of $A$. The numbers are the amout of data transfered,
+    they can be seen as the capacity in the context of the maximum flow
+    problem.}
+  \label{fig:bartercast}
+\end{figure}
+
+BarterCast does not prevent the Sybil attack by itself. Because attackers can
+first upload a lot of data to obtain a good reputation in the network. If the
+attacker now creates Sybils and false report of the Sybils saying that they
+uploaded a lot. Then the peers who have interacted with the attacker will be
+tricked to think that the Sybils also have a high reputation. To fix this
+problem, Delaviz et el. created SybilRes\cite{delaviz2012sybilres}. The main
+idea is the following. Suppose there are two peers $A$ and $B$ who are sharing
+data. If $A$ is uploading (represented by an outgoing edge) to $B$, then it
+decreases the weight of the incoming edge from $B$. Vice versa, the weight is
+increased for the outgoing edge when $A$ is downloading. The rate of change
+depends on the capacities of the edges and the amout of data transferred after
+computing the reputation. Using the definition in \autoref{fig:attack-edge}, the
+attacker cannot built up reputation for its Sybils by uploading to peers in the
+benevolent region beforehand, it is now forced to keep on uploading to keep its
+Sybil's reputation which is a much more desirable behaviour.
+
+Seuken et al. provided a formal model of BarterCast. They found that BarterCast
+is vulnerable to misreporting and proposed a solution called the DropEdge
+mechanism\cite{seuken2011sybil, seuken2014sybil}. DropEdge, like the name
+implies, drops some edges in the subjective graph that satisfies the following
+constraints. Suppose peer $A$ wishes to download from peers in set $C$ (the
+choice set). Then any reports received by $A$ from $p \in C$ is dropped. Also,
+edges with both end points in $C$ are also dropped from $A$'s subjective graph.
+Intuitively, peers in $C$ cannot misreport their contribution. The authors
+formally prove this property in their work. It may seem that the DropEdge
+mechanism is discarding useful information, but the authors also prove that it
+is robust against weakly benefician Sybils, that is Sybils that do not perform
+actual work for benevolent peers.
+
+Conversely, maximum flow is dual to minimum cut, so the problem of finding Sybil
+can also be formulated as finding sparse cuts\footnote{Without getting into the
+  formal definition, the sparse cut problem is to find a partition such that the
+  ratio between the number in the cut and the number of vertices in the smaller
+  partition is minimised. This problem is related to minimum cut.}. Kurve and
+Kesidis devised an algorithm for finding sparse cuts to detect
+Sybils\cite{kurve2011sybil}. Unlike the aforementioned techniques, it relies on
+the presence of trusted nodes.
+
+
+\subsection{Random Walk Based Techniques}
+
+
+% \subsection{Indirect Information}
+% EigenTrust\cite{kamvar2003eigentrust} - doesn't prevent sybils, suggests to add cost in ID creation
+% R2Trust\cite{tian2011h2trust} - credibility, tackles colluders, time decay factor
 
 \subsection{Graph Techniques}\label{sec:graph}
 
@@ -47,15 +164,9 @@ OSN (online social networks) such as Facebook can be viewed as a graph, where
 the nodes on the graph are identities created by users and the edges represent
 trust relationships.
 
-
-Theory\cite{seuken2011sybil}
 Gal-Oz et al. \cite{gal2008robust} communities are collection of knots, sybils can form a knot?
 Regret\cite{sabater2001regret, sabater2002social} - information from multiple dimensions
 Guha 04\cite{guha2004propagation} - no mention of sybil attacks or attacks in general
-
-\subsubsection{Flow Based}
-BarterCast\cite{meulpolder2009bartercast}
-SybilRes\cite{delaviz2012sybilres}
 
 \subsubsection{Topology}
 SybilGuard\cite{yu2006sybilguard}
@@ -66,17 +177,13 @@ SumUp\cite{tran2009sybil}
 GateKeeper\cite{tran2011optimal} - based on SumUp
 Social-network\cite{viswanath2010analysis} - community detection
 
-Distributed Sparse Cut Monitoring\cite{kurve2011sybil}
 
 Other systems are built on top:
 ReDS\cite{akavipat2014reds} suggests to use sybilimit or sybilinfer
 SybilProof-DHT\cite{lesniewski2010whanau}
+
 \subsection{Reputation Transfer}
 Trust-transfer\cite{seigneur2005trust}
-
-\subsection{Self Registration}
-P-GRID 01\cite{aberer2001p}
-Self-registration\cite{dinger2006defending} - distributed registration based on IP address
 
 \subsection{Cryptography Based Techniques?}
 Secure-Overlay\cite{lua2007securing} - ID crypto and SSS
@@ -92,6 +199,9 @@ Parental control\cite{tehale2012parental} - uses parents to ``observe'' find sus
 DSybil\cite{yu2009dsybil} - recommendation system, need historical data
 Symon\cite{jyothi2009symon} - pair peers together, likelihood for both to be sybils is low, the pair monitor each other to prevent attacks
 XRep 02\cite{damiani2002reputation} IP check, and checks digest, uses existing P2P systems like Gnutella
+
+\subsection{Distrust Relationships}
+VoteTrust\cite{xue2013votetrust}
 
 \subsection{Unsorted?}
 
