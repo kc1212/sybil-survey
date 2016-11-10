@@ -150,37 +150,67 @@ Kesidis devised an algorithm for finding sparse cuts to detect
 Sybils\cite{kurve2011sybil}. Unlike the aforementioned techniques, it relies on
 the presence of trusted nodes.
 
+SumUp\cite{tran2009sybil}
 
 \subsection{Random Walk Based Techniques}
+Another family, possibly the largest, Sybil defence mechanism is based on random
+walks. The key assumptions in these techniques is that the benevolent region is
+\emph{fast mixing}\footnote{In a graph, if a random walk of length $O(\log{N})$
+  reaches a stationary distribution of nodes, then the graph is fast mixing.},
+and the attack edges are difficult to form and are independent of the number of
+Sybils. The first defence mechanism is SybilGuard\cite{yu2006sybilguard},
+created by Yu et el. SybilLimit\cite{yu2008sybillimit} is the continuation of
+SybilGuard and it is an improvement on many fronts while keeping the same or
+better guarantees as SybilGuard. In this section we focus on SybilLimit plus
+other random walk based techniques.
 
+Before explaining SybilLimit, we define the term \emph{random route}. Random
+route is a modified form of a random walk. In random walk, a outgoing edge is
+selected uniformly at random on every hop of the walk. In random route, every
+node maintains a static routing table that contains a uniformly random
+one-to-one mapping between incoming edges and outgoing edges, initialised at
+start-up. Thus the route is determined by the tables on every node. An important
+property of random route is that if two routes enter the same edge, then they
+will always exit at the same edge, so their route after exiting will be exactly
+the same. The number of hops for a random route (the mixing time) should be long
+enough, i.e. $O(\log{N})$ so that the fast mixing property is achieved.
+
+In SybilLimit, every honest node acts as a verifier $V$ and initially treats all
+other nodes as suspects $S$. The verification process begins by performing
+multiple independent random routes by each party. $V$ labels $S$ as a benevolent
+node if and only if they share at least one tail (the final edge in the route).
+For each tail of $V$, there is a quota for the number of node that it labels.
+The authors prove that SybilLimit bounds the number of accepted Sybils at
+$O(\log{n})$, an improvement from $O(\sqrt{n} \log{n})$ of SybilGuard.
+
+Let us consider the following three scenarios to intuitively show why SybilLimit
+works. Suppose $S$ is not a Sybil, and if $V$ and $S$ perform enough random
+routes, each with enough hops for fast mixing, then due to the Birthday Paradox,
+$S$ and $V$ will have an intersecting tail with high probability. Next, suppose
+some of the tails of $V$ are in the Sybil region so they may intersect with a
+large number of Sybils, but crossing the attack edges is improbable and
+accepting a lot of Sybils is also difficult due to the aforementioned quota
+mechanism, thus $V$ has a small probability of accepting a large number of
+Sybils. Finally, consider there is only one attack edge and suppose a Sybil has
+tails in the benevolent region, due to the random route property, the route of
+the Sybils in the benevolent region will be exactly the same, so accepting the
+Sybil in this scenario is also low due to the quota mechanism.
+
+SybilGuard and SybilLimit inspired many other defence mechanisms.
+SybilInfer\cite{danezis2009sybilinfer}
+
+Social-network\cite{viswanath2010analysis} - community detection
+SybilShield\cite{shi2013sybilshield} - assuming sybils have bad connectedness
+
+GateKeeper\cite{tran2011optimal} - based on SumUp, but uses random walk
+
+Whanau\cite{lesniewski2010whanau}
+ReDS\cite{akavipat2014reds} suggests to use sybilimit or sybilinfer
+SybilDefender\cite{wei2012sybildefender}
 
 % \subsection{Indirect Information}
 % EigenTrust\cite{kamvar2003eigentrust} - doesn't prevent sybils, suggests to add cost in ID creation
 % R2Trust\cite{tian2011h2trust} - credibility, tackles colluders, time decay factor
-
-\subsection{Graph Techniques}\label{sec:graph}
-
-OSN (online social networks) such as Facebook can be viewed as a graph, where
-the nodes on the graph are identities created by users and the edges represent
-trust relationships.
-
-Gal-Oz et al. \cite{gal2008robust} communities are collection of knots, sybils can form a knot?
-Regret\cite{sabater2001regret, sabater2002social} - information from multiple dimensions
-Guha 04\cite{guha2004propagation} - no mention of sybil attacks or attacks in general
-
-\subsubsection{Topology}
-SybilGuard\cite{yu2006sybilguard}
-SybilLimit\cite{yu2008sybillimit}
-SybilInfer\cite{danezis2009sybilinfer}
-SybilShield\cite{shi2013sybilshield} - assuming sybils have bad connectedness
-SumUp\cite{tran2009sybil}
-GateKeeper\cite{tran2011optimal} - based on SumUp
-Social-network\cite{viswanath2010analysis} - community detection
-
-
-Other systems are built on top:
-ReDS\cite{akavipat2014reds} suggests to use sybilimit or sybilinfer
-SybilProof-DHT\cite{lesniewski2010whanau}
 
 \subsection{Reputation Transfer}
 Trust-transfer\cite{seigneur2005trust}
