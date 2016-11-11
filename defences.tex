@@ -54,6 +54,8 @@ that the ID matches the peer's origin.
 
 Bitcoin is also resource testing...
 
+SybilConf\cite{tegeler2010sybilconf}
+
 \subsection{Registration Fee}
 Using registration fee is similar to resource testing except it only happens on
 registration. Entities can be charged a fee for creating identities, often 
@@ -75,7 +77,7 @@ in the first place.
 % presence of a central authority. The limit can be set globally, or it can be
 % done regionally (i.e. based on IP address).
 
-\subsection{Network Flow Based Techniques}
+\subsection{Network Flow Based Techniques}\label{sec:network-flow}
 Network flow based techniques began with
 BarterCast\cite{meulpolder2009bartercast}. It was initially designed to combat
 freeriding in P2P file sharing networks, where users are selfish and do not
@@ -142,18 +144,38 @@ formally prove this property in their work. They also prove that it is robust
 against weakly benefician Sybils, that is Sybils that do not perform actual work
 for honest peers.
 
+SumUp\cite{tran2009sybil} is a defence mechanism specific for the vote
+aggregation problem. For example, in social news aggregation websites such as
+Reddit, users vote on the submitted content to determine its ranking; the
+problem occurs when Sybils can out-vote honest users. It is a centralised
+approach that fits the architecture of most websites that perform vote
+aggregation. SumUp consist of three stages. Firstly, pruning is performed to
+limit the number of incoming edges of every node, this is to reduce the number
+of attack edges available and reduce the computational cost in later stages, the
+threshold is a system parameter. Secondly, it uses a ticket source (the central
+component) distributes tickets in a breadth-first search manner equally to its
+neighbours, every node keeps one ticket and distributes the remaining tickets
+the same way. The number of tickets distributed across an edge plus one is the
+capacity of the edge. Effectively, edges closer to the ticket source have a high
+capacity. This idea keeps the capacities in the Sybil region low so that they do
+not have a large influence on the outcome. Finally, the maximum flow is computed
+where the source is simply the ticket source and the sink is an imaginary node
+with edges of capacity one that is connected to every voter. SumUp offers a
+better guarantee than SybilLimit where it only accepts $1 + o(n)$ votes per
+attack edge. An improved version of SumUp - GateKeeper is discussed in
+\autoref{sec:random-walk}.
+
+TODO diagram for ticket distribution?
+
 Conversely, maximum flow is dual to minimum cut, so the problem of finding Sybil
-can also be formulated as finding sparse cuts\footnote{Without getting into the
-  formal definition, the sparse cut problem is to find a partition such that the
-  ratio between the number in the cut and the number of vertices in the smaller
-  partition is minimised. This problem is related to minimum cut.}. Kurve and
-Kesidis devised an algorithm for finding sparse cuts to detect
-Sybils\cite{kurve2011sybil}. Unlike the aforementioned techniques, it relies on
-the presence of trusted nodes.
+can also be formulated as finding sparse cuts\footnote{The sparse cut problem is
+  to find a partition such that the ratio between the number in the cut and the
+  number of vertices in the smaller partition is minimised. This problem is
+  related to minimum cut.}. Kurve and Kesidis devised an algorithm for finding
+sparse cuts to detect Sybils\cite{kurve2011sybil}. Unlike the aforementioned
+techniques, it relies on the presence of trusted nodes.
 
-SumUp\cite{tran2009sybil}
-
-\subsection{Random Walk Based Techniques}
+\subsection{Random Walk Based Techniques}\label{sec:random-walk}
 Another family, possibly the largest, Sybil defence mechanism is based on random
 walks. The key assumptions in these techniques is that the honest region is
 \emph{fast mixing}\footnote{In a graph, if a random walk of length $O(\log{N})$
@@ -232,6 +254,9 @@ reaching the edge of the Sybil region, thus they are likely to stay in the Sybil
 region. The Sybil region is detected by examining the nodes traversed by the
 partial random walk.
 
+% how does SybilDefender guarantee that the Sybils actually perform the random
+% walk correctly in the second step?
+
 SybilRank, in contrast of the aforementioned techniques, is designed to be
 integrated with real-world OSN and is deployed on Tuenti (an OSN with 11 million
 users)\cite{cao2012aiding}. SybilRank uses short random walks that begins on
@@ -256,14 +281,25 @@ $V$ knows that it has made a mistake, otherwise $S$ is indeed a Sybil.
 
 TODO make figure of multiple communities for SybilShield
 
-GateKeeper\cite{tran2011optimal} - based on SumUp, but uses random walk
+GateKeeper\cite{tran2011optimal} combines ideas from SumUp (discussed in
+\autoref{sec:network-flow}) and SybilLimit. GateKeeper assumes a admission
+controller that is honest, the admission controller performs random walks to
+select $n$ ticket sources. The ticket sources act the same way as SumUp where it
+distributes ticket in a breadth-first search manner. For a node to be labeled
+honest, it must obtain $fn$ tickets, where $f$ is a system parameter (0.2 is
+shown to be a good value experimentally). This idea works becauses if the ticket
+sources are evenly distributed and Sybils ony have a few attack edges, then it
+is unlikely that they will receive a large number of tickets.
 
-Whanau\cite{lesniewski2010whanau}
+% Whanau\cite{lesniewski2010whanau}
 % ReDS\cite{akavipat2014reds} suggests to use sybilimit or sybilinfer
 
-% \subsection{Indirect Information}
-% EigenTrust\cite{kamvar2003eigentrust} - doesn't prevent sybils, suggests to add cost in ID creation
-% R2Trust\cite{tian2011h2trust} - credibility, tackles colluders, time decay factor
+\subsection{Distrust Relationships}
+Ostra\cite{mislove2008ostra}
+VoteTrust\cite{xue2013votetrust}
+
+\subsection{Content Driven}
+\cite{chatterjee2008robust}
 
 \subsection{Reputation Transfer}
 Trust-transfer\cite{seigneur2005trust}
@@ -272,19 +308,12 @@ Trust-transfer\cite{seigneur2005trust}
 Secure-Overlay\cite{lua2007securing} - ID crypto and SSS
 Privacy-preserving\cite{schaub2016trustless} - blockchain?
 Proof-of-stake\cite{dennis2016rep}
-SybilConf\cite{tegeler2010sybilconf}
-
-\subsection{Content Driven}
-\cite{chatterjee2008robust}
 
 \subsection{Other}
 Parental control\cite{tehale2012parental} - uses parents to ``observe'' find suspects, only for detection, requires a sybil-proof reputation scheme
 DSybil\cite{yu2009dsybil} - recommendation system, need historical data
 Symon\cite{jyothi2009symon} - pair peers together, likelihood for both to be sybils is low, the pair monitor each other to prevent attacks
 XRep 02\cite{damiani2002reputation} IP check, and checks digest, uses existing P2P systems like Gnutella
-
-\subsection{Distrust Relationships}
-VoteTrust\cite{xue2013votetrust}
 
 \subsection{Unsorted?}
 
