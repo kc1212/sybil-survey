@@ -65,6 +65,8 @@ monetary. For instance, CAPTCHA\cite{von2003captcha} is a form of
 registration fee. It prevents programs from automatically creating new
 identities and limits the rate at which identities can be created.
 
+TODO \cite{resnick2001social}
+
 Feldman et el. proposed another form of registration fee for P2P networks - the
 adaptive stranger policy\cite{feldman2004robust}. When new peers join the
 network, they are treated using a policy that is adapted from previous
@@ -176,6 +178,8 @@ sparse cuts to detect Sybils\cite{kurve2011sybil}. Unlike the aforementioned
 techniques, it relies on the presence of trusted nodes.
 
 \subsection{Random Walk Based Techniques}\label{sec:random-walk}
+TODO actually exlain SybilGuard?
+
 Another family, possibly the largest, Sybil defence mechanism is based on random
 walks. The key assumptions in these techniques is that the honest region is
 \emph{fast mixing}\footnote{In a graph, if a random walk of length $O(\log{N})$
@@ -232,16 +236,6 @@ assigning a ``score'' to every node. Sybil are the nodes with a low ``score''.
 SybilInfer outperforms SybilLimit regarding the number of false positives, but
 its drawbacks are its high computational cost and reliance on trusted nodes.
 
-Viswanath et al. realised many of the aforementioned mechanisms in this section
-is in fact performing local community detection (i.e. detecting clusters of
-nodes) which is a more developed field\cite{viswanath2010analysis}. The authors
-also argue that social graphs are not always fast mixing, which may result in
-poor results for techniques that uses the fast mixing assumption. Using
-synthetic social graphs, the authors show that applying Mislove's
-algorithm\cite{mislove2010you} achieve similar results as SybilLimit and
-SybilInfer. But using a Facebook social graph, Mislove's algorithm performs
-better.
-
 SybilDefender\cite{wei2012sybildefender} can be seen as a two step process. It
 assumes the size of the Sybil region is smaller than the honest region and the
 nodes in the Sybil region are well connected. The first step is to perform
@@ -294,54 +288,118 @@ is unlikely that they will receive a large number of tickets.
 % Whanau\cite{lesniewski2010whanau}
 % ReDS\cite{akavipat2014reds} suggests to use sybilimit or sybilinfer
 
-\subsection{Distrust Relationships}
-Ostra\cite{mislove2008ostra}
-VoteTrust\cite{xue2013votetrust}
+\subsection{Community Detection}
+Viswanath et al. realised many of the mechanisms mentioned in
+\autoref{sec:random-walk} such as SybilGuard, SybilLimit and SybilInfer, are in
+fact performing local community detection (i.e. detecting clusters of nodes)
+which is a more developed field\cite{viswanath2010analysis}. The authors also
+argue that social graphs are not always fast mixing, which may result in poor
+results for techniques that uses the fast mixing assumption. Using synthetic
+social graphs, the authors show that applying Mislove's
+algorithm\cite{mislove2010you} achieve similar results as SybilLimit and
+SybilInfer. But using a Facebook social graph, Mislove's algorithm performs
+better.
+
+SybilExposer\cite{misra2016sybilexposer}
+
+SybilRadar\cite{mulamba2016sybilradar}
+
+\subsection{User Feedback and Machine Learning}
+In some application domains such as OSN it is possible to leverage user feedback
+to detect Sybils. These techniques do not work in the general setting.
+
+Ostra\cite{mislove2008ostra} is a system for limiting spam in social networks.
+In the simplest form, every undirected edge in the social graph is considered as
+two directed edges, each of them has a credit values. When a user wants to send
+a message, it needs to find a path with enough credits in the social graph from
+itself to the receiver. The edge traversed by the message will have its credit
+deducted, and the opposite edge will have its credit added. The receiver then
+decides whether the message is a spam, if it's not a spam then the credit
+operations are reversed. Effectively, only spam messages will have an effect on
+the credits. If a path cannot be found, i.e. all possible paths have run out of
+credit, then the message is blocked. Naturally, spams from the Sybils must use
+the attack edges, if enough honest users mark those messages as spam then the
+credit on the attack edges will run out and the Sybils can no longer send
+messages.
+
+Stringhini et el. devised a machine learning technique to classify bot accounts 
+in Twitter\cite{stringhini2010detecting}. User feedback is incoperated into the
+features. For example one of features is ``FF Ratio'', that is the ratio between
+number of users that the account is following and the number of followers.
+Honest users typically do not follow bots and this can be considered as a form
+of feedback. Other features include ``URL Ratio'', ``Message Similarity'' and so
+on. The authors collected data on ``honey-profiles'', trained a classifier after
+analysing those data and collaborated with Twitter to delete tens of thousands
+of spam accounts.
+
+VoteTrust\cite{xue2013votetrust} leverages the distrust relationship, i.e.
+friend request rejection, to detect Sybils in OSN. Suppose $A$ sends a friend
+request to $B$, if $B$ accepts/rejects the request then it is considered as a
+positive/negative vote on $A$ by $B$. The first step is to use PageRank combined
+with human scrutiny to select a number of trust seeds in the honest region. Then
+the trusted seeds distributes \emph{vote capacity}, that is the number of votes
+each node can cast. Initially only the trusted seeds have a positive vote
+capacity and other nodes have 0. When a node receives a positive vote from a
+trusted seed, it also receives some vote capacity. Then it can repeat the same
+process on nodes it votes on, thus distributing the vote capacity. The vote
+capacity decreases as it goes further away from the trusted seeds. This
+technique is comparable to the ticket distribution technique used in SumUp and
+GateKeeper. Finally, the votes are aggregated to compute a global ration for
+every node in the graph. Naturally, the Sybils are likely to have a low vote
+because their vote capacity is slow and many of their friend requests would be
+rejected.
 
 \subsection{Content Driven}
 \cite{chatterjee2008robust}
 
-\subsection{Reputation Transfer}
-Trust-transfer\cite{seigneur2005trust}
+\subsection{Other}
+Trust transfer\cite{seigneur2005trust} is a Sybil defence mechanism for
+reputation systems that transfers the reputation score from a recommender to a
+recommended identity. This method discourages self-recommendation behaviour
+because the attacker would need to lower the reputation of its Sybils to
+recommend him or herself. The Sybils cannot gain reputation from honest
+identities because if they do not interact with them. It may be strange to lose
+reputation when recommending an identity, but the authors argue that in certain
+scenarios where there are a lot of interactions and the overall trustworthieness
+is high, then there is no major effect to transfer a little bit of reputation to
+a recommended identity.
+
+DSybil\cite{yu2009dsybil} - recommendation system, need historical data
+
+Symon\cite{jyothi2009symon} - pair peers together, likelihood for both to be sybils is low, the pair monitor each other to prevent attacks
 
 \subsection{Cryptography Based Techniques?}
 Secure-Overlay\cite{lua2007securing} - ID crypto and SSS
 Privacy-preserving\cite{schaub2016trustless} - blockchain?
 Proof-of-stake\cite{dennis2016rep}
 
-\subsection{Other}
-Parental control\cite{tehale2012parental} - uses parents to ``observe'' find suspects, only for detection, requires a sybil-proof reputation scheme
-DSybil\cite{yu2009dsybil} - recommendation system, need historical data
-Symon\cite{jyothi2009symon} - pair peers together, likelihood for both to be sybils is low, the pair monitor each other to prevent attacks
-XRep 02\cite{damiani2002reputation} IP check, and checks digest, uses existing P2P systems like Gnutella
-
-\subsection{Unsorted?}
-
-Beth and PGP limits Sybil attack to some extent by using social graphs
-Beth 94\cite{beth1994valuation}
-PGP (Zimmermann) 95\cite{zimmermann1995official}
-
-Yu 00\cite{yu2000social}
-% CORE 02\cite{michiardi2002core} % MANETs
-Lee 03\cite{lee2003cooperative} - uses flooding, might not be scalable, only talks about DoS
-% Buchegger 04 - MANETs
-% Xiong 03\cite{xiong2003reputation} % also PeerTrust?
-Marti 04\cite{marti2004limited}
-ARA 05\cite{ham2005ara} - no mention of sybil, prevents freeriding, prevents short-term abuse because reputation increases gradually
-FuzzyTrust Song 05\cite{song2005trusted} - uses fuzzy logic
-P2PRep/Fuzzy 06\cite{aringhieri2006fuzzy} - also fuzzy, does not prevent generation of false rumors
-Xiong 05\cite{xiong2007countering} - no mention of sybil, but tries to mitigate false information
-PowerTrust 06\cite{zhou2007powertrust} - uses ``power nodes'' (from power-law), no mention of sybil, some defence against colluders
-% Li 07 - MANETs
-
-Histos and Sopras\cite{zacharia2000collaborative}, doesn't really have structure?
-Beta\cite{jsang2002beta}
-% Confidant\cite{buchegger2002performance} MANETs
-Gupta et al.\cite{gupta2003reputation}
-
-PeerTrust\cite{xiong2004peertrust} - DHT, used P-GRID source code, has credibility rating
-
-PerContRep\cite{yan2014percontrep}
+% \subsection{Unsorted?}
+% 
+% Beth and PGP limits Sybil attack to some extent by using social graphs
+% Beth 94\cite{beth1994valuation}
+% PGP (Zimmermann) 95\cite{zimmermann1995official}
+% 
+% Yu 00\cite{yu2000social}
+% % CORE 02\cite{michiardi2002core} % MANETs
+% Lee 03\cite{lee2003cooperative} - uses flooding, might not be scalable, only talks about DoS
+% % Buchegger 04 - MANETs
+% % Xiong 03\cite{xiong2003reputation} % also PeerTrust?
+% Marti 04\cite{marti2004limited}
+% ARA 05\cite{ham2005ara} - no mention of sybil, prevents freeriding, prevents short-term abuse because reputation increases gradually
+% FuzzyTrust Song 05\cite{song2005trusted} - uses fuzzy logic
+% P2PRep/Fuzzy 06\cite{aringhieri2006fuzzy} - also fuzzy, does not prevent generation of false rumors
+% Xiong 05\cite{xiong2007countering} - no mention of sybil, but tries to mitigate false information
+% PowerTrust 06\cite{zhou2007powertrust} - uses ``power nodes'' (from power-law), no mention of sybil, some defence against colluders
+% % Li 07 - MANETs
+% 
+% Histos and Sopras\cite{zacharia2000collaborative}, doesn't really have structure?
+% Beta\cite{jsang2002beta}
+% % Confidant\cite{buchegger2002performance} MANETs
+% Gupta et al.\cite{gupta2003reputation}
+% 
+% PeerTrust\cite{xiong2004peertrust} - DHT, used P-GRID source code, has credibility rating
+% 
+% PerContRep\cite{yan2014percontrep}
 
 
 \subsection{Does not handle Sybil-attack?}
