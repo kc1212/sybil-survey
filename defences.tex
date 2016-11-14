@@ -33,28 +33,48 @@ Payment systems such as PayPal verifies identities using credit card billing add
 
 \subsection{Resource Testing}
 Every attacker can create multiple Sybils, but the attack cannot duplicate its
-resources the same way. In resource testing, the goal is to find identities that
-possess fewer than the expected amout of resources. The resource type can vary
-depending on the application. In wireless networks it may be using radio
-channels\cite{newsome2004sybil}, in online social networks it may be IP
-addresses\cite{freedman2002tarzan} and solving computationally demanding puzzles
-in P2P networks\cite{aspnes2005exposing}. Resource testing may deter casual
-attackers but its usefulness degrades for resourceful attackers.
+resources the same way. In resource testing, the goal is to limit the influence
+of every identity with respect to the amout of resources it can expend. The
+resource type can vary depending on the application as we describe below. It may
+deter casual attackers but its usefulness degrades for resourceful attackers.
 
-For example, in the Tarzan P2P network, neighbours are selected not from all
-known IP addresses, but from distinct IP prefixes\cite{freedman2002tarzan}. The
-effectiveness of the Sybil attack is reduced if the attackers cannot easily
-create Sybils in a large range of IP prefixes.
+% In wireless networks it may be using radio
+% channels\cite{newsome2004sybil}, in online social networks it may be IP
+% addresses\cite{freedman2002tarzan} and solving computationally demanding puzzles
+% in P2P networks\cite{aspnes2005exposing}.
 
-Another example for resource
-testing is self-registration\cite{dinger2006defending}. When a peer wish to join
-the network, it needs to compute a ID which is a hash of its own IP address and
-port number. While participating in the nettwork, other peers need to verify
-that the ID matches the peer's origin.
+In P2P networks, IP address can be used as a resource. In
+Tarzan\cite{freedman2002tarzan}, neighbours are selected not from all known IP
+addresses, but from distinct IP prefixes. The effectiveness of the Sybil attack
+is reduced if the attackers cannot easily create Sybils in a large range of IP
+prefixes. Another example the self-registration
+technique~\cite{dinger2006defending}. When a peer wish to join the network, it
+needs to compute a ID which is a cryptographically secure hash of its own IP
+address and port number. While participating in the nettwork, other peers need
+to verify that the ID matches the peer's origin.
 
-Bitcoin is also resource testing...
+Aspnes et el. proposed the idea of solving difficult puzzles to limiting the
+number of Sybils\cite{aspnes2005exposing}. The puzzle in this case is computing
+hashes on some input $y$ concatinated by a some string $x$ such that the digest
+begins with $w$ number of zeros. Essentially, every node acts as a verifier by
+picking $y$ and then broadcast it to the network to the puzzle
+solver\footnote{We simplify the protocol a bit because the original protocol
+  (called Democracy) is made to be Byzantine fault tolerent and is a bit more
+  involved.}. $x$ is picked by the puzzle solver. The puzzle solver must compute
+as many $x$ as possible such that they match the requirement. Sybils are
+unlikely to produce enough $x$'s so the honest nodes will refuse to interact
+with them.
 
-SybilConf\cite{tegeler2010sybilconf}
+In fact, many crypto-currencies use the same idea. For instance
+\emph{proof-of-work} in the case of Bitcoin~\cite{nakamoto2008bitcoin}. The
+Bitcoin blockchain is a global ledger and it needs to reach a concensus for its
+blocks. Nodes in the Bitcoin network essentially ``vote'' for the the latest
+block. But the vote is performed not by counting the majority, but by
+``counting'' the amount of CPU power, i.e. one CPU is one vote. Thus an attacker
+cannot simply create a lot of identities to out-vote the honest nodes. It needs
+to gather a lot of CPU power which is much more difficult.
+
+% SybilConf\cite{tegeler2010sybilconf}
 
 \subsection{Registration Fee}
 Using registration fee is similar to resource testing except it only happens on
@@ -342,8 +362,9 @@ ratio and communities with a low ratio are likely to be Sybils.
 
 \subsection{Content Based and Machine Learning}
 In some application domains such as OSN it is possible to leverage content or
-user feedback to detect Sybils. These techniques do not work in the general
-setting.
+user feedback to detect Sybils. These techniques work well in practice. But
+often depend on uninformed attackers that do not try to mimic the behaviour of
+honest nodes.
 
 Ostra\cite{mislove2008ostra} is a system for limiting spam in social networks.
 In the simplest form, every undirected edge in the social graph is considered as
@@ -447,11 +468,11 @@ transactions. For instance, a transaction could be reporting the number bytes
 transferred in a P2P file file sharing network. Cheating occurs when a node
 reports some bytes transferred that does not match its network traffic. The
 authors provide four methods for pairing nodes. Suppose the nodes are identified
-by the hash of their RSA public key, then it is difficult to create identities
-deterministically. Then nodes can be matched by the closeness of their
-identities when they are in a DHT. The downside of this approach is that it
-sacrifices a lot of privacy, every action that a node makes is monitored by some
-other node.
+by a cryptographically secure hash of their RSA public key, then it is difficult
+to create identities deterministically. Then nodes can be matched by the
+closeness of their identities when they are in a DHT. The downside of this
+approach is that it sacrifices a lot of privacy, every action that a node makes
+is monitored by some other node.
 
 SybilFrame?
 
