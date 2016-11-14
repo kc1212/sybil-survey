@@ -178,51 +178,69 @@ sparse cuts to detect Sybils\cite{kurve2011sybil}. Unlike the aforementioned
 techniques, it relies on the presence of trusted nodes.
 
 \subsection{Random Walk Based Techniques}\label{sec:random-walk}
-TODO actually exlain SybilGuard?
-
 Another family, possibly the largest, Sybil defence mechanism is based on random
-walks. The key assumptions in these techniques is that the honest region is
-\emph{fast mixing}\footnote{In a graph, if a random walk of length $O(\log{N})$
-  reaches a stationary distribution of nodes, then the graph is fast mixing.},
-and the attack edges are difficult to form and are independent of the number of
-Sybils. The first defence mechanism is SybilGuard\cite{yu2006sybilguard},
-created by Yu et el. SybilLimit\cite{yu2008sybillimit} is the continuation of
-SybilGuard and it is an improvement on many fronts while keeping the same or
-better guarantees as SybilGuard. In this section we focus on SybilLimit plus
-other random walk based techniques.
+walks, first proposed in SybilGuard\cite{yu2006sybilguard}. The key assumptions
+in these techniques is that the honest region is \emph{fast mixing}\footnote{In
+  a graph, if a random walk of length $O(\log{N})$ reaches a stationary
+  distribution of nodes, then the graph is fast mixing.}, and the attack edges
+are difficult to form and are independent of the number of Sybils.
 
-Before explaining SybilLimit, we define the term \emph{random route}. Random
-route is a modified form of a random walk. In random walk, a outgoing edge is
-selected uniformly at random on every hop of the walk. In random route, every
-node maintains a static routing table that contains a uniformly random
-one-to-one mapping between incoming edges and outgoing edges, initialised at
-start-up. Thus the route is determined by the tables on every node. An important
-property of random route is that if two routes enter the same edge, then they
-will always exit at the same edge, so their route after exiting will be exactly
-the same. The number of hops for a random route (the mixing time) should be just
-right, so that the fast mixing property is achieved only in the honest region.
+% The first
+% defence mechanism is SybilGuard\cite{yu2006sybilguard}, created by Yu et el.
+% SybilLimit\cite{yu2008sybillimit} is the continuation of SybilGuard and it is an
+% improvement on many fronts while keeping the same or better guarantees as
+% SybilGuard. In this section we focus on SybilLimit plus other random walk based
+% techniques.
 
-In SybilLimit, every honest node acts as a verifier $V$ and initially treats all
+Before explaining the techniques, we define the terms \emph{random walk} and
+\emph{random route} in the context of social graphs. In random walk, the social
+graph is traversed such that outgoing edges are selected uniformly at
+random on every hop of the walk. Random route is a modified form of a random
+walk. Every node maintains a static routing table that contains a uniformly
+random one-to-one mapping between incoming edges and outgoing edges, initialised
+at start-up. Thus the route is determined by the tables on every node. An
+important property of random route is that if two routes enter the same edge,
+then they will always exit at the same edge, so their route after exiting will
+be exactly the same. The number of hops for a random route (the mixing time)
+should be just right, so that the fast mixing property is achieved only in the
+honest region.
+
+Every node acts as a verifier in SybilGuard\cite{yu2006sybilguard} and performs
+a single random route of a fixed length, determined by the mixing time. The
+verifier treats every other nodes as suspects initially. The suspect is labeled
+as an honest node if its random route intersects with the verificer's random
+route. The number accepted nodes for every intersection is limited by a quota.
+Intuitively, the random route from an honest node is unlikely to escape into the
+Sybil region because the number of attack edges is limited. Due to the random
+route property, the number of overlapping random routes from the
+Sybils is bounded by the number of attack edges. Recall that the number of
+attack edges is independent of the number of Sybils, thus they are unlikely to
+intersect with many honest nodes.
+
+SybilLimit\cite{yu2008sybillimit} is the continuation of SybilGuard and it is an
+improvement on many fronts while keeping the same or better guarantees. In Sasm
+as before, every honest node acts as a verifier $V$ and initially treats all
 other nodes as suspects $S$. The verification process begins by performing
-multiple independent random routes by each party. $V$ labels $S$ as an honest
-node if and only if they share at least one tail (the final edge in the route).
-For each tail of $V$, there is a quota for the number of node that it labels.
-The authors prove that SybilLimit bounds the number of accepted Sybils (false
-positives) at $O(\log{n})$, an improvement from $O(\sqrt{n} \log{n})$ of
-SybilGuard.
+multiple independent random routes instead of a single one as in SybilGuard. $V$
+labels $S$ as an honest node if and only if they share at least one tail (the
+final edge in the route). For each tail of $V$, there is a quota for the number
+of node that it labels. The authors prove that SybilLimit bounds the number of
+accepted Sybils (false positives) at $O(\log{n})$, an improvement from
+$O(\sqrt{n} \log{n})$ of SybilGuard.
 
 Let us consider the following three scenarios to intuitively show why SybilLimit
-works. Suppose $S$ is not a Sybil, and if $V$ and $S$ perform enough random
-routes, each with enough hops for fast mixing, then due to the Birthday Paradox,
-$S$ and $V$ will have an intersecting tail with high probability. Next, suppose
-some of the tails of $V$ are in the Sybil region so they may intersect with a
-large number of Sybils, but crossing the attack edges is improbable and
-accepting a lot of Sybils is also difficult due to the aforementioned quota
-mechanism, thus $V$ has a small probability of accepting a large number of
-Sybils. Finally, consider there is only one attack edge and suppose a Sybil has
-tails in the honest region, due to the random route property, the route of the
-Sybils in the honest region will be exactly the same, so accepting the Sybils in
-this scenario is also low due to the quota mechanism.
+works. The same intuition applies to SybilGuard. Suppose $S$ is not a Sybil, and
+if $V$ and $S$ perform enough random routes, each with enough hops for fast
+mixing, then due to the Birthday Paradox, $S$ and $V$ will have an intersecting
+tail with high probability. Next, suppose some of the tails of $V$ are in the
+Sybil region so they may intersect with a large number of Sybils, but crossing
+the attack edges is improbable and accepting a lot of Sybils is also difficult
+due to the aforementioned quota mechanism, thus $V$ has a small probability of
+accepting a large number of Sybils. Finally, consider there is only one attack
+edge and suppose a Sybil has tails in the honest region, due to the random route
+property, the route of the Sybils in the honest region will be equivalent
+(overlapping), so accepting the Sybils in this scenario is also low due to the
+quota mechanism.
 
 TODO create a diagram for SybilLimit
 
@@ -257,21 +275,27 @@ users)\cite{cao2012aiding}. SybilRank uses short random walks that begins on
 trusted nodes in the honest region. The trusted nodes is choosen manually, this
 allows SybilRank to adapt to different graph structures. A novelty in SybilRank
 is that it uses power iterations, an efficient technique for computing the
-landing probability of random walks. Intuitively, the probability decreases for
-nodes that are far away from the trusted nodes, especially for nodes in the
-Sybil region. The probabilities are normalised by the degree of the node and
-then ranked. The potential Sybils are the nodes that are under a some threshold.
-Finally, various actions can be performed to to verify the potential Sybils,
-e.g. using CAPTCHA puzzles.
+landing probability of random walks. Intuitively, the landing probability
+decreases for nodes that are far away from the trusted nodes (since it is using
+short random walks), especially for nodes in the Sybil region. The probabilities
+are normalised by the degree of the node and then ranked. The potential Sybils
+are the nodes that are under a some threshold. Finally, various actions can be
+performed to to verify the potential Sybils, e.g. using CAPTCHA puzzles.
 
 SybilShield\cite{shi2013sybilshield} makes use of multiple communities. It
 begins the same way as SybilGuard/SybilLimit, i.e. $V$ performs random route to
 determine whether suspect $S$ is a Sybil. But to reduce the possibility that $S$
 is in fact an honest node but labeled as a Sybil, $V$ searches for agents $A$
-that are from another community (also using random route). $A$ performs the same
-random route algorithm and decides whether $S$ is actually a Sybil and then
-relay the information to $V$. If a large majority of $A$ say $S$ is honest, then
+that are from another community. This is also done using random routes and
+relies on the assumption that inter-community edges are rare. First, $V$
+performs a random route and picks a \emph{candidate} $A$, then $V$ and the
+candidate perform random routes simultaneously, if they do not intersect then
+$A$ is considered to be in another community, otherwise $V$ repeats the process
+until it finds a suitable $A$. When a number of suitable $A$ is found, they all
+perform random route and decides whether $S$ is actually a Sybil and then relay
+the information back to $V$. If a large majority of $A$ say $S$ is honest, then
 $V$ knows that it has made a mistake, otherwise $S$ is indeed a Sybil.
+% the Algorithm 2 is not a community detection algorithm
 
 TODO make figure of multiple communities for SybilShield
 
@@ -289,24 +313,37 @@ is unlikely that they will receive a large number of tickets.
 % ReDS\cite{akavipat2014reds} suggests to use sybilimit or sybilinfer
 
 \subsection{Community Detection}
-Viswanath et al. realised many of the mechanisms mentioned in
-\autoref{sec:random-walk} such as SybilGuard, SybilLimit and SybilInfer, are in
-fact performing local community detection (i.e. detecting clusters of nodes)
-which is a more developed field\cite{viswanath2010analysis}. The authors also
-argue that social graphs are not always fast mixing, which may result in poor
-results for techniques that uses the fast mixing assumption. Using synthetic
-social graphs, the authors show that applying Mislove's
+In thi section we discuss techniques that leverage existing community detection
+algorithm. The work started with Viswanath et al., who realised many of the
+mechanisms mentioned in \autoref{sec:random-walk} such as SybilGuard, SybilLimit
+and SybilInfer, are in fact performing local community detection (i.e. detecting
+clusters of nodes) which is a more developed field\cite{viswanath2010analysis}.
+The authors also argue that social graphs are not always fast mixing, which may
+result in poor results for techniques that uses the fast mixing assumption.
+Using synthetic social graphs, the authors show that applying Mislove's
 algorithm\cite{mislove2010you} achieve similar results as SybilLimit and
 SybilInfer. But using a Facebook social graph, Mislove's algorithm performs
 better.
 
-SybilExposer\cite{misra2016sybilexposer}
+The authors of SybilExposer\cite{misra2016sybilexposer} argue that the number of
+attack edges may not be that small which may render the random walk based method
+ineffective. They proposed a solution that relies on the ratio between the
+number of inter-community (inter-cluster) edges and the number of
+intra-community (intra-cluster) edges. The idea is that this ratio is different
+between honest communities and Sybil communities, namely the Sybil communities have
+a lower ratio because they are well connected between themselves but not with
+other honest communities. SybilExposer operates in two stages, first communities
+are extracted using community detection algorithm (a modified version of the
+Louvain method\cite{blondel2008fast}), then the communities are ranked based on the
+ratio and communities with a low ratio are likely to be Sybils.
+% community diversity vs node diversity
 
-SybilRadar\cite{mulamba2016sybilradar}
+% SybilRadar\cite{mulamba2016sybilradar}
 
-\subsection{User Feedback and Machine Learning}
-In some application domains such as OSN it is possible to leverage user feedback
-to detect Sybils. These techniques do not work in the general setting.
+\subsection{Content Based and Machine Learning}
+In some application domains such as OSN it is possible to leverage content or
+user feedback to detect Sybils. These techniques do not work in the general
+setting.
 
 Ostra\cite{mislove2008ostra} is a system for limiting spam in social networks.
 In the simplest form, every undirected edge in the social graph is considered as
@@ -349,8 +386,25 @@ every node in the graph. Naturally, the Sybils are likely to have a low vote
 because their vote capacity is slow and many of their friend requests would be
 rejected.
 
-\subsection{Content Driven}
-\cite{chatterjee2008robust}
+Integro\cite{boshmaf2015integro} is a hybrid between random walk and content based
+approaches. It begin by training a machine learning algorithm (random forest
+learning algorithm) to identify potential \emph{victim accounts}, that is honest
+accounts that have accepted Sybils as their friends. Then in the social graph,
+edges connecting the potential victim accounts will have its weight reduced
+depending on the likelihood of it being a victim. Finally, a biased short random
+walk is perfrom starting from some known honest account and the landing
+probabilities are calculated for every node. Biased in a sense that that the
+walk is a higher probability of using a path with a higher weight. Sybils are
+the nodes with a low landing probabilty. This technique works because, victims
+are easier to detect than Sybils due to the fact that Sybils can arbitrarily
+modify their account information to avoid detection. Once the victims are
+detected, they effectively form a ``border-line'' between the honest region and
+the Sybil region. Finally, it is unlikely that the random walk will traverse
+into the Sybil region due to its bias, so the Sybil will have a low landing
+probability and be detected.
+
+% \subsection{Content Driven}
+% \cite{chatterjee2008robust}
 
 \subsection{Other}
 Trust transfer\cite{seigneur2005trust} is a Sybil defence mechanism for

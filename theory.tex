@@ -59,9 +59,14 @@ created by honest entities, the edges connecting those nodes are real-world
 trust relationships. The right region contains the Sybils and they are connected
 with fake relationships. The edges connecting the two regions are called
 \emph{attack edges}. These can be created by tricking an honest user to befriend
-a Sybil, stealing an honest user's account and so on. Many Sybil defence
-mechanisms rely on the fact that attack edges are difficult to create as we will
-describe in \autoref{sec:defences}.
+a Sybil, stealing an honest user's account and so on. If malicious users create
+too many Sybils, then the graph begins to have certain properties, i.e. it will
+have a quotient cut. Effectively, removing the attack edges will disconnect a
+large number of nodes from the social graph. Many Sybil defence mechanisms rely
+on the fact that attack edges are difficult to create as we will describe in
+\autoref{sec:defences}. 
+
+Note that in general there may be multiple honest regions multiple Sybil region. 
 
 \begin{figure}
   \centering
