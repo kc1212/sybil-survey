@@ -438,44 +438,59 @@ for identities that have the same interest as Alice grow exponentially when
 Alice consumes a good non-overwhelming object. Conversely the trust scores
 decreases exponentially for identities that are recommending bad objects, making
 Sybils ineffective.
+% Similar to some randomised byzantine agreement algorithm?
 
-Symon\cite{jyothi2009symon} - pair peers together, likelihood for both to be sybils is low, the pair monitor each other to prevent attacks
+SyMon\cite{jyothi2009symon} or \emph{Sybil Monitor} assumes that any two
+sufficiently random nodes in the network cannot both be Sybils with a high
+probability. Then the nodes are paired together to monitor each other's
+transactions. For instance, a transaction could be reporting the number bytes
+transferred in a P2P file file sharing network. Cheating occurs when a node
+reports some bytes transferred that does not match its network traffic. The
+authors provide four methods for pairing nodes. Suppose the nodes are identified
+by the hash of their RSA public key, then it is difficult to create identities
+deterministically. Then nodes can be matched by the closeness of their
+identities when they are in a DHT. The downside of this approach is that it
+sacrifices a lot of privacy, every action that a node makes is monitored by some
+other node.
+
+SybilFrame?
 
 \subsection{Cryptography Based Techniques?}
 Secure-Overlay\cite{lua2007securing} - ID crypto and SSS
 Privacy-preserving\cite{schaub2016trustless} - blockchain?
 Proof-of-stake\cite{dennis2016rep}
 
-% \subsection{Unsorted?}
-% 
-% Beth and PGP limits Sybil attack to some extent by using social graphs
-% Beth 94\cite{beth1994valuation}
-% PGP (Zimmermann) 95\cite{zimmermann1995official}
-% 
-% Yu 00\cite{yu2000social}
-% % CORE 02\cite{michiardi2002core} % MANETs
-% Lee 03\cite{lee2003cooperative} - uses flooding, might not be scalable, only talks about DoS
-% % Buchegger 04 - MANETs
-% % Xiong 03\cite{xiong2003reputation} % also PeerTrust?
-% Marti 04\cite{marti2004limited}
-% ARA 05\cite{ham2005ara} - no mention of sybil, prevents freeriding, prevents short-term abuse because reputation increases gradually
-% FuzzyTrust Song 05\cite{song2005trusted} - uses fuzzy logic
-% P2PRep/Fuzzy 06\cite{aringhieri2006fuzzy} - also fuzzy, does not prevent generation of false rumors
-% Xiong 05\cite{xiong2007countering} - no mention of sybil, but tries to mitigate false information
-% PowerTrust 06\cite{zhou2007powertrust} - uses ``power nodes'' (from power-law), no mention of sybil, some defence against colluders
-% % Li 07 - MANETs
-% 
-% Histos and Sopras\cite{zacharia2000collaborative}, doesn't really have structure?
-% Beta\cite{jsang2002beta}
-% % Confidant\cite{buchegger2002performance} MANETs
-% Gupta et al.\cite{gupta2003reputation}
-% 
-% PeerTrust\cite{xiong2004peertrust} - DHT, used P-GRID source code, has credibility rating
-% 
-% PerContRep\cite{yan2014percontrep}
+\begin{comment}
+\subsection{Unsorted}
+
+Beth and PGP limits Sybil attack to some extent by using social graphs
+Beth 94\cite{beth1994valuation}
+PGP (Zimmermann) 95\cite{zimmermann1995official}
+
+Yu 00\cite{yu2000social}
+% CORE 02\cite{michiardi2002core} % MANETs
+Lee 03\cite{lee2003cooperative} - uses flooding, might not be scalable, only talks about DoS
+% Buchegger 04 - MANETs
+% Xiong 03\cite{xiong2003reputation} % also PeerTrust?
+Marti 04\cite{marti2004limited}
+ARA 05\cite{ham2005ara} - no mention of sybil, prevents freeriding, prevents short-term abuse because reputation increases gradually
+FuzzyTrust Song 05\cite{song2005trusted} - uses fuzzy logic
+P2PRep/Fuzzy 06\cite{aringhieri2006fuzzy} - also fuzzy, does not prevent generation of false rumors
+Xiong 05\cite{xiong2007countering} - no mention of sybil, but tries to mitigate false information
+PowerTrust 06\cite{zhou2007powertrust} - uses ``power nodes'' (from power-law), no mention of sybil, some defence against colluders
+% Li 07 - MANETs
+
+Histos and Sopras\cite{zacharia2000collaborative}, doesn't really have structure?
+Beta\cite{jsang2002beta}
+% Confidant\cite{buchegger2002performance} MANETs
+Gupta et al.\cite{gupta2003reputation}
+
+PeerTrust\cite{xiong2004peertrust} - DHT, used P-GRID source code, has credibility rating
+
+PerContRep\cite{yan2014percontrep}
 
 
-\subsection{Does not handle Sybil-attack?}
+\subsection{Does not handle Sybil-attack}
 TrustMe\cite{singh2003trustme} is a reputation that focuses on anonymity, no mention of sybil attack
 
 H-Trust\cite{zhao2009htrust} does not mention sybil
@@ -486,6 +501,7 @@ TrustGuard 05\cite{srivatsa2005trustguard} - assumes it is built on secure overl
 
 Scrivener 05\cite{nandi2005scrivener} - assumes ID cannot be created and discarded
 
+\end{comment}
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "main"
