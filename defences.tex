@@ -418,7 +418,26 @@ scenarios where there are a lot of interactions and the overall trustworthieness
 is high, then there is no major effect to transfer a little bit of reputation to
 a recommended identity.
 
-DSybil\cite{yu2009dsybil} - recommendation system, need historical data
+Yu et el. of DSybil\cite{yu2009dsybil} argue that defending Sybils in reputation
+or recommendation systems is a lot more difficult than in social networks
+because only a very small percentage of the user will vote for an object (e.g.
+news article in Reddit), so a small number of Sybils and attack edges can easily
+out-vote honest users. Their proposed solution is DSybil, a distributed
+algorithm for diminishing the influence of Sybils in recommendation systems
+using historical data. Suppose Alice is an identity that runs the algorithm, and
+every identity begins with the same trust score from Alice's perspective. The
+algorithm runs in rounds. In every round, Alice picks an object to consume (e.g.
+reads the new article on Reddit) and then makes a binary (good or bad) feedback
+on the object. Then Alice computes whether the object is \emph{overwhelming},
+namely whether the sum of the trust scores of the voters of the object exceeds
+some threshold. If Alice voted for good and the object is not overwhelming, then
+she would increase the trust scores by a factor for all the voters of that
+object. Otherwise she decreases the trust score by a factor. When Alice needs a
+recommendation, a uniformly random overwhelming object is returned. Trust scores
+for identities that have the same interest as Alice grow exponentially when
+Alice consumes a good non-overwhelming object. Conversely the trust scores
+decreases exponentially for identities that are recommending bad objects, making
+Sybils ineffective.
 
 Symon\cite{jyothi2009symon} - pair peers together, likelihood for both to be sybils is low, the pair monitor each other to prevent attacks
 
