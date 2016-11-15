@@ -13,21 +13,6 @@ are built for discovering and sharing files. BitTorrent\cite{bep3} is likely the
 most popular P2P network at the time of writing. Due to their open and
 distributed nature, they are vulnerable to the Sybil attack.
 
-\subsubsection{Denial of Service}
-By exploiting vulnerabilities in the BitTorrent network, denial of service
-attack can be directed at any machine connected to the internet, not just
-machines in the network\cite{sia2006ddos}. The main idea is to report the victim
-as the tracker (a server that coordinates the peers). El Defrawy, Gjoka and
-Markopoulou created a small scale proof-of-concept attack. Using only one
-machine, they could generate enough traffic to cripple small organisations and
-home users. The authors suggested that if Sybils are created to perform the same
-attack aimed at a single victim, then it could easily throttle links with much
-higher bandwidth\cite{el2007bottorrent}.
-
-% Gnutella?
-% \cite{daswani2002query}
-% \cite{daswani2004pong}
-
 \subsubsection{Index Poisoning}
 P2P networks often implement a DHT (distributed hash table). The DHT in
 BitTorrent is called Mainline-DHT, based on
@@ -48,11 +33,48 @@ such as Overnet\cite{liang2006index}.
 % \subsubsection{Unfair Use of Resources}
 % creating sybils with ``strategic'' missing pieces
 
+% Gnutella?
+% \cite{daswani2002query}
+% \cite{daswani2004pong}
 \subsubsection{Eclipse Attack}
-TODO KAD\cite{steiner2007exploiting}
+Steiner et al. mounted an Eclipse attack on a Kademlia based DHT for P2P file
+sharing known as KAD, it is used in Overnet and
+eMule\cite{steiner2007exploiting}. The Eclipse Attack\cite{singh2006eclipse} is
+a special form of targeted Sybil attack. Sybils are arranged in the network such
+that they eclipse the the victim from the rest of the network. The victim can
+either an identity or an object such as a key in DHT. The authors mounted the
+latter variation. The authors show that it is possible to eclipse a key using
+only 32 Sybils in a DHT with 1.5 million users and 42,000 key.
+
+
+\subsubsection{Denial of Service}
+By exploiting vulnerabilities in the BitTorrent network, denial of service
+attack can be directed at any machine connected to the internet, not just
+machines in the network\cite{sia2006ddos}. The main idea is to report the victim
+as the tracker (a server that coordinates the peers). El Defrawy, Gjoka and
+Markopoulou created a small scale proof-of-concept attack. Using only one
+machine, they could generate enough traffic to cripple small organisations and
+home users. The authors suggested that if Sybils are created to perform the same
+attack aimed at a single victim, then it could easily throttle links with much
+higher bandwidth\cite{el2007bottorrent}.
+
+Steiner et al. also succeeded in mounting a DDoS attack but using their in the
+context of the aforementioned KAD DHT\cite{steiner2007exploiting}. Instead of
+replying the correct list of peers to DHT queries, the Sybils always respond
+with the IP address of the target peer in an attempt to overwhelm the target.
+The authors show evidence that real-world malicious DDoS attacks involving more than
+300,000 peers are mounted using P2P networks.
 
 \subsubsection{Spying}
-TODO \cite{holz2008measurements}
+Many authors have used Sybils to monitor or spy a P2P file sharing network that
+uses DHT\cite{holz2008measurements, steiner2007exploiting}. In essence, the
+authors created a lot of light-weight Sybils and trick all the honest peers to
+store them in their routing table, a form of index poisoning. The Sybils are
+light-weight because do not follow the DHT protocol and perform much simpler
+operations, thus a single machine can have thousands of Sybils running
+simultaneously. Finally, DHT requests would ``pass through'' the Sybils due to
+the poisoned routing table, and the requests can be stored in a database for
+further analysis. 
 
 \subsection{The Sybil Attack in OSN}
 OSN (online social networks) are vulnerable to the Sybil attack even when most
