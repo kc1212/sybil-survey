@@ -187,7 +187,16 @@ better guarantee than SybilLimit where it only accepts $1 + o(n)$ votes per
 attack edge. An improved version of SumUp - GateKeeper is discussed in
 \autoref{sec:random-walk}.
 
-TODO diagram for ticket distribution?
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\linewidth]{sumup}
+  \caption{Visualisation of the ticket distribution step of SumUp. Note that
+    tickets are not distributed to nodes on the same level of breadth-first
+    search, or nodes that already hold a ticket. The same process is also
+    applied for GateKeeper, discussed in at the end of
+    \autoref{sec:random-walk}.}
+  \label{fig:sumup}
+\end{figure}
 
 Conversely, maximum flow is dual to minimum cut, so the problem of finding Sybil
 can also be formulated as finding sparse cuts\footnote{The sparse cut problem is
@@ -230,12 +239,22 @@ a single random route of a fixed length, determined by the mixing time. The
 verifier treats every other nodes as suspects initially. The suspect is labeled
 as an honest node if its random route intersects with the verificer's random
 route. The number accepted nodes for every intersection is limited by a quota.
-Intuitively, the random route from an honest node is unlikely to escape into the
-Sybil region because the number of attack edges is limited. Due to the random
-route property, the number of overlapping random routes from the
-Sybils is bounded by the number of attack edges. Recall that the number of
-attack edges is independent of the number of Sybils, thus they are unlikely to
-intersect with many honest nodes.
+The process is visualsed in \autoref{fig:sybilguard}. Intuitively, the random
+route from an honest node is unlikely to escape into the Sybil region because
+the number of attack edges is limited. Due to the random route property, the
+number of overlapping random routes from the Sybils is bounded by the number of
+attack edges. Recall that the number of attack edges is independent of the
+number of Sybils, thus they are unlikely to intersect with many honest nodes.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\linewidth]{sybilguard}
+  \caption{Visualisation of SybilGuard. The verifier accepts the suspect because
+    their random routes intersect. The Sybils' random routes all come from a
+    single attack edges, thus their routes are equivalent after entering the
+    honest region.}
+  \label{fig:sybilguard}
+\end{figure}
 
 SybilLimit\cite{yu2008sybillimit} is the continuation of SybilGuard and it is an
 improvement on many fronts while keeping the same or better guarantees. In Sasm
@@ -246,7 +265,8 @@ labels $S$ as an honest node if and only if they share at least one tail (the
 final edge in the route). For each tail of $V$, there is a quota for the number
 of node that it labels. The authors prove that SybilLimit bounds the number of
 accepted Sybils (false positives) at $O(\log{n})$, an improvement from
-$O(\sqrt{n} \log{n})$ of SybilGuard.
+$O(\sqrt{n} \log{n})$ of SybilGuard. The process is visualised in
+\autoref{fig:sybillimit}.
 
 Let us consider the following three scenarios to intuitively show why SybilLimit
 works. The same intuition applies to SybilGuard. Suppose $S$ is not a Sybil, and
@@ -262,7 +282,15 @@ property, the route of the Sybils in the honest region will be equivalent
 (overlapping), so accepting the Sybils in this scenario is also low due to the
 quota mechanism.
 
-TODO create a diagram for SybilLimit
+\begin{figure}
+  \centering
+  \includegraphics[width=\linewidth]{sybillimit}
+  \caption{Visualisation of SybilLimit. The verifier accepts the suspect because
+    one of the tails of their random routes meet. Similarly, the Sybils' random
+    route are all from a single attack edges, so their routes are equivalent in
+    the honest region.}
+  \label{fig:sybillimit}
+\end{figure}
 
 SybilGuard and SybilLimit inspired many other defence mechanisms.
 SybilInfer\cite{danezis2009sybilinfer} assumes trusted nodes, which create
@@ -317,7 +345,17 @@ the information back to $V$. If a large majority of $A$ say $S$ is honest, then
 $V$ knows that it has made a mistake, otherwise $S$ is indeed a Sybil.
 % the Algorithm 2 is not a community detection algorithm
 
-TODO make figure of multiple communities for SybilShield
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\linewidth]{community}
+  \caption{Visualisation of communities in a social graph. Solid lines represent
+    intra-community edges. Dotted lines represent inter-community edges. The red
+    dotted lines are inter-community edges coming from the Sybils, in other
+    words the attack edges. The idea of making use of communities is used in
+    SybilShield (this section) as well as SybilExposer
+    (\autoref{sec:community-detection}).}
+  \label{fig:community}
+\end{figure}
 
 GateKeeper\cite{tran2011optimal} combines ideas from SumUp (discussed in
 \autoref{sec:network-flow}) and SybilLimit. GateKeeper assumes a admission
@@ -332,7 +370,7 @@ is unlikely that they will receive a large number of tickets.
 % Whanau\cite{lesniewski2010whanau}
 % ReDS\cite{akavipat2014reds} suggests to use sybilimit or sybilinfer
 
-\subsection{Community Detection}
+\subsection{Community Detection}\label{sec:community-detection}
 In thi section we discuss techniques that leverage existing community detection
 algorithm. The work started with Viswanath et al., who realised many of the
 mechanisms mentioned in \autoref{sec:random-walk} such as SybilGuard, SybilLimit
