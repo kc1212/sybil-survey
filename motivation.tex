@@ -47,11 +47,28 @@ they can effectively suppress the opinions of the real users.
 
 Clearly, the defence mechanisms employed by social network and micro-blogging
 websites are not adaquate to combat the Sybil attack. If the Sybils infiltrate
-even more of our cyberspace, then it may become a form of censorship. In that
-case, can we still be considered to have the right to freedom of speech?
+even more of our cyberspace, then it may become a form of censorship.
+Effectively taking away our right to freedom of speech.
 
-TODO Tor
-https://blog.torproject.org/blog/tor-security-advisory-relay-early-traffic-confirmation-attack
+Speaking of censorship, many users use Tor (The Onion
+Router)~\cite{dingledine2004tor} to access the uncensored internet when living
+in authoritarian regimes such as China, or intelligence agencies from doing
+illegal mass surveillence. Unfortunately, Tor suffered a Sybil attack. In
+January 2014, 115 relays joined the Tor network. Six months later, it was
+discovered that those relays were using a protocol vulnerability to deanonymise
+users and find the location of hidden services. It is unclear to the Tor
+developers which users are affected or what information was retrieved, thus it
+is assumed that users who used Tor between that period are all
+affected\cite{torsybil}. In fact, Tor depends on the fact that majority of the
+relays are good to guarantee anonymity with a high probability. If the network
+is infiltrated by a large number of Sybils then users can be easily
+deanonymised.
+
+These example demonstrate a big problem with in the popular social network
+websites and anonymous communication tool we use today. A lot of Sybils
+controlled by an attacker can censor content and track user behaviour. In the
+next section, we explore more types of attacks grouped by the underlying
+application.
 
 %%% Local Variables:
 %%% mode: latex
