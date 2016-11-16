@@ -10,26 +10,28 @@ time is to use a certificate authority. The surveyed defence mechanisms
 approximately cover sections \ref{sec:cert-authority},
 \ref{sec:resource-testing} and \ref{sec:registration-fee} in this work.
 
-Many years later, Mohaisen and Kim published a survey focusing on 
+Many more surveys were published after the introduction of OSN based Sybil
+defences beginning with SybilGuard. Mohaisen and Kim made surveyed certificate
+authority, resource testing and OSN (random walk) based
+approaches\cite{mohaisen2013sybil}. They also compare the assumptions,
+performance and many other properties. Rakesh et el. made a similar
+survey\cite{rakesh2014survey}, they discuss six types of attacks in addition to
+describing the defence mechanisms.
 
-Reputation Surveys:
-\cite{marti2006taxonomy}
-\cite{josang2007survey} ?
-\cite{hoffman2009survey}
-\cite{koutrouli2012taxonomy}
-\cite{selvaraj2012survey} ?
-\cite{hendrikx2015reputation}
+Koll et el. surveyed 8 defence mechanisms for OSN and analysed them in much more
+depth\cite{koll2014state}. The authors experimentally show that increasing the
+number of attack edges indeed makes the defence mechanisms less effective. More
+interestingly, Sybil tolerance systems\footnote{Sybil tolerance systems are
+  those that are designed to limit the effectiveness of the Sybils rather than
+  detecting them.} such as Ostra (discussed in \autoref{sec:content-based}) and
+SumUp (discussed in \autoref{sec:network-flow}) can still be effective when the
+number of attack edges increase. The authors advise future defence mechanism
+designers to use information in addition to simply the graph structure to detect
+or tolerate Sybils.
 
-Sybil Surveys:
-\cite{mohaisen2013sybil}
-\cite{rakesh2014survey}
-\cite{gunturu2015survey}
-\cite{koll2014state}
-Sok\cite{alvisi2013sok} but also some contribution
+Surveys of reputation often cover Sybil attacks too \cite{marti2006taxonomy,
+  hoffman2009survey, koutrouli2012taxonomy, selvaraj2012survey}. TODO
 
-Other:
-\cite{wallach2003survey}
-DHT seucrity survey\cite{urdaneta2011survey}
 
 %%% Local Variables:
 %%% mode: latex

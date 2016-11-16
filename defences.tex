@@ -382,16 +382,6 @@ $V$ knows that it has made a mistake, otherwise $S$ is indeed a Sybil.
   \label{fig:community}
 \end{figure}
 
-GateKeeper\cite{tran2011optimal} combines ideas from SumUp (discussed in
-\autoref{sec:network-flow}) and SybilLimit. GateKeeper assumes a admission
-controller that is honest, the admission controller performs random walks to
-select $n$ ticket sources. The ticket sources act the same way as SumUp where it
-distributes ticket in a breadth-first search manner. For a node to be labeled
-honest, it must obtain $fn$ tickets, where $f$ is a system parameter (0.2 is
-shown to be a good value experimentally). This idea works becauses if the ticket
-sources are evenly distributed and Sybils ony have a few attack edges, then it
-is unlikely that they will receive a large number of tickets.
-
 Recently, Liu et el. argue that random walks with fixed length is not adaquate
 because social graphs can have communities of different sizes, nodes in a large
 community that is well connected may have a lower mixing time than nodes in a
@@ -407,6 +397,16 @@ i.e. node is accepted when their tails meet. The authors evaluated SmartWalk
 using real-world social graphs. In particular, the false positive rate for a
 Twitter social graph can be reduced by two orders of magnitude when compared to
 the standard SybilLimit.
+
+GateKeeper\cite{tran2011optimal} combines ideas from SumUp (discussed in
+\autoref{sec:network-flow}) and SybilLimit. GateKeeper assumes a admission
+controller that is honest, the admission controller performs random walks to
+select $n$ ticket sources. The ticket sources act the same way as SumUp where it
+distributes ticket in a breadth-first search manner. For a node to be labeled
+honest, it must obtain $fn$ tickets, where $f$ is a system parameter (0.2 is
+shown to be a good value experimentally). This idea works becauses if the ticket
+sources are evenly distributed and Sybils ony have a few attack edges, then it
+is unlikely that they will receive a large number of tickets.
 
 % ReDS\cite{akavipat2014reds} suggests to use sybilimit or sybilinfer
 
@@ -439,6 +439,7 @@ ratio and communities with a low ratio are likely to be Sybils.
 % SybilRadar\cite{mulamba2016sybilradar}
 
 \subsection{Content Based and Machine Learning}
+\label{sec:content-based}
 In some application domains such as OSN it is possible to leverage content or
 user feedback to detect Sybils. These techniques work well in practice. But
 often depend on uninformed attackers that do not try to mimic the behaviour of
