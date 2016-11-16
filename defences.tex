@@ -77,15 +77,25 @@ to gather a lot of CPU power which is much more difficult.
 % SybilConf\cite{tegeler2010sybilconf}
 
 \subsection{Registration Fee}
-Using registration fee is similar to resource testing except it only happens on
-registration. Entities can be charged a fee for creating identities, often 
-facilitated by a central authority. The fee need to be set appropriately so that
-the cost of creating Sybils outweights the benefits. The fee does not need to be
-monetary. For instance, CAPTCHA\cite{von2003captcha} is a form of
-registration fee. It prevents programs from automatically creating new
-identities and limits the rate at which identities can be created.
 
-TODO \cite{resnick2001social}
+Friedman and Resnick is one of the first to propose the use of a registration
+fee\cite{resnick2001social}. It is similar to resource testing except it only
+happens on registration. Entities can be charged a fee for creating identities,
+often facilitated by a central authority. The fee need to be set appropriately
+so that the cost of creating Sybils outweights the benefits but does not hinder
+honest entities.
+
+The fee does not need to be monetary. For instance, Friedman and Resnick
+proposed the idea of a once-in-a-lifetime identity\cite{resnick2001social}. It
+uses blind signatures and a central authority, the authority does not know the
+mapping between the real identity (e.g. real-world identity) and the pseudo
+identity of entities, but it checks whether there has been previous
+registrations of the same real identity. In this case, the fee is the real
+identity, and attackers cannot create an arbitrary number of real identities.
+CAPTCHA\cite{von2003captcha} is another form of registration fee. It prevents
+programs from automatically creating new identities and limits the rate at which
+identities can be created by asking users to solve a puzzle that is difficult
+for computers.
 
 Feldman et el. proposed another form of registration fee for P2P networks - the
 adaptive stranger policy\cite{feldman2004robust}. When new peers join the

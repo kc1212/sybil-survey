@@ -78,22 +78,26 @@ further analysis.
 
 \subsection{The Sybil Attack in OSN}
 OSN (online social networks) are vulnerable to the Sybil attack even when most
-of them use a central, trusted authority such as Facebook. In OSN, users create
+of them use a central, trusted authority. In OSN, users create
 profiles and form relationships with friends. In contrast with real world
 relationships, it is much easier to create relationships in OSN even with
 strangers. In 2008, Sophos conducted an experiment where they created a Facebook
 profile and send friend requests to 200 random users, and 41\% of the users
-accepted the friend request\cite{sophos}. A report by Facebook at the end of
-2011 stated 5-6\% of their accounts are fake\cite{facebookfake}. Combining with
-the ability to create new identities with very little cost, it is possible to
-perform many types of attacks which we outline below.
+accepted the friend request\cite{sophos}.
 
-Note that online social networks often have a reputation aspect as well, for
-example a Facebook page with a lot of fans may be considered to be more
-reputable than others. We discuss attacks specific to OSN in this section and
-attacks on reputation in \autoref{sec:reputation-attack}
+Many OSN in fact have a large number of Sybils. A report by Facebook at the end
+of 2011 stated 5-6\% of their accounts are fake\cite{facebookfake}. Jiang et el.
+analysed data from Renren\footnote{One of the largest social network in China.},
+they discovered almost 1 million Sybils from 2440 Sybil
+groups\cite{jiang2015understanding}.
 
-TODO Understanding Sybil Groups\cite{jiang2015understanding}
+Attackers leverage the ability to fool users into becoming one of their Sybil's
+friend and the ability to create a large number of Sybils to mount a large
+variety of attacks on the user. We outline the different types of attack in this
+section. Note that online social networks often have a reputation aspect as
+well, for example a Facebook page with a lot of fans may be considered to be
+more reputable than others. We discuss attacks specific to OSN in this section
+and attacks on reputation in \autoref{sec:reputation-attack}
 
 \subsubsection{Identity Theft}
 Authors of \cite{bilge2009all} created two attacks - profile cloning and
@@ -174,13 +178,18 @@ Spamming, much like in the context of email, is the act of sending unsolicited
 or undesire messages (spam). The goal of the attacker varies from advertisement
 to phishing and spreading malicious software\cite{twittermalware1,
   twittermalware2}. Many studies have characterised the behaviour of the
-spammers and found that they either use fake accounts or stolen
-accounts\cite{stringhini2010detecting, yang2012analyzing, grier2010spam}. Some
-authors have worked with the service provide to close the spam accounts, but it
-is clearly not sufficient as we described in \autoref{sec:motivation}.
+spammers and found that many spammers are in fact
+Sybils~\cite{stringhini2010detecting, yang2012analyzing, grier2010spam,
+  jiang2015understanding}. More importantly, spamming is possibly the most
+common attack in OSN. Jiang et el. analysed the malicious activities of the
+Sybils and found propogating advertisement (at 32.8\%) is the most common
+one\cite{jiang2015understanding}. Some authors have worked with the service
+provide to close the spam accounts, but it is clearly not sufficient as we
+described in \autoref{sec:motivation}.
 
 
-\subsection{The Sybil Attack in Reputation Systems}\label{sec:reputation-attack}
+\subsection{The Sybil Attack in Reputation Systems}
+\label{sec:reputation-attack}
 Reputation systems cultivate collaborative behaviour by allowing entities to
 trust each other based on community feedback, usually in the form of a
 reputation score. Entities decide whom to trust based on the reputation scores,
