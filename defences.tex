@@ -6,8 +6,6 @@ specific.
 
 \subsection{Certificate Authority}\label{sec:cert-authority}
 
-TODO add relevant references
-
 CA (certificate authorities) check the users' identities and then issues
 certificates to honest users. The certificate can be tangible (trusted
 hardware\cite{newsome2004sybil}) or non-tangible (public key certificate)
@@ -15,6 +13,13 @@ depending on the application. When an identity wishes to user the application,
 the CA must verify the validity of its certificate to ensure one-to-one
 correspondence. This mechanism prevents the Sybil attack as long as the CA does
 not make mistakes in the issuance stage.
+
+Many existing systems today use a form of CA. X.509\cite{housley2002internet} is
+a standard for certificates and is used in a large variety of applications. For
+example, emails can be encrypted and signed using
+S/MIME\cite{ramsdell2010secure} certificates which are based on X.509. Attackers
+can still create a large number of Sybils and send emails, but the receiver
+would reject the emails because they are not correctly signed.
 
 CA can prevent the Sybil attack but it also has a lot of downsides. (1) Users
 have different opinions and may not agree on a single CA. (2) Users living in
@@ -26,14 +31,10 @@ certificates then he or she can easily generate Sybils, if the CA goes offline
 then the application ceases to function because it can no longer verify
 identites.
 
-Many existing systems today use a form of CA.
-X.509 is a standard for certificates and is used in a large variety of
-applications, for example websites (TLS), email (S/MIME), smart cards and so on.
-Payment systems such as PayPal verifies identities using credit card billing addresses.
 % Credence\cite{walsh2006experience} is a distributed reputation system, but the
 % identities are created using a CA.
 
-\subsection{Resource Testing}
+\subsection{Resource Testing}\label{sec:resource-testing}
 Every attacker can create multiple Sybils, but the attack cannot duplicate its
 resources the same way. In resource testing, the goal is to limit the influence
 of every identity with respect to the amout of resources it can expend. The
@@ -78,7 +79,7 @@ to gather a lot of CPU power which is much more difficult.
 
 % SybilConf\cite{tegeler2010sybilconf}
 
-\subsection{Registration Fee}
+\subsection{Registration Fee}\label{sec:registration-fee}
 
 Friedman and Resnick is one of the first to propose the use of a registration
 fee\cite{resnick2001social}. It is similar to resource testing except it only
@@ -235,16 +236,16 @@ are difficult to form and are independent of the number of Sybils.
 
 Before explaining the techniques, we define the terms \emph{random walk} and
 \emph{random route} in the context of social graphs. In random walk, the social
-graph is traversed such that outgoing edges are selected uniformly at
-random on every hop of the walk. Random route is a modified form of a random
-walk. Every node maintains a static routing table that contains a uniformly
-random one-to-one mapping between incoming edges and outgoing edges, initialised
-at start-up. Thus the route is determined by the tables on every node. An
-important property of random route is that if two routes enter the same edge,
-then they will always exit at the same edge, so their route after exiting will
-be exactly the same. The number of hops for a random route (the mixing time)
-should be just right, so that the fast mixing property is achieved only in the
-honest region.
+graph is traversed such that outgoing edges are selected uniformly at random on
+every hop of the walk. Random route is a modified form of a random walk. Every
+node maintains a static routing table that contains a uniformly random
+one-to-one mapping between incoming edges and outgoing edges, initialised at
+start-up. Thus the route is determined by the tables on every node. An important
+property of random route is that if two routes enter the same edge, then they
+will always exit at the same edge, so their route after exiting will be exactly
+the same. The number of hops for a random route should be just right, so that
+the fast mixing property is achieved in the honest region, this is known as the
+\emph{mixing time}.
 
 Every node acts as a verifier in SybilGuard\cite{yu2006sybilguard} and performs
 a single random route of a fixed length, determined by the mixing time. The
@@ -314,6 +315,18 @@ assigning a ``score'' to every node. Sybil are the nodes with a low ``score''.
 SybilInfer outperforms SybilLimit regarding the number of false positives, but
 its drawbacks are its high computational cost and reliance on trusted nodes.
 
+Lesniewski et el. created Wh\={a}nau, a Sybil-resistent DHT, it is also inspired
+by SybilLimit\cite{lesniewski2008sybil, lesniewski2010whanau}. Suppose all nodes
+in the DHT belong to a social network and an Alice (who is honest) wish to join
+the DHT. Alice performs multiple random walks and it inserts the node on the
+tails of her random walks into her own routing table. Again, the random walk
+properties guarantee that there cannot be a large proportion of Sybils in the
+routing table with a high probability. The number of entries in the routing
+table needs to be high enough such that the entries cover the whole key spaces.
+If Alice wants to find a key, she broadcasts the request to all the entries.
+Since most of the entries are honest, Alice can retrieve the required value with
+high probability.
+
 SybilDefender\cite{wei2012sybildefender} can be seen as a two step process. It
 assumes the size of the Sybil region is smaller than the honest region and the
 nodes in the Sybil region are well connected. The first step is to perform
@@ -379,7 +392,22 @@ shown to be a good value experimentally). This idea works becauses if the ticket
 sources are evenly distributed and Sybils ony have a few attack edges, then it
 is unlikely that they will receive a large number of tickets.
 
-% Whanau\cite{lesniewski2010whanau}
+Recently, Liu et el. argue that random walks with fixed length is not adaquate
+because social graphs can have communities of different sizes, nodes in a large
+community that is well connected may have a lower mixing time than nodes in a
+smaller community. A longer than desired random walk length will result in a
+growing number of false negatives. To solve this problem, the authors created
+SmartWalk\cite{liu2016smartwalk} which uses adaptive random walks. There are two
+steps to SmartWalk. The first step uses machine learning to predict the local
+mixing time given a node. The second step performs the random walk using the
+local mixing time as the starting length, but on every hop the number of hops
+remaining is also updated depending on the intermediate node's local mixing
+time. Finally the Sybils can be detected using the same method as SybilLimit,
+i.e. node is accepted when their tails meet. The authors evaluated SmartWalk
+using real-world social graphs. In particular, the false positive rate for a
+Twitter social graph can be reduced by two orders of magnitude when compared to
+the standard SybilLimit.
+
 % ReDS\cite{akavipat2014reds} suggests to use sybilimit or sybilinfer
 
 \subsection{Community Detection}\label{sec:community-detection}
