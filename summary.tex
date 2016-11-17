@@ -1,4 +1,37 @@
-Temporal dynamics\cite{liu2015exploiting}
+In this work, we survey both the practical and the theoretical aspects of the
+Sybil attack. We motivate the Sybil attack by showing the harm it is causing in
+the real world. Social networks are flooded with Sybils making real news and
+fake news almost indistinguishable. Users of Tor are monitored by Sybils hidden
+in the network trying to reveal their real identity. Then we define the Sybil
+attack using its original definition from Douceur~\cite{douceur2002sybil} and
+introduce one of the most common models, i.e. the social graph. Next, we zoom
+into four different systems---P2P file sharing networks, online social networks,
+reputation systems and wireless ad-hoc networks---and look the various types of
+attacks that can be mounted. There are a number of alarming attacks, for
+instance automated identity theft, self-promotion and so on. The main part of
+our work summarises the defence mechanisms. Earlier defence mechanisms primarily
+work by limiting the number of identities or the rate at which they are created.
+The introduction of BarterCast inspired many network-flow based techniques for
+limiting the influence of Sybils. Similarly, the introduction of SybilGuard
+stimulated a lot of work on random-walk based techniques for identifying Sybils.
+Hybrids are also available, for instance GateKeeper is a hybrid of the two
+aforementioned techniques. Finally, we compare and contrast our work with
+existing surveys.
+
+We hope this work demonstrates the alarming consequences of the Sybil attack and
+many ingenious ways to defend against it. However, there does not exist a
+general solution and many defence mechanisms must satisfy their own set of
+assumptions in order to perform well. When the assumptions are violated, which
+can be the case due to the dynamic structure of real networks, they become
+ineffective (demonstrated in~\cite{liu2016smartwalk}). Moreover, almost no
+defence mechanisms considers the temporal dynamics~\cite{liu2015exploiting},
+i.e. the attacker may modify the attack edges or its the social graph in the
+Sybil region over time. The authors show the attacker can ``greatly undermine
+the security guarantees'' of many defence mechanisms.
+
+Without a doubt, much work still needs to be done in order for the cyberspace to
+be free of the Sybil attack. We hope this work serves as a cornerstone for the
+future defence mechanisms.
 
 %%% Local Variables:
 %%% mode: latex
