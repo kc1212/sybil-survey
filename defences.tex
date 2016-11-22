@@ -1,45 +1,45 @@
 % TODO expand, better intro
-In this section we categorise various defence techniques against the
-sybil-attack. Many of them are independent of the application, thus we classify
-them on their main idea, and state explicitly when the mechanism is application
-specific.
+The Sybil attack clearly has a lot of consequences, some of them are very severe
+and may cause financial lossess. In this section we categorise various defence
+techniques against the sybil-attack. We classify them on their main idea, and
+state explicitly when the mechanism is application specific.
+% Many techniques are also hybrids, we explain these 
 
 \subsection{Certificate Authority}\label{sec:cert-authority}
-
-CA (certificate authorities) check the users' identities and then issues
+CA (certificate authorities) check the users' real identities and then issues
 certificates to honest users. The certificate can be tangible (trusted
-hardware\cite{newsome2004sybil}) or non-tangible (public key certificate)
+hardware~\cite{newsome2004sybil}) or non-tangible (public key certificate)
 depending on the application. When an identity wishes to user the application,
 the CA must verify the validity of its certificate to ensure one-to-one
 correspondence. This mechanism prevents the Sybil attack as long as the CA does
 not make mistakes in the issuance stage.
 
-Many existing systems today use a form of CA. X.509\cite{housley2002internet} is
-a standard for certificates and is used in a large variety of applications. For
-example, emails can be encrypted and signed using
+Many existing systems today use a form of CA. X.509~\cite{housley2002internet}
+--- a standard for certificates, it is used in a large variety of applications.
+For example, emails can be encrypted and signed using
 S/MIME\cite{ramsdell2010secure} certificates which are based on X.509. Attackers
 can still create a large number of Sybils and send emails, but the receiver
 would reject the emails because they are not correctly signed.
 
 CA can prevent the Sybil attack but it also has a lot of downsides. (1) Users
 have different opinions and may not agree on a single CA. (2) Users living in
-authoritarian regimes may not have access to the CA in use. (3) It is difficult
-to scale up a CA to meet increasing users demands. (4) Anonymity is difficult to
-obtain because the CA has complete information of the entities. (5) It is a
-central point of failure; i.e. if the attacker obtains the private key to create
-certificates then he or she can easily generate Sybils, if the CA goes offline
-then the application ceases to function because it can no longer verify
+authoritarian regimes may not have access to the necessary CA. (3) It is
+difficult to scale up a CA to meet increasing users demands. (4) Anonymity is
+difficult to obtain because the CA has complete information of the entities. (5)
+It is a central point of failure; i.e. if the attacker obtains the private key
+to create certificates then he or she can easily generate Sybils, if the CA goes
+offline then the application ceases to function because it can no longer verify
 identites.
 
 % Credence\cite{walsh2006experience} is a distributed reputation system, but the
 % identities are created using a CA.
 
 \subsection{Resource Testing}\label{sec:resource-testing}
-Every attacker can create multiple Sybils, but the attack cannot duplicate its
-resources the same way. In resource testing, the goal is to limit the influence
-of every identity with respect to the amout of resources it can expend. The
-resource type can vary depending on the application as we describe below. It may
-deter casual attackers but its usefulness degrades for resourceful attackers.
+Resource testing makes attacks costly. That is to say every attacker can create
+multiple sybils, but the attack cannot duplicate its resources the same way. The
+resource type varies depending on the application, and we give a few examples
+below. It may deter casual attackers but its usefulness degrades for resourceful
+attackers.
 
 % In wireless networks it may be using radio
 % channels\cite{newsome2004sybil}, in online social networks it may be IP
@@ -47,55 +47,55 @@ deter casual attackers but its usefulness degrades for resourceful attackers.
 % in P2P networks\cite{aspnes2005exposing}.
 
 In P2P networks, IP address can be used as a resource. In
-Tarzan\cite{freedman2002tarzan}, neighbours are selected not from all known IP
+Tarzan~\cite{freedman2002tarzan}, neighbours are selected not from all known IP
 addresses, but from distinct IP prefixes. The effectiveness of the Sybil attack
 is reduced if the attackers cannot easily create Sybils in a large range of IP
 prefixes. Another example the self-registration
 technique~\cite{dinger2006defending}. When a peer wish to join the network, it
 needs to compute a ID which is a cryptographically secure hash of its own IP
-address and port number. While participating in the nettwork, other peers need
-to verify that the ID matches the peer's origin.
+address and port number, and then broadcast it to the network. While
+participating in the nettwork, other peers need to verify that the ID matches
+the peer's origin.
 
 Aspnes et el. proposed the idea of solving difficult puzzles to limiting the
-number of Sybils\cite{aspnes2005exposing}. The puzzle in this case is computing
+number of sybils~\cite{aspnes2005exposing}. The puzzle in this case is computing
 hashes on some input $y$ concatinated by a some string $x$ such that the digest
 begins with $w$ number of zeros. Essentially, every node acts as a verifier by
 picking $y$ and then broadcast it to the network to the puzzle
 solver\footnote{We simplify the protocol a bit because the original protocol
   (called Democracy) is made to be Byzantine fault tolerent and is a bit more
-  involved.}. $x$ is picked by the puzzle solver. The puzzle solver must compute
-as many $x$ as possible such that they match the requirement. Sybils are
-unlikely to produce enough $x$'s so the honest nodes will refuse to interact
-with them.
+  involved.}. The puzzle solver must compute as many $x$ as possible such that
+they match the requirement. Sybils are unlikely to produce enough $x$'s so the
+honest nodes will refuse to interact with them.
 
 In fact, many crypto-currencies use the same idea. For instance
-\emph{proof-of-work} in the case of Bitcoin~\cite{nakamoto2008bitcoin}. The
-Bitcoin blockchain is a global ledger and it needs to reach a concensus for its
-blocks. Nodes in the Bitcoin network essentially ``vote'' for the the latest
-block. But the vote is performed not by counting the majority, but by
-``counting'' the amount of CPU power, i.e. one CPU is one vote. Thus an attacker
-cannot simply create a lot of identities to out-vote the honest nodes. It needs
-to gather a lot of CPU power which is much more difficult.
+\emph{proof-of-work} in Bitcoin~\cite{nakamoto2008bitcoin}. The Bitcoin
+blockchain is a global ledger and it needs to reach a concensus for its blocks.
+Nodes in the Bitcoin network essentially ``vote'' for the the latest block. But
+the vote is performed not by counting the majority, but by ``counting'' the
+amount of CPU power, i.e. one CPU is one vote. Thus an attacker cannot simply
+create a lot of identities to out-vote the honest nodes. It needs to gather a
+lot of CPU power which is much more difficult.
 
 % SybilConf\cite{tegeler2010sybilconf}
 
 \subsection{Registration Fee}\label{sec:registration-fee}
 
 Friedman and Resnick is one of the first to propose the use of a registration
-fee\cite{resnick2001social}. It is similar to resource testing except it only
+fee~\cite{resnick2001social}. It is similar to resource testing except it only
 happens on registration. Entities can be charged a fee for creating identities,
-often facilitated by a central authority. The fee need to be set appropriately
+often facilitated by a central authority. The fee needs to be set appropriately
 so that the cost of creating Sybils outweights the benefits but does not hinder
 honest entities.
 
 The fee does not need to be monetary. For instance, Friedman and Resnick
 proposed the idea of a once-in-a-lifetime identity\cite{resnick2001social}. It
 uses blind signatures and a central authority, the authority does not know the
-mapping between the real identity (e.g. real-world identity) and the pseudo
-identity of entities, but it checks whether there has been previous
-registrations of the same real identity. In this case, the fee is the real
-identity, and attackers cannot create an arbitrary number of real identities.
-CAPTCHA\cite{von2003captcha} is another form of registration fee. It prevents
+mapping between the real identity (e.g. driving licence) and the pseudo identity
+of entities, but it checks whether there has been previous registrations of the
+same real identity. In this case, the fee is the real identity, and attackers
+cannot create an arbitrary number of real identities.
+CAPTCHA~\cite{von2003captcha} is another form of registration fee. It prevents
 programs from automatically creating new identities and limits the rate at which
 identities can be created by asking users to solve a puzzle that is difficult
 for computers.
@@ -112,7 +112,7 @@ in the first place.
 % presence of a central authority. The limit can be set globally, or it can be
 % done regionally (i.e. based on IP address).
 
-\subsection{Network Flow Based Techniques}\label{sec:network-flow}
+\subsection{Network Flow}\label{sec:network-flow}
 Network flow based techniques began with
 BarterCast\cite{meulpolder2009bartercast}. It was initially designed to combat
 freeriding in P2P file sharing networks, where users are selfish and do not
@@ -120,12 +120,12 @@ share content, but its idea can be extended combat the Sybil attack. The ideas
 based on BarterCast do not directly identify Sybils, but they prevent Sybils
 from doing harm in the P2P network.
 
-The main idea comes from real-world social networks, where the reputation of a
-person can be from direct experiences, or information obtained frome someone
-else. The direct experience is always true, but the indirect information may not
-be, i.e. people can lie about their experiences. Humans solve the problem by
-treating the indirect information with a grain of salt unless the source of the
-information is highly trusted.
+The main idea comes from human interactions, where the reputation of a person
+can be from direct experiences, or information obtained frome someone else. The
+direct experience is always true, but the indirect information may not be, i.e.
+people can lie about their experiences. Humans solve the problem by treating the
+indirect information with a grain of salt unless the source of the information
+is highly trusted.
 
 BarterCast applies this idea in P2P file sharing networks. Peers all maintain a
 subjective graph which is created by exchanging messages with their neighbours.
@@ -136,11 +136,10 @@ the peer. For example in \autoref{fig:bartercast}, $A$ is the subject, it has
 direct experiences with $B$ and $B$ has told $A$ about $S$, so it has indirect
 information about $S$. But $A$ is unsure about the truthfulness of $S$'s
 contribution, so it only trusts $S$ as much as it trusts $B$. This idea is
-realised using a maximum flow algorithm and the final reputation metric is given
-in \autoref{eq:bartercast}.
-\begin{equation}\label{eq:bartercast}
-  R_i(j) = \frac{\arctan(\text{maxflow}(j, i) - \text{maxflow}(i, j))}{\pi / 2}
-\end{equation}
+realised using the Ford-Fulkerson maximum flow
+algorithm~\cite{thomas2001introduction} as shown in \autoref{fig:bartercast},
+$A$ only have 5 units of trust for $S$ even when $S$ apparently contributed a
+lot to $B$.
 
 \begin{figure}
   \centering
@@ -156,10 +155,11 @@ first upload a lot of data to obtain a good reputation in the network. If the
 attacker now creates Sybils and false report of the Sybils saying that they
 uploaded a lot. Then the peers who have interacted with the attacker will be
 tricked to think that the Sybils also have a high reputation. To fix this
-problem, Delaviz et el. created SybilRes\cite{delaviz2012sybilres}. The main
-idea is the following. Suppose there are two peers $A$ and $B$ who are sharing
-data. If $A$ is uploading (represented by an outgoing edge) to $B$, then it
-decreases the weight of the incoming edge from $B$. Vice versa, the weight is
+problem, Delaviz et el. created SybilRes~\cite{delaviz2012sybilres}.
+% TODO draw?
+The main idea is the following. Suppose there are two peers $A$ and $B$ who are
+sharing data. If $A$ is uploading (represented by an outgoing edge) to $B$, then
+it decreases the weight of the incoming edge from $B$. Vice versa, the weight is
 increased for the outgoing edge when $A$ is downloading. The rate of change
 depends on the capacities of the edges and the amout of data transferred after
 computing the reputation. Using the definition in \autoref{fig:attack-edge}, the
@@ -169,35 +169,39 @@ Sybil's reputation which is a much more desirable behaviour.
 
 Seuken et al. provided a formal model of BarterCast. They found that BarterCast
 is vulnerable to misreporting and proposed a solution called the DropEdge
-mechanism\cite{seuken2011sybil, seuken2014sybil}. DropEdge, like the name
+mechanism~\cite{seuken2011sybil, seuken2014sybil}. DropEdge, like the name
 implies, drops some edges in the subjective graph that satisfies the following
 constraints. Suppose peer $A$ wishes to download from peers in set $C$ (the
 choice set). Then any reports received by $A$ from $p \in C$ is dropped. Also,
 edges with both end points in $C$ are also dropped from $A$'s subjective graph.
-Intuitively, peers in $C$ cannot misreport their contribution. The authors
-formally prove this property in their work. They also prove that it is robust
-against weakly benefician Sybils, that is Sybils that do not perform actual work
-for honest peers.
+Peers in $C$ cannot misreport their contribution since all the necessary edges
+are dropped. The authors prove that it is robust against weakly beneficial
+sybils, that is sybils that do not perform actual work for honest peers. The
+authors also prove that no mechanism can prevently strongly beneficial sybils,
+i.e. sybils that interact with honest users.
 
 SumUp\cite{tran2009sybil} is a defence mechanism specific for the vote
 aggregation problem. For example, in social news aggregation websites such as
-Reddit, users vote on the submitted content to determine its ranking; the
-problem occurs when Sybils can out-vote honest users. It is a centralised
-approach that fits the architecture of most websites that perform vote
-aggregation. SumUp consist of three stages. Firstly, pruning is performed to
-limit the number of incoming edges of every node, this is to reduce the number
-of attack edges available and reduce the computational cost in later stages, the
-threshold is a system parameter. Secondly, it uses a ticket source (the central
-component) distributes tickets in a breadth-first search manner equally to its
-neighbours, every node keeps one ticket and distributes the remaining tickets
-the same way. The number of tickets distributed across an edge plus one is the
-capacity of the edge. Effectively, edges closer to the ticket source have a high
-capacity. This idea keeps the capacities in the Sybil region low so that they do
-not have a large influence on the outcome. Finally, the maximum flow is computed
-where the source is simply the ticket source and the sink is an imaginary node
-with edges of capacity one that is connected to every voter. SumUp offers a
-better guarantee than SybilLimit where it only accepts $1 + o(n)$ votes per
-attack edge. An improved version of SumUp - GateKeeper is discussed in
+Reddit\footnote{\texttt{www.reddit.com}}, users vote on the submitted content to
+determine its ranking; the problem occurs when Sybils can out-vote honest users.
+It is a centralised approach that fits the architecture of most websites that
+perform vote aggregation. SumUp consist of three stages. Firstly, pruning is
+performed to limit the number of incoming edges of every node, this is to reduce
+the number of attack edges available and reduce the computational cost in later
+stages, the threshold for the number of edges to prune is a system parameter.
+Secondly, it uses a ticket source (the central component) to distribute tickets
+in a breadth-first search manner equally to its neighbours, every node keeps one
+ticket and distributes the remaining tickets the same way. The number of tickets
+distributed across an edge plus one is the capacity of the edge. Effectively,
+edges closer to the ticket source have a high capacity. This idea keeps the
+capacities in the Sybil region low so that they do not have a large influence on
+the outcome. Finally, the maximum flow is computed where the source is simply
+the ticket source and the sink is an imaginary node with edges of capacity one
+that is connected to every voter. SumUp offers a better guarantee than
+SybilLimit (\autoref{sec:random-walk}) where it only accepts $1 + o(n)$ votes
+per attack edge. Unlike the aforementioned techniques in this section,
+SumUp requires a social network so it does not work in a generic P2P setting. An
+improved version of SumUp - GateKeeper is discussed in
 \autoref{sec:random-walk}.
 
 \begin{figure}
@@ -212,20 +216,20 @@ attack edge. An improved version of SumUp - GateKeeper is discussed in
 \end{figure}
 
 Conversely, maximum flow is dual to minimum cut, so the problem of finding Sybil
-can also be formulated as finding sparse cuts\footnote{The sparse cut problem is
-  to find a partition such that the ratio between the number in the cut and the
-  number of vertices in the smaller partition is minimised. This problem is
-  related to minimum cut.}. Kurve and Kesidis devised an algorithm for finding
-sparse cuts to detect Sybils\cite{kurve2011sybil}. Unlike the aforementioned
-techniques, it relies on the presence of trusted nodes.
+can also be formulated as finding sparse cuts. The sparse cut problem is to find
+a partition such that the ratio between the number in the cut and the number of
+vertices in the smaller partition is minimised. Kurve and Kesidis devised an
+algorithm for finding sparse cuts to detect sybils~\cite{kurve2011sybil}. It
+relies on the presence of trusted nodes.
 
-\subsection{Random Walk Based Techniques}\label{sec:random-walk}
+\subsection{Random Walk and OSN}\label{sec:random-walk}
 Another family, possibly the largest, Sybil defence mechanism is based on random
-walks, first proposed in SybilGuard\cite{yu2006sybilguard}. The key assumptions
-in these techniques is that the honest region is \emph{fast mixing}\footnote{In
-  a graph, if a random walk of length $O(\log{N})$ reaches a stationary
-  distribution of nodes, then the graph is fast mixing.}, and the attack edges
-are difficult to form and are independent of the number of Sybils.
+walks in OSN (online social network), first proposed in
+SybilGuard\cite{yu2006sybilguard}. The key assumptions in these techniques is
+that the honest region is \emph{fast mixing}\footnote{In a graph, if a random
+  walk of length $O(\log{N})$ reaches a stationary distribution of nodes, then
+  the graph is fast mixing.}, and the attack edges are difficult to form and are
+independent of the number of Sybils.
 
 % The first
 % defence mechanism is SybilGuard\cite{yu2006sybilguard}, created by Yu et el.
@@ -240,24 +244,25 @@ graph is traversed such that outgoing edges are selected uniformly at random on
 every hop of the walk. Random route is a modified form of a random walk. Every
 node maintains a static routing table that contains a uniformly random
 one-to-one mapping between incoming edges and outgoing edges, initialised at
-start-up. Thus the route is determined by the tables on every node. An important
+start-up. Thus a route is determined by the tables on every node. An important
 property of random route is that if two routes enter the same edge, then they
 will always exit at the same edge, so their route after exiting will be exactly
-the same. The number of hops for a random route should be just right, so that
-the fast mixing property is achieved in the honest region, this is known as the
-\emph{mixing time}.
+the same. In most cases, the number of hops for a random route should be just
+right, so that the fast mixing property is achieved in the honest region, this
+is known as the \emph{mixing time}.
 
-Every node acts as a verifier in SybilGuard\cite{yu2006sybilguard} and performs
-a single random route of a fixed length, determined by the mixing time. The
-verifier treats every other nodes as suspects initially. The suspect is labeled
-as an honest node if its random route intersects with the verificer's random
-route. The number accepted nodes for every intersection is limited by a quota.
-The process is visualsed in \autoref{fig:sybilguard}. Intuitively, the random
-route from an honest node is unlikely to escape into the Sybil region because
-the number of attack edges is limited. Due to the random route property, the
-number of overlapping random routes from the Sybils is bounded by the number of
-attack edges. Recall that the number of attack edges is independent of the
-number of Sybils, thus they are unlikely to intersect with many honest nodes.
+In SybilGuard~\cite{yu2006sybilguard}, every node acts as a verifier and
+performs a single random route of a fixed length, determined by the mixing time.
+The verifier treats every other nodes as suspects initially. The suspect is
+labeled as an honest node if its random route intersects with the verificer's
+random route. The number of accepted nodes for every intersection is limited by
+a quota. The process is visualsed in \autoref{fig:sybilguard}. Intuitively, the
+random route from an honest node is unlikely to escape into the Sybil region
+because the number of attack edges is limited. The number of overlapping random
+routes from the Sybils is bounded by the number of attack edges due to the
+random route property. Recall that the number of attack edges is independent of
+the number of Sybils, thus they are unlikely to intersect with many honest
+nodes.
 
 \begin{figure}
   \centering
@@ -269,8 +274,8 @@ number of Sybils, thus they are unlikely to intersect with many honest nodes.
   \label{fig:sybilguard}
 \end{figure}
 
-SybilLimit\cite{yu2008sybillimit} is the continuation of SybilGuard and it is an
-improvement on many fronts while keeping the same or better guarantees. In Sasm
+SybilLimit~\cite{yu2008sybillimit} is the continuation of SybilGuard and it is
+an improvement on many fronts while keeping the same or better guarantees. Same
 as before, every honest node acts as a verifier $V$ and initially treats all
 other nodes as suspects $S$. The verification process begins by performing
 multiple independent random routes instead of a single one as in SybilGuard. $V$
@@ -317,23 +322,23 @@ its drawbacks are its high computational cost and reliance on trusted nodes.
 
 Lesniewski et el. created Wh\={a}nau, a Sybil-resistent DHT, it is also inspired
 by SybilLimit\cite{lesniewski2008sybil, lesniewski2010whanau}. Suppose all nodes
-in the DHT belong to a social network and an Alice (who is honest) wish to join
-the DHT. Alice performs multiple random walks and it inserts the node on the
-tails of her random walks into her own routing table. Again, the random walk
-properties guarantee that there cannot be a large proportion of Sybils in the
-routing table with a high probability. The number of entries in the routing
-table needs to be high enough such that the entries cover the whole key spaces.
-If Alice wants to find a key, she broadcasts the request to all the entries.
-Since most of the entries are honest, Alice can retrieve the required value with
-high probability.
+in the DHT belong to a social network and a node, say Alice (who is honest),
+wish to join the DHT. Alice performs multiple random walks and it inserts the
+node on the tails of her random walks into her own routing table. Again, the
+random walk properties guarantee that there cannot be a large proportion of
+Sybils in the routing table with a high probability. The number of entries in
+the routing table needs to be high enough such that the entries cover the whole
+key spaces. If Alice wants to find a key, she broadcasts the request to all the
+entries. Since most of the entries are honest, Alice can retrieve the required
+value with high probability.
 
-SybilDefender\cite{wei2012sybildefender} can be seen as a two step process. It
+SybilDefender~\cite{wei2012sybildefender} can be seen as a two step process. It
 assumes the size of the Sybil region is smaller than the honest region and the
 nodes in the Sybil region are well connected. The first step is to perform
 random walk to detect Sybils. The second step is to detect a complete Sybil
 region around the detected Sybils. The algorithm in the second step employs
 \emph{partial} random walk, where the random walk is not allowed to traverse the
-same node more than once. The property of the partial random walks is that they
+same node more than once. A property of partial random walks is that they
 are likely to ``die'' (all the neighbour nodes have already been traversed) upon
 reaching the edge of the Sybil region, thus they are likely to stay in the Sybil
 region. The Sybil region is detected by examining the nodes traversed by the
@@ -342,29 +347,31 @@ partial random walk.
 % how does SybilDefender guarantee that the Sybils actually perform the random
 % walk correctly in the second step?
 
-SybilRank, in contrast of the aforementioned techniques, is designed to be
-integrated with real-world OSN and is deployed on Tuenti (an OSN with 11 million
-users)\cite{cao2012aiding}. SybilRank uses short random walks that begins on
-trusted nodes in the honest region. The trusted nodes is choosen manually, this
-allows SybilRank to adapt to different graph structures. A novelty in SybilRank
-is that it uses power iterations, an efficient technique for computing the
-landing probability of random walks. Intuitively, the landing probability
-decreases for nodes that are far away from the trusted nodes (since it is using
-short random walks), especially for nodes in the Sybil region. The probabilities
-are normalised by the degree of the node and then ranked. The potential Sybils
-are the nodes that are under a some threshold. Finally, various actions can be
-performed to to verify the potential Sybils, e.g. using CAPTCHA puzzles.
+SybilRank~\cite{cao2012aiding}, in contrast of the aforementioned techniques, is
+designed to be integrated with real-world OSN and is deployed on Tuenti (an OSN
+with 11 million users). SybilRank uses short random walks that begins on trusted
+nodes in the honest region. The trusted nodes is choosen manually, this allows
+SybilRank to adapt to different graph structures. A novelty in SybilRank is that
+it uses power iterations, an efficient technique for computing the landing
+probability of random walks. Intuitively, the landing probability decreases for
+nodes that are far away from the trusted nodes (since it is using short random
+walks), especially for nodes in the Sybil region. The probabilities are
+normalised by the degree of the node and then ranked. The potential Sybils are
+the nodes that are under some threshold---a system parameter. Finally, various
+actions can be performed to to verify the potential Sybils, e.g. using CAPTCHA
+puzzles.
 
-SybilShield\cite{shi2013sybilshield} makes use of multiple communities. It
-begins the same way as SybilGuard/SybilLimit, i.e. $V$ performs random route to
-determine whether suspect $S$ is a Sybil. But to reduce the possibility that $S$
-is in fact an honest node but labeled as a Sybil, $V$ searches for agents $A$
-that are from another community. This is also done using random routes and
-relies on the assumption that inter-community edges are rare. First, $V$
-performs a random route and picks a \emph{candidate} $A$, then $V$ and the
-candidate perform random routes simultaneously, if they do not intersect then
-$A$ is considered to be in another community, otherwise $V$ repeats the process
-until it finds a suitable $A$. When a number of suitable $A$ is found, they all
+SybilShield~\cite{shi2013sybilshield} makes use of multiple communities
+(\autoref{fig:community}). It begins the same way as
+SybilGuard/SybilLimit, i.e. $V$ performs random route to determine whether
+suspect $S$ is a Sybil. But to reduce the possibility that $S$ is in fact an
+honest node but labeled as a Sybil, $V$ searches for agents $A$ that are from
+another community. This is also done using random routes and relies on the
+assumption that inter-community edges are rare. To do this, $V$ performs a
+random route and picks a \emph{candidate} $A$, then $V$ and the candidate
+perform random routes simultaneously, if they do not intersect then $A$ is
+considered to be in another community, otherwise $V$ repeats the process until
+it finds a suitable $A$. When a number of suitable $A$ is found, they all
 perform random route and decides whether $S$ is actually a Sybil and then relay
 the information back to $V$. If a large majority of $A$ say $S$ is honest, then
 $V$ knows that it has made a mistake, otherwise $S$ is indeed a Sybil.
@@ -377,16 +384,17 @@ $V$ knows that it has made a mistake, otherwise $S$ is indeed a Sybil.
     intra-community edges. Dotted lines represent inter-community edges. The red
     dotted lines are inter-community edges coming from the Sybils, in other
     words the attack edges. The idea of making use of communities is used in
-    SybilShield (this section) as well as SybilExposer
+    SybilShield as well as SybilExposer
     (\autoref{sec:community-detection}).}
   \label{fig:community}
 \end{figure}
 
-Recently, Liu et el. argue that random walks with fixed length is not adaquate
-because social graphs can have communities of different sizes, nodes in a large
-community that is well connected may have a lower mixing time than nodes in a
-smaller community. A longer than desired random walk length will result in a
-growing number of false negatives. To solve this problem, the authors created
+All the techniques so far use fixed length random walks. Recently, Liu et el.
+argue that fixed length random walks is not adaquate because social graphs can
+have communities of different sizes, nodes in a large community that is well
+connected may have a lower mixing time than nodes in a smaller community. A
+longer than desired random walk length will result in a growing number of false
+negatives. To solve this problem, the authors created
 SmartWalk\cite{liu2016smartwalk} which uses adaptive random walks. There are two
 steps to SmartWalk. The first step uses machine learning to predict the local
 mixing time given a node. The second step performs the random walk using the
@@ -398,54 +406,58 @@ using real-world social graphs. In particular, the false positive rate for a
 Twitter social graph can be reduced by two orders of magnitude when compared to
 the standard SybilLimit.
 
-GateKeeper\cite{tran2011optimal} combines ideas from SumUp (discussed in
+GateKeeper~\cite{tran2011optimal} combines ideas from SumUp (discussed in
 \autoref{sec:network-flow}) and SybilLimit. GateKeeper assumes a admission
 controller that is honest, the admission controller performs random walks to
 select $n$ ticket sources. The ticket sources act the same way as SumUp where it
-distributes ticket in a breadth-first search manner. For a node to be labeled
-honest, it must obtain $fn$ tickets, where $f$ is a system parameter (0.2 is
-shown to be a good value experimentally). This idea works becauses if the ticket
-sources are evenly distributed and Sybils ony have a few attack edges, then it
-is unlikely that they will receive a large number of tickets.
+distributes ticket in a breadth-first search manner (\autoref{fig:sumup}). For a
+node to be labeled honest, it must obtain $fn$ tickets, where $f$ is a system
+parameter (0.2 is shown to be a good value experimentally). This idea works
+becauses if the ticket sources are evenly distributed and Sybils ony have a few
+attack edges, then it is unlikely that they will receive a large number of
+tickets.
 
 % ReDS\cite{akavipat2014reds} suggests to use sybilimit or sybilinfer
 
 \subsection{Community Detection}\label{sec:community-detection}
-In thi section we discuss techniques that leverage existing community detection
+In this section we discuss techniques that leverage existing community detection
 algorithm. The work started with Viswanath et al., who realised many of the
 mechanisms mentioned in \autoref{sec:random-walk} such as SybilGuard, SybilLimit
 and SybilInfer, are in fact performing local community detection (i.e. detecting
-clusters of nodes) which is a more developed field\cite{viswanath2010analysis}.
+clusters of nodes) which is a more developed field~\cite{viswanath2010analysis}.
 The authors also argue that social graphs are not always fast mixing, which may
-result in poor results for techniques that uses the fast mixing assumption.
+result in poor results for techniques that use the fast mixing assumption.
 Using synthetic social graphs, the authors show that applying Mislove's
-algorithm\cite{mislove2010you} achieve similar results as SybilLimit and
+algorithm~\cite{mislove2010you} achieve similar results as SybilLimit and
 SybilInfer. But using a Facebook social graph, Mislove's algorithm performs
 better.
 
-The authors of SybilExposer\cite{misra2016sybilexposer} argue that the number of
-attack edges may not be that small which may render the random walk based method
-ineffective. They proposed a solution that relies on the ratio between the
-number of inter-community (inter-cluster) edges and the number of
-intra-community (intra-cluster) edges. The idea is that this ratio is different
-between honest communities and Sybil communities, namely the Sybil communities have
-a lower ratio because they are well connected between themselves but not with
-other honest communities. SybilExposer operates in two stages, first communities
-are extracted using community detection algorithm (a modified version of the
-Louvain method\cite{blondel2008fast}), then the communities are ranked based on the
-ratio and communities with a low ratio are likely to be Sybils.
+The authors of SybilExposer~\cite{misra2016sybilexposer} argue that the number
+of attack edges may not be that small which may render the random walk based
+method ineffective. They proposed a solution that relies on the ratio between
+the number of inter-community (inter-cluster) edges and the number of
+intra-community (intra-cluster) edges. This is visualised in
+\autoref{fig:community} where the sybil region has fewer
+inter-community edges than the honest region. The idea is that this ratio is
+different between honest communities and Sybil communities, namely the Sybil
+communities have a lower ratio because they are well connected between
+themselves but not with other honest communities. SybilExposer operates in two
+stages, first communities are extracted using community detection algorithm (a
+modified version of the Louvain method~\cite{blondel2008fast}), then the
+communities are ranked based on the ratio and communities with a low ratio are
+likely to be Sybils.
 % community diversity vs node diversity
 
 % SybilRadar\cite{mulamba2016sybilradar}
 
 \subsection{Content Based and Machine Learning}
 \label{sec:content-based}
-In some application domains such as OSN it is possible to leverage content or
-user feedback to detect Sybils. These techniques work well in practice. But
+In some application domains such as OSN it is possible to leverage user content
+or user feedback to detect Sybils. These techniques work well in practice. But
 often depend on uninformed attackers that do not try to mimic the behaviour of
 honest nodes.
 
-Ostra\cite{mislove2008ostra} is a system for limiting spam in social networks.
+Ostra~\cite{mislove2008ostra} is a system for limit spam in social networks.
 In the simplest form, every undirected edge in the social graph is considered as
 two directed edges, each of them has a credit values. When a user wants to send
 a message, it needs to find a path with enough credits in the social graph from
@@ -459,17 +471,15 @@ the attack edges, if enough honest users mark those messages as spam then the
 credit on the attack edges will run out and the Sybils can no longer send
 messages.
 
-Stringhini et el. devised a machine learning technique to classify bot accounts 
-in Twitter\cite{stringhini2010detecting}. User feedback is incoperated into the
+Stringhini et el. devised a machine learning technique to classify bot accounts
+in Twitter~\cite{stringhini2010detecting}. User feedback is incoperated into the
 features. For example one of features is ``FF Ratio'', that is the ratio between
-number of users that the account is following and the number of followers.
-Honest users typically do not follow bots and this can be considered as a form
-of feedback. Other features include ``URL Ratio'', ``Message Similarity'' and so
-on. The authors collected data on ``honey-profiles'', trained a classifier after
-analysing those data and collaborated with Twitter to delete tens of thousands
-of spam accounts.
+number of users that the account is following and the number of followers. Other
+features include ``URL Ratio'', ``Message Similarity'' and so on. The authors
+collected data on ``honey-profiles'', trained a classifier after analysing those
+data and collaborated with Twitter to delete tens of thousands of spam accounts.
 
-VoteTrust\cite{xue2013votetrust} leverages the distrust relationship, i.e.
+VoteTrust~\cite{xue2013votetrust} leverages the distrust relationship, i.e.
 friend request rejection, to detect Sybils in OSN. Suppose $A$ sends a friend
 request to $B$, if $B$ accepts/rejects the request then it is considered as a
 positive/negative vote on $A$ by $B$. The first step is to use PageRank combined
@@ -483,30 +493,32 @@ capacity decreases as it goes further away from the trusted seeds. This
 technique is comparable to the ticket distribution technique used in SumUp and
 GateKeeper. Finally, the votes are aggregated to compute a global ration for
 every node in the graph. Naturally, the Sybils are likely to have a low vote
-because their vote capacity is slow and many of their friend requests would be
+because their vote capacity is low and many of their friend requests would be
 rejected.
 
-Integro\cite{boshmaf2015integro} is a hybrid between random walk and content based
-approaches. It begin by training a machine learning algorithm (random forest
-learning algorithm) to identify potential \emph{victim accounts}, that is honest
-accounts that have accepted Sybils as their friends. Then in the social graph,
-edges connecting the potential victim accounts will have its weight reduced
-depending on the likelihood of it being a victim. Finally, a biased short random
-walk is perfrom starting from some known honest account and the landing
-probabilities are calculated for every node. Biased in a sense that that the
-walk is a higher probability of using a path with a higher weight. Sybils are
-the nodes with a low landing probabilty. This technique works because, victims
-are easier to detect than Sybils due to the fact that Sybils can arbitrarily
-modify their account information to avoid detection. Once the victims are
-detected, they effectively form a ``border-line'' between the honest region and
-the Sybil region. Finally, it is unlikely that the random walk will traverse
-into the Sybil region due to its bias, so the Sybil will have a low landing
-probability and be detected.
+Integro\cite{boshmaf2015integro} is a hybrid between random walk and content
+based approaches. It begin by training a machine learning algorithm to identify
+potential \emph{victim accounts}, that is honest accounts that have accepted
+Sybils as their friends. Then in the social graph, edges connecting the
+potential victim accounts will have its weight reduced depending on the
+likelihood of it being a victim. Finally, perform biased short random walk
+starting from some known honest account to compute the landing probabilities for
+every node. Biased in a sense that that the walk is a higher probability of
+using a path with a higher weight. Sybils are the nodes with a low landing
+probabilty. This technique works because, victims are easier to detect than
+Sybils due to the fact that Sybils can arbitrarily modify their account
+information to avoid detection. Once the victims are detected, they effectively
+form a ``border-line'' between the honest region and the Sybil region. Finally,
+it is unlikely that the random walk will traverse into the Sybil region due to
+its bias, so the Sybil will have a low landing probability and be detected.
 
 % \subsection{Content Driven}
 % \cite{chatterjee2008robust}
 
 \subsection{Other}
+There are many defence mechanisms that unique in their own right. We cover some
+of them in this section.
+
 Trust transfer\cite{seigneur2005trust} is a Sybil defence mechanism for
 reputation systems that transfers the reputation score from a recommender to a
 recommended identity. This method discourages self-recommendation behaviour
@@ -531,11 +543,11 @@ reads the new article on Reddit) and then makes a binary (good or bad) feedback
 on the object. Then Alice computes whether the object is \emph{overwhelming},
 namely whether the sum of the trust scores of the voters of the object exceeds
 some threshold. If Alice voted for good and the object is not overwhelming, then
-she would increase the trust scores by a factor for all the voters of that
-object. Otherwise she decreases the trust score by a factor. When Alice needs a
-recommendation, a uniformly random overwhelming object is returned. Trust scores
-for identities that have the same interest as Alice grow exponentially when
-Alice consumes a good non-overwhelming object. Conversely the trust scores
+she would increase the trust scores by some factor for all the voters of that
+object. Otherwise she decreases the trust score by some factor. When Alice needs
+a recommendation, a uniformly random overwhelming object is returned. Trust
+scores for identities that have the same interest as Alice grow exponentially
+when Alice consumes a good non-overwhelming object. Conversely the trust scores
 decreases exponentially for identities that are recommending bad objects, making
 Sybils ineffective.
 % Similar to some randomised byzantine agreement algorithm?
@@ -544,14 +556,13 @@ SyMon\cite{jyothi2009symon} or \emph{Sybil Monitor} assumes that any two
 sufficiently random nodes in the network cannot both be Sybils with a high
 probability. Then the nodes are paired together to monitor each other's
 transactions. For instance, a transaction could be reporting the number bytes
-transferred in a P2P file file sharing network. Cheating occurs when a node
-reports some bytes transferred that does not match its network traffic. The
-authors provide four methods for pairing nodes. Suppose the nodes are identified
-by a cryptographically secure hash of their RSA public key, then it is difficult
-to create identities deterministically. Then nodes can be matched by the
-closeness of their identities when they are in a DHT. The downside of this
-approach is that it sacrifices a lot of privacy, every action that a node makes
-is monitored by some other node.
+transferred in a P2P file sharing network. Cheating occurs when a node reports
+some bytes transferred that does not match its network traffic. The authors
+provide four methods for pairing nodes. Suppose the nodes are identified by a
+cryptographically secure hash of their RSA public key, then it is difficult to
+create identities deterministically. Nodes can be matched by the closeness of
+their identities. The downside of this approach is that it sacrifices a lot of
+privacy, every action that a node makes is monitored by some other node.
 
 % SybilFrame?
 
