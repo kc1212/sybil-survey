@@ -1,35 +1,40 @@
-Electronic commerce and online social networks are common phenomenons at the
-present time. They allow us to orchestrate many aspects of our lives in the
-comfort of our homes, behind the monitors of our devices. An online identity is
-often required to use such services, for example in Twitter\footnote{Twitter is
-  a social network website where users can send and read short messages (called
-  ``tweets'').}, users must create accounts to tweet a friend, who must also
-have an account. In this scenario, users can choose to remain psudonymous if
-they are careful, where their real-life identity is uncorrelated with their
-online identity. % privacy
+Electronic commerce and online social networks allow us to orchestrate many
+aspects of our lives in the comfort of our homes, behind the monitors of our
+devices. With such services, online identity is often required. For example in
+Twitter\footnote{Twitter is a social network website where users can send and
+  read short messages --- called ``tweets'', users can also ``follow'' each
+  other.}, users must create accounts to tweet a friend, who must also have an
+account. In this scenario, users can choose to remain psudonymous if they are
+careful, where their real-life identity is uncorrelated with their online
+identity. While that is useful for protecting the users' privacy, it also opens
+an alleyway for attackers.
 
-While creating pseudonyms is useful for protecting users' privacy, it also opens
-an alleyway for attackers. The Sybil attack, first described by
-Douceur\cite{douceur2002sybil}, is an attack where an entity can assume multiple
-identities or Sybils, and then attack either another entity or undermine the
-whole system. For example, a malicious Twitter user can create many fake
-identities and have the fake identities follow his real identity, thus creating
-a false reputation. It is one of the most important attacks because it leads to
-a large number of consequences including but not limited to spreading false
-information, identity theift\cite{bilge2009all} and ballot
-stuffing\cite{bhattacharjee2005avoiding}. Furthermore, to the best of our
+The Sybil attack, first described by Douceur\cite{douceur2002sybil}, is an
+attack where an entity can assume multiple identities or sybils\footnote{In this
+  work we use ``sybil'' as a noun to mean a fake identity.}, and then attack
+either another entity or undermine the whole system. For example, a malicious
+Twitter user can create many fake identities and have them follow his real
+identity, thus creating a false reputation. It is one of the most important
+attacks because it leads to a large number of consequences including but not
+limited to spreading false information, identity theift\cite{bilge2009all} and
+ballot stuffing\cite{bhattacharjee2005avoiding}. Furthermore, to the best of our
 knowledge, there is no general solution for preventing the Sybil attack.
 
-In this work, we survey various aspects of the Sybil attack. But in contrast
-with previous surveys, we include both the theoretical and practical aspects.
-First, we describe the Sybil attack in more detail and and illustrate its
-importance by looking at how researchers and black-hat hackers mounted the
-attack on real-world e-commerce and online social network systems in
-\autoref{sec:sybil}. Since there is a large variety of Sybil attack defence
-mechanisms, from using trusted-third-party to exploiting the graph
+There has been over a decade of work on the Sybil attack from both perspective
+--- attackers and defenders. Many previous surveys focus only on the defender's
+perspective or a particular class of defence mechanisms. The purpose of this
+work is to survey and provide a broad view on all aspects of the Sybil attack.
+First, we illustrate the importance of the Sybil attack by looking at how
+researchers and black-hat hackers mounted the attack in the real-world; we also
+experiment with fake Twitter followers and look at their properties
+(\autoref{sec:motivation}). Then we define the Sybil attack give some important
+theoretical results (\autoref{sec:theory}). With the fundamentals in place, we
+describe the various types of attacks (\autoref{sec:attacks}) and defence
+mechanisms (\autoref{sec:defences}). There is a large variety of Sybil attack
+defence mechanisms, from using trusted-third-party to exploiting the graph
 characteristics in online social networks, thus we classify these mechanisms by
-their ``main idea'' in \autoref{sec:defences}. Finally we present the related
-work and conclude in \autoref{sec:related} and \autoref{sec:summary}.
+their ``main idea''. Finally we present the related work and conclude in
+\autoref{sec:related} and \autoref{sec:summary}.
 
 %%% Local Variables:
 %%% mode: latex

@@ -6,7 +6,7 @@ how Twitter bots (Sybils) are shaping the 2016 US presidential
 election\cite{atlantictwitterbots}. Over a third of pro-Trump tweets and almost
 a fifth of pro-Clinton tweets, totalling at about 1 million, came from bots. The
 article questions whether the bots are a threat to democracy because opinions of
-real users are eclipsed by spam of bots.
+real users are eclipsed by the spam of bots.
 
 \begin{figure}
   \centering
@@ -23,7 +23,7 @@ real users are eclipsed by spam of bots.
 \end{figure*}
 
 Using Sybils to manipulate public opinion is not only accessible to campaigners
-with a large budget. There are marketplaces where anybody can purchase
+with a large budget. There are marketplaces where anybody can purchase false
 reputation scores such as Twitter followers. BoostLikes shown on
 \autoref{fig:boostlikes} is a professionally presented website, it offers a
 large range of services including Facebook likes, Twitter followers, Instagram
@@ -37,13 +37,14 @@ little doubt that those companies use automated bots to provide their services.
 
 SadBotTrue and its related website Socialpuncher publishes studies on social
 media fraud. Two of their studies is particularly useful for demonstrating the
-scale of the Sybil attack on Twitter. Firstly, there exist a botnet that consist
-of 3 million accounts. Since their creation, they generated 2.6 billion tweets.
-Surprisingly, all of the 3 million accounts were created on the same day and the
-account names are simply numbered sequentially\cite{sadbottrue}. Such an obvious
-activity should be easily detectable by Twitter, but these accounts are still
-not closed at the time of writing. Secondly, the top-100 Twitter users have 523
-million unique followers between them, but 310 million are bots, that is almost
+scale of the Sybil attack and the obliviousness of Twitter. Firstly, there exist
+a botnet that consist of 3 million accounts. Since their creation, they
+generated 2.6 billion tweets. Surprisingly, all of the 3 million accounts were
+created on the same day --- 22/10/2013, and the account names are simply
+numbered sequentially\cite{sadbottrue}. Such an obvious activity should be
+easily detectable by Twitter, but these accounts are still not closed at the
+time of writing. Secondly, the top-100 Twitter users have 523 million unique
+followers between them, but 310 million are bots, that is almost
 60\%\cite{socialpuncher}. Suppose the bots all belong to the same attacker, then
 they can effectively suppress the opinions of the real users.
 
@@ -52,15 +53,15 @@ websites are not adaquate to combat the Sybil attack. If the Sybils infiltrate
 even more of our cyberspace, then it may become a form of censorship.
 Effectively taking away our right to freedom of speech.
 
-Speaking of censorship, many users use Tor (The Onion
-Router)~\cite{dingledine2004tor} to access the uncensored internet when living
-in authoritarian regimes such as China, or intelligence agencies from doing
-illegal mass surveillence. Unfortunately, Tor suffered a Sybil attack. In
-January 2014, 115 relays joined the Tor network. Six months later, it was
-discovered that those relays were using a protocol vulnerability to deanonymise
-users and find the location of hidden services. It is unclear to the Tor
-developers which users are affected or what information was retrieved, thus it
-is assumed that users who used Tor between that period are all
+Speaking of censorship, around a million \cite{tormetric} people use Tor (The
+Onion Router)~\cite{dingledine2004tor} to access the uncensored internet when
+living in authoritarian regimes such as China, or uphold their privacy from
+illegal mass surveillence by intelligence agencies. Unfortunately, Tor suffered
+a Sybil attack. In January 2014, 115 bogus relays joined the Tor network. Six months
+later, it was discovered that those relays were using a protocol vulnerability
+to deanonymise users and find the location of hidden services. It is unclear to
+the Tor developers which users are affected or what information was retrieved,
+thus it is assumed that users who used Tor between that period are all
 affected\cite{torsybil}. In fact, Tor depends on the fact that majority of the
 relays are good to guarantee anonymity with a high probability. If the network
 is infiltrated by a large number of Sybils then users can be easily
@@ -71,6 +72,9 @@ websites and anonymous communication tool we use today. A lot of Sybils
 controlled by an attacker can censor content and track user behaviour. In the
 next section, we zoom in on the practical attacks and grouped them by the
 underlying application.
+
+\subsection{Experiment}
+TODO
 
 %%% Local Variables:
 %%% mode: latex
