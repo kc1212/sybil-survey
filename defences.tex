@@ -33,12 +33,12 @@ the CA must verify the validity of its certificate to ensure one-to-one
 correspondence. This mechanism prevents the Sybil attack as long as the CA does
 not make mistakes in the issuance stage.
 
-Many existing systems today use a form of CA. X.509~\cite{housley2002internet}
---- a standard for certificates, it is used in a large variety of applications.
-For example, emails can be encrypted and signed using
-S/MIME\cite{ramsdell2010secure} certificates which are based on X.509. Attackers
-can still create a large number of Sybils and send emails, but the receiver
-would reject the emails because they are not correctly signed.
+Many existing systems today use a form of CA.
+X.509~\cite{housley2002internet}---a standard for certificates, it is used in a
+large variety of applications. For example, emails can be encrypted and signed
+using S/MIME\cite{ramsdell2010secure} certificates which are based on X.509.
+Attackers can still create a large number of Sybils and send emails, but the
+receiver would reject the emails because they are not correctly signed.
 
 CA can prevent the Sybil attack but it also has a lot of downsides. (1) Users
 have different opinions and may not agree on a single CA. (2) Users living in

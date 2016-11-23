@@ -194,8 +194,11 @@ requests would ``traverse through'' the Sybils due to the poisoned routing
 table, and the requests are stored in a database for further analysis.
 
 \subsection{Whitewashing}
-
-TODO~\cite{feldman2004free}
+Whitewashing is the act of joining the network under a new identity, usually
+when the previous identity acquired a lot of negative reports. In file sharing
+networks that involve a central component for policing the users, whitewashing
+is often a problem. Many studies have found penalising selfish behaviours
+(free-riding) encourages whitewashing~\cite{feldman2004free, yang2005empirical}.
 
 \subsection{The Sybil Attack in Reputation Systems}
 \label{sec:reputation-attack}
@@ -260,10 +263,12 @@ to undermine the reputation of the target. It is easy to imagine the improvement
 in effectiveness when using multiple Sybils. Many have suggested it is a
 feasible attack~\cite{hoffman2009survey, koutrouli2012taxonomy}, but from the
 best of our knowledge, there are no published studies on real-world slandering.
-But research has shown having a negative feedback may harm the target's ability
-to do business~\cite{ba2002evidence}.
+On the other hand, a mailing list post by post by Mike Hearn suggest attackers
+would submit false reports on advertisements provided by AdWords to gain an
+advantage over their competitors~\cite{adwords}. Research has shown having a
+negative feedback may harm the target's ability to do
+business~\cite{ba2002evidence}.
 
-TODO-AdWords
 
 \subsubsection{Whitewashing}
 In whitewashing, attackers abuse the reputation system for temporary gain and
@@ -278,16 +283,46 @@ attack\cite{hoffman2009survey, marti2006taxonomy}.
 % The denial of service attack highly depends on the structure of the reputation
 % system. 
 
-\subsection{The Sybil Attack in Blockchain}
+\subsection{The Sybil Attack in the Bitcoin Network}
+Bitcoin is a cryptocurrency. It uses a global ledger that is replicated across
+all nodes (miners). The ledger is created using blocks, chained together using
+hash pointers to create a notion of ordering. Each block contains transactions.
+Miners reach consensus using \emph{proof-of-work}~\cite{nakamoto2008bitcoin}.
+This section describes how the Bitcoin network suffers from the Sybil attack.
+The consequences are fairly general and apply to other blockchain networks such
+as Ethereum~\cite{wood2014ethereum}.
 
-\subsubsection{Denial of Service}
-TODO~\cite{vasek2014empirical}
+% \subsubsection{Denial of Service}
+% TODO~\cite{vasek2014empirical}
 
 \subsubsection{Eclipse Attack}
-TODO~\cite{heilman2015eclipse}
+Attacker can eclipse Bitcoin nodes to gain various unfair
+advantages~\cite{heilman2015eclipse}. Nodes receive unsolicited messages for IP
+addresses of other nodes, the IP addresses are stored in an internal table. The
+attacker essentially sends bogus messages to the target that only contains the
+IP address of the attacker's sybils or ``trash'' addresses. This technique
+eclipses the target because it can only connect to the attacker's IP address.
+There are many consequences. (1) Engineering block races, when two nodes
+discover the next block at the same time, the eclipsed block will not be able to
+receive the reward. (2) Eclipsing a large portion of the network can cause a
+51\% attack, where a single party gains complete control of the network. (3)
+Selfish-mining is when the attacker do not publish the latest block immediately
+after discovery but aims to publish 2 or more blocks at the same time to gain a
+lead; this results in many orphaned blocks for the other miners and the attacker
+can use the eclipse attack to drop newly discovered blocks by other miners to
+make the attack more effective. (4) Double spending, the eclipse attack allows
+the attacker to double spend his Bitcoins to eclipse nodes because they don't
+have an accurate view of the whole network.
 
 \subsubsection{Spamming}
-TODO~\cite{bitcoinspam}
+In Bitcoin, the spammer's goal is to waste system resources rather than
+advertisements such as in social networks. Block sizes is fixed to 1 MB and
+block generation takes about 10 minutes. Thus there is an upper bound for the
+number of transactions that the Bitcoin network can handle per second
+(approximately 7 at the time of writing~\cite{bitcointps}). Flooding the network
+with useless transactions will cause its performance to drop. Decreasing the
+scalability even more. Fortunately, Bitcoin incoperates a transaction fee, so
+spammers cannot abuse the network indefinitly~\cite{bitcoinspam}.
 
 \subsection{The Sybil Attack in WANET}
 WANET (wireless ad-hoc networks) is a dynamic, self-configuring, self-healing
