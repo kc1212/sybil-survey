@@ -6,7 +6,23 @@ state explicitly when the mechanism is application specific.
 % Many techniques are also hybrids, we explain these 
 
 \subsection{Reputation Systems}
-TODO PageRank\cite{baeza2005pagerank, cheng2006manipulability}
+Some reputation systems exhibit the ability to resist sybils. The canonical
+reputation system is PageRank~\cite{page1999pagerank}. In the context of world
+wide web, it assigns a score to every web page depending on the number of links
+pointing to it from other web pages. Suppose an attacker wants to boost the
+score of his web page, he would create sybil pages and create link to his main
+page. PageRank prevent this type of manipulation because the sybil pages do not
+have a high score so they cannot influence the attacker's page by a large
+amount~\cite{baeza2005pagerank}. On the other hand, the initial score for the
+sybil pages are not zero; Cheng and Friedman found that for about 300,000 pages
+with a median score of 0.3, it requires 500 sybils to rise a median node to the
+top 100~\cite{cheng2006manipulability}.
+
+Many other reputation systems exist other than
+PageRank~\cite{kamvar2003eigentrust, srivatsa2005trustguard,
+  nandi2005scrivener}. However, many of them do not factor the Sybil attack into
+their design and suggest to use an independent defence mechanism which we
+describe in the following sections.
 
 \subsection{Certificate Authority}\label{sec:cert-authority}
 CA (certificate authorities) check the users' real identities and then issues
