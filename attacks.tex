@@ -37,7 +37,7 @@ and cross-site profile cloning, targeting five social network sites including
 Facebook and LinkedIn. The iCloner system was created to automate these attacks.
 
 In profile cloning, iCloner uses publicly available information to automatically
-create clones of the victim's profiles. iCloner then sents friend requests from
+create clones of the victim's profiles. iCloner then sends friend requests from
 the cloned profile to the friends of the victim. The fact that the victim may
 have many friends that they do not contact very often, e.g. friend from primary
 school living in another country, makes this attack highly effective. The
@@ -54,7 +54,7 @@ requests were accepted.
 
 More recently, Boshmaf et el. created SbN (Socialbot Network), which targets
 Facebook~\cite{boshmaf2011socialbot}. Each socialbot is a sybil created by the
-attacker, it controls a forged profile and minics human behaviour to avoid
+attacker, it controls a forged profile and mimics human behaviour to avoid
 detection. The attacker is the botmaster who coordinates the socialbots to
 achieve a common objective such as infiltrating the target OSN by creating
 friend relationships with real users. The authors found that infiltration
@@ -81,12 +81,12 @@ such as Twitter where a lot of the social interaction such as sending messages
 happen in the public.
 
 In the 2010 Massachusetts senate race, Mustafaraj and Metaxas found evidence
-that Republican campaingners created fake Twitter accounts and used them to send
+that Republican campaigners created fake Twitter accounts and used them to send
 spam. The spam caused Google real-time search results to tip in their favour
 thus causing a spread of misinformation~\cite{mustafaraj2010obscurity}.
 Ratkiewicz et el. suggest that this type of attack can be mounted cheaply and
 may have a larger influence than traditional
-adversiting~\cite{ratkiewicz2011truthy}.
+advertising~\cite{ratkiewicz2011truthy}.
 
 The Truthy system~\cite{ratkiewicz2011truthy} is a web service that perform
 real-time analysis of Twitter to detect political astroturfing. In the 2010
@@ -94,7 +94,7 @@ U.S. midterm election, the authors found accounts which generated a lot of
 retweets but no original tweets. More importantly, they uncovered a network of
 bot accounts that injected thousands of tweets to smear the Democratic candidate.
 
-In 2012, Wang et el. investigated two of the largeset crowdturfing (crowdsourced
+In 2012, Wang et el. investigated two of the largest crowdturfing (crowdsourced
 astroturfing) platforms in China---Zhubajie and Sandaha. One of their services
 is perform astroturfing on Weibo\footnote{The Chinese Twitter
   (\texttt{http://weibo.com/}.)}. The authors found that the 5364 sellers
@@ -104,14 +104,14 @@ have been spent on these two platforms over five years\cite{wang2012serf}.
 
 \subsubsection{Spamming}
 Spamming, much like in the context of email, is the act of sending unsolicited
-or undesire messages (spam). The goal of the attacker varies from advertisement
+or undesired messages (spam). The goal of the attacker varies from advertisement
 to phishing and spreading malicious software~\cite{twittermalware1,
   twittermalware2}. Many studies have characterised the behaviour of the
 spammers and found that many spammers are in fact automated
 sybils~\cite{stringhini2010detecting, yang2012analyzing, grier2010spam,
   jiang2015understanding}. More importantly, spamming is possibly the most
 common attack in OSN. Jiang et el. analysed the malicious activities of the
-sybils on Renren and found propogating advertisement (at 32.8\%) is the most
+sybils on Renren and found propagating advertisement (at 32.8\%) is the most
 common one~\cite{jiang2015understanding}. Some authors have worked with the
 service provide to close the spam accounts, but it is clearly not sufficient as
 we described in \autoref{sec:motivation}.
@@ -130,7 +130,7 @@ BitTorrent is called Mainline-DHT, based on
 Kademlia~\cite{maymounkov2002kademlia}. Keys are the infohashes (file
 identifiers) and values are the metadata of the files, these are distributed
 across all the participating peers. Every node also stores a routing table, the
-entries in the table is percise for the closer nodes and coarse for node that
+entries in the table is precise for the closer nodes and coarse for node that
 are further away. Requests to search for a key are routed iteratively, every
 iteration the request gets closer to the destination node. Finally the value is
 returned if it is found~\cite{bep5}.
@@ -224,7 +224,7 @@ systems.
 
 \subsubsection{Self-promoting}
 In self-promotion, the goal of the attacker is to illegitimately raise its own
-reputation. A common way to perform self-promition is to create Sybils and have
+reputation. A common way to perform self-promotion is to create Sybils and have
 them create positive reputation for the attacker's main identity.
 
 \begin{comment}
@@ -239,10 +239,10 @@ place a bid on their own good with a fake account~\cite{dini2009buying}.
 % Christin crawed the Silk Road, the anonymous marketplace. The author
 % \cite{christin2013traveling}
 
-De Cristofaro et el. performed an emperical study on Facebook page promotion
+De Cristofaro et el. performed an empirical study on Facebook page promotion
 using like-farms~\cite{de2014paying}. Some of the farms such as
 \verb!SocialFormulae.com! are clearly operated by bots and the operator does not
-attempt to hide it, others such as \verb!BoostLikes.com! tries to minic human
+attempt to hide it, others such as \verb!BoostLikes.com! tries to mimics human
 users. The authors purchased the ``1000 likes'' service on their empty Facebook
 pages. In under a month, many empty pages have accumulated almost 1000 likes as
 promised by the like-farms. A month later, the authors empty accounts were not
@@ -321,8 +321,8 @@ block generation takes about 10 minutes. Thus there is an upper bound for the
 number of transactions that the Bitcoin network can handle per second
 (approximately 7 at the time of writing~\cite{bitcointps}). Flooding the network
 with useless transactions will cause its performance to drop. Decreasing the
-scalability even more. Fortunately, Bitcoin incoperates a transaction fee, so
-spammers cannot abuse the network indefinitly~\cite{bitcoinspam}.
+scalability even more. Fortunately, Bitcoin incorporates a transaction fee, so
+spammers cannot abuse the network indefinitely~\cite{bitcoinspam}.
 
 \subsection{The Sybil Attack in WANET}
 WANET (wireless ad-hoc networks) is a dynamic, self-configuring, self-healing
@@ -346,7 +346,7 @@ channels. Resources such as these must be shared between the neighbours using
 time slices. When the neighbours are Sybils, then the attacker can receive an
 unfair amount of resource allocation and denies resources for the honest
 nodes\cite{newsome2004sybil}. In contrast with the other attacks, this works
-even when the Sybils are not behaving malicioiusly.
+even when the Sybils are not behaving maliciously.
 
 \subsubsection{Routing Disruption}
 An important routing technique is multipath routing, data is routed using
@@ -355,7 +355,7 @@ if Sybils are present in the network, then the different paths may in fact go
 through the Sybils owned by a single attacker, nullifying the advantages.
 Another technique is geographic routing, nodes route data depending on the
 geographic location of their neighbours. Sybils in the network can pretend to be
-in more than one place at a time, thus significant distrupting the routing
+in more than one place at a time, thus significant disrupting the routing
 algorithm\cite{karlof2003secure}.
 
 \subsubsection{Spreading False Information}
@@ -363,7 +363,7 @@ Nodes often need to exchange information with each other to satisfy the
 underlying requirements of the application. Some of the common tasks are data
 aggregation and voting. With enough Sybils, it is possible to manipulate the
 aggregated data or the poll to benefit the attacker. For example, sensor
-networks may use a bollot to detect misbehaving nodes, the attack could use its
+networks may use a ballot to detect misbehaving nodes, the attack could use its
 Sybils to claim that a honest node is misbehaving and have the other nodes expel
 it from the network\cite{newsome2004sybil}.
 
