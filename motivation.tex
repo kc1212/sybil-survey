@@ -74,7 +74,62 @@ next section, we zoom in on the practical attacks and grouped them by the
 underlying application.
 
 \subsection{Experiment}
-TODO
+We crawled Twitter to gain first-hand knowledge on the real-world sybils.
+Twitter was selected because it has an easy-to-use API and it is one of the
+major targets of sybils as mentioned at the top of this section.
+
+\subsubsection{Setup}
+A Twitter account was created on 25th of November 2016. We purchased the ``1,000
+Followers'' product from CoinCrack\footnote{\texttt{coincrack.com}} for \$9. We
+made sure our account has 0 tweets and is not advertised in any other medium,
+this guarantees that all of its followers are sybils. Followers started coming
+in almost immediately after we made our purchase. No more than 1 hour later, our
+brand new account with 0 tweets have accumulated 1,300 followers. To find their
+relationships, we crawled the followers of sybils for 72 hours using
+\verb!tweetf0rm!\footnote{\texttt{https://github.com/bianjiang/tweetf0rm}}
+recursively for a depth of three---more than enough for our analysis below.
+% We did not crawl 
+
+\subsubsection{Results and Analysis}
+We obtained 3 million nodes and 6 million edges by the end of crawling period.
+We only consider the known sybils (the followers of our account) for two reasons.
+(1) There is no guarantee how many of those 3 million nodes are actually sybils.
+(2) Graph visualisation software cannot handle this volume of data under a
+reasonable amount of time and computational resources.
+% (3) hair-ball
+\autoref{fig:twitter-graph} is the result visualised using
+Gephi~\cite{bastian2009gephi}. In particular, we use the OpenOrd layout
+algorithm~\cite{martin2011openord} to capture the overall structure of the
+graph. It structures the layout using hierarchical clustering so that we can
+clearly see the communities. We observe the following properties.
+\begin{enumerate}
+  \item Many sybils are connected with each other, and many of them form a large
+    community. This is most likely because the sybils need to be made to look like
+    humans so that they can avoid detection. An account that follows thousands of
+    users but has 0 followers would look suspicious.
+  \item There exist 4 ``super sybils'' (large purple nodes at the centre of the
+    graph) and they each have over 1000 followers, so they are connected to
+    almost all the other sybils. One of them is
+    \verb!@gf1av!\footnote{\texttt{https://twitter.com/gf1av}}, it also joined
+    in November 2016 and has over 174K followers at the time of writing. We do
+    not know the exact reason for this property, it may be another strategy to
+    avoid detection.
+  \item The ``1,000 Followers'' service is the cheapest Twitter service, so the
+    attacker has many more sybils than what is pictured. Hence the smaller
+    communities may be in fact parts of a larger community.
+\end{enumerate}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\linewidth]{twitter_graph}
+  \caption{Visualisation of the relationships of the sybils. }
+  \label{fig:twitter-graph}
+\end{figure}
+
+From the results we see the sybils do not have the same characteristics, and
+more importantly they form communities within themselves. In
+\autoref{sec:defences}, we describe how to leverage the community property to
+detect sybils or create sybil-resistant applications.
 
 %%% Local Variables:
 %%% mode: latex
