@@ -26,13 +26,13 @@ Using Sybils to manipulate public opinion is not only accessible to campaigners
 with a large budget. There are marketplaces where anybody can purchase false
 reputation scores such as Twitter followers. BoostLikes shown on
 \autoref{fig:boostlikes} is a professionally presented website, it offers a
-large range of services including Facebook likes, Twitter followers, Instagram
-followers and YouTube views\footnote{Facebook is possibly the largest social
-  network website at the time of writing. Instagram is a social network website
-  designed for sharing photos. YouTube is a video sharing website.}.
-SocialFormulae (\autoref{fig:socialformulae}) is a similar service but at a much
-lower price point, one thousand Twitter followers is only \$9.99. There can be
-little doubt that those companies use automated bots to provide their services.
+large range of services including
+Facebook\footnote{\texttt{https://www.facebook.com/}} likes, Twitter followers,
+Instagram\footnote{\texttt{https://www.instagram.com/}} followers and
+YouTube\footnote{\texttt{https://www.youtube.com/}} views. SocialFormulae
+(\autoref{fig:socialformulae}) is a similar service but at a much lower price
+point, one thousand Twitter followers is only \$9.99. There can be little doubt
+that those companies use automated bots to provide their services.
 % one thousand likes cost \$71 at the time of writing. 
 
 SadBotTrue and its related website Socialpuncher publishes studies on social
@@ -80,12 +80,12 @@ major targets of sybils as mentioned at the top of this section.
 
 \subsubsection{Setup}
 A Twitter account was created on 25th of November 2016. We purchased the ``1,000
-Followers'' product from CoinCrack\footnote{\texttt{coincrack.com}} for \$9. We
-made sure our account has 0 tweets and is not advertised in any other medium,
-this guarantees that all of its followers are sybils. Followers started coming
-in almost immediately after we made our purchase. No more than 1 hour later, our
-brand new account with 0 tweets have accumulated 1,300 followers. To find their
-relationships, we crawled the followers of sybils for 72 hours using
+Followers'' product from CoinCrack\footnote{\texttt{https://coincrack.com/}} for
+\$9. We made sure our account has 0 tweets and is not advertised in any other
+medium, this guarantees that all of its followers are sybils. Followers started
+coming in almost immediately after we made our purchase. No more than 1 hour
+later, our brand new account with 0 tweets have accumulated 1,300 followers. To
+find their relationships, we crawled the followers of sybils for 72 hours using
 \verb!tweetf0rm!\footnote{\texttt{https://github.com/bianjiang/tweetf0rm}}
 recursively for a depth of three---more than enough for our analysis below.
 % We did not crawl 
@@ -122,7 +122,8 @@ clearly see the communities. We observe the following properties.
 \begin{figure}
   \centering
   \includegraphics[width=\linewidth]{twitter_graph}
-  \caption{Visualisation of the relationships of the sybils. }
+  \caption{Visualisation of the relationships of the sybils. Dark/light nodes
+    are nodes with a high/low degree.}
   \label{fig:twitter-graph}
 \end{figure}
 

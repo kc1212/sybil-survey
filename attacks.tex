@@ -16,10 +16,10 @@ profile and send friend requests to 200 random users, and 41\% of the users
 accepted the friend request~\cite{sophos}.
 
 Many OSN in fact have a large number of Sybils. A report by Facebook at the end
-of 2011 stated 5-6\% of their accounts are fake~\cite{facebookfake}. Jiang et el.
-analysed data from Renren\footnote{One of the largest social network in China.},
-they discovered 2440 sybil groups which totals to about 1 million sybils
-\cite{jiang2015understanding}.
+of 2011 stated 5-6\% of their accounts are fake~\cite{facebookfake}. Jiang et
+el. analysed data from Renren\footnote{One of the largest social network in
+  China (\texttt{http://renren.com/}).}, they discovered 2440 sybil groups which
+totals to about 1 million sybils \cite{jiang2015understanding}.
 
 Attackers leverage the ability to fool users into becoming one of their Sybil's
 friend and the ability to create a large number of Sybils to mount a large
@@ -96,11 +96,11 @@ bot accounts that injected thousands of tweets to smear the Democratic candidate
 
 In 2012, Wang et el. investigated two of the largeset crowdturfing (crowdsourced
 astroturfing) platforms in China---Zhubajie and Sandaha. One of their services
-is perform astroturfing on Weibo\footnote{The Chinese Twitter}. The authors
-found that the 5364 sellers collectively own 14151 Weibo accounts and the top
-1\% of the sellers own over 100 accounts. Furthermore, the business is growing
-and more than \$4 million have been spent on these two platforms over five
-years\cite{wang2012serf}.
+is perform astroturfing on Weibo\footnote{The Chinese Twitter
+  (\texttt{http://weibo.com/}.)}. The authors found that the 5364 sellers
+collectively own 14151 Weibo accounts and the top 1\% of the sellers own over
+100 accounts. Furthermore, the business is growing and more than \$4 million
+have been spent on these two platforms over five years\cite{wang2012serf}.
 
 \subsubsection{Spamming}
 Spamming, much like in the context of email, is the act of sending unsolicited
@@ -193,9 +193,10 @@ single machine can have thousands of Sybils running simultaneously. Finally, DHT
 requests would ``traverse through'' the Sybils due to the poisoned routing
 table, and the requests are stored in a database for further analysis.
 
-\subsection{Whitewashing}
-Whitewashing is the act of joining the network under a new identity, usually
-when the previous identity acquired a lot of negative reports. In file sharing
+\subsubsection{Whitewashing}
+Whitewashing is the act of joining the network under a new identity, usually for
+when the previous identity have acquired a lot of negative reports. It can be
+performed very easily if it is cheap to create new sybils. In file sharing
 networks that involve a central component for policing the users, whitewashing
 is often a problem. Many studies have found penalising selfish behaviours
 (free-riding) encourages whitewashing~\cite{feldman2004free, yang2005empirical}.
@@ -269,13 +270,12 @@ advantage over their competitors~\cite{adwords}. Research has shown having a
 negative feedback may harm the target's ability to do
 business~\cite{ba2002evidence}.
 
-
 \subsubsection{Whitewashing}
-In whitewashing, attackers abuse the reputation system for temporary gain and
-then escape the consequences by joining the reputation system under a new
-identity to shed their bad reputation. Clearly, whitewashing is only possible
-when the Sybil attack is possible. Again, there are no studies on whitewashing
-in the real-world. But many have suggested that it is feasible
+In whitewashing for reputation systems, attackers abuse the reputation system
+for temporary gain and then escape the consequences by joining the reputation
+system under a new identity to shed their bad reputation. Clearly, whitewashing
+is only possible when the Sybil attack is possible. Again, there are no studies
+on whitewashing in the real-world. But many have suggested that it is feasible
 attack\cite{hoffman2009survey, marti2006taxonomy}.
 
 % TODO
