@@ -1,3 +1,5 @@
+
+\begin{comment}
 Electronic commerce and online social networks allow us to orchestrate many
 aspects of our lives in the comfort of our homes, behind the monitors of our
 devices. With such services, online identity is often required. For example in
@@ -8,16 +10,28 @@ who must also have an account. In this scenario, users can choose to remain
 pseudonymous if they are careful, where their real-life identity is uncorrelated
 with their online identity. While that is useful for protecting the users'
 privacy, it also opens an alleyway for attackers.
+\end{comment}
 
-The sybil attack, first described by Douceur\cite{douceur2002sybil}, is an
+A recent article in the Atlantic describe how fake Twitter accounts are shaping
+the 2016 US presidential election~\cite{atlantictwitterbots}. Over a third of
+pro-Trump tweets and almost a fifth of pro-Clinton tweets, totalling at about 1
+million, came from bots. These cases date back to 2010. In the 2010
+Massachusetts senate race, researchers found evidence that Republican
+campaigners also used fake accounts to manipulate Google real-time search
+results to tip in their favour, effectively causing a spread of
+misinformation~\cite{mustafaraj2010obscurity}. These are examples of the sybil
+attacks and they are a threat to democracy because opinions of real users are
+eclipsed by an overwhelming number of fake accounts.
+
+The sybil attack, first described by Douceur~\cite{douceur2002sybil}, is an
 attack where an entity can assume multiple identities or sybils\footnote{In this
   work we use ``sybil'' as a noun to mean a fake identity.}, and then attack
 either another entity or undermine the whole system. For example, a malicious
 Twitter user can create many fake identities and have them follow his real
 identity, thus creating a false reputation. It is one of the most important
 attacks because it leads to numerous consequences including but not limited to
-spreading false information, identity theft\cite{bilge2009all} and ballot
-stuffing\cite{bhattacharjee2005avoiding}. Furthermore, to the best of our
+spreading false information, identity theft~\cite{bilge2009all} and ballot
+stuffing~\cite{bhattacharjee2005avoiding}. Furthermore, to the best of our
 knowledge, there is no general solution for preventing the sybil attack.
 
 There has been over a decade of work on the sybil attack from both
@@ -30,11 +44,13 @@ also experiment with fake Twitter followers and look at their properties
 (\autoref{sec:motivation}). Then we define the sybil attack give some important
 theoretical results (\autoref{sec:theory}). With the fundamentals in place, we
 describe the various types of attacks (\autoref{sec:attacks}) and defence
-mechanisms (\autoref{sec:defences}). There is a large variety of sybil attack
-defence mechanisms, from using trusted-third-party to exploiting the graph
-characteristics in online social networks, thus we classify these mechanisms by
-their ``main idea''. Finally, we present the related work and conclude in
-\autoref{sec:related} and \autoref{sec:summary}.
+mechanisms (\autoref{sec:defences}).
+% There is a large variety of sybil attack
+% defence mechanisms, from using trusted-third-party to exploiting the graph
+% characteristics in online social networks, thus we classify these mechanisms by
+% their ``main idea''.
+Finally, we present the related work and conclude in \autoref{sec:related} and
+\autoref{sec:summary}.
 
 %%% Local Variables:
 %%% mode: latex
