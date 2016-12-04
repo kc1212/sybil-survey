@@ -1,231 +1,71 @@
-
-Sybil attacks can be mounted in different applications and cause a large array
-of consequences. This section categorises the attacks by the goal for five
-common applications. Some attacks are general, so we give them a general
-description when they first occur, and then give an application specific
-description under each subsection. We hope this section further illuminates the
+The sybil attack can be seen as an umbrella term for all attacks that require
+the use of sybils. This section categorises the derivatives of the sybil attack
+by the attacker's aim. Some attacks are more general, such as spamming, others
+are application specific, i.e. astroturfing. The attacks are sorted by their
+generality in decreasing order. We hope this section further illuminates the
 alarming consequences of the sybil attack.
 
-\subsection{The Sybil Attack in OSN}
-OSN (online social networks) are vulnerable to the sybil attack even when most
-of them use a central, trusted authority. Users create
-profiles and form relationships with friends. In contrast with real world
-relationships, it is much easier to create relationships in OSN even with
-strangers. In 2008, Sophos conducted an experiment where they created a Facebook
-profile and send friend requests to 200 random users, and 41\% of the users
-accepted the friend request~\cite{sophos}.
+\subsection{Spamming}
+Spamming is the act of sending unsolicited or undesired messages (spam). The
+goal of the attacker varies from advertisement to phishing and spreading
+malicious software~\cite{twittermalware1, twittermalware2}. Although spam can
+originate from a single account, but it is much more difficul to detect and
+prevent when it is from a group of sybils. In the context of email, spam can be
+prevented in most cases when a large service provide is involved, such as
+Gmail~\cite{adwords}. The same is not true in other applications.
 
-Many OSN in fact have a large number of sybils. A report by Facebook at the end
-of 2011 stated 5-6\% of their accounts are fake~\cite{facebookfake}. Jiang et
-el. analysed data from Renren\footnote{One of the largest social network in
-  China (\texttt{http://renren.com/}).}, they discovered 2440 sybil groups which
-totals to about 1 million sybils \cite{jiang2015understanding}.
-
-Attackers leverage the ability to fool users into becoming one of their sybil's
-friend and the ability to create a large number of sybils to mount a large
-variety of attacks on the user. We outline the different types of attack in this
-section. Note that online social networks often have a reputation aspect as
-well, for example a Facebook page with a lot of fans may be considered to be
-more reputable than pages with a lower number of fans. We discuss attacks
-specific to OSN in this section and attacks on reputation in
-\autoref{sec:reputation-attack}
-
-\subsubsection{Identity Theft}
-Identity theft is the intentional user of the victim's identity to gain an
-advantage. Authors of~\cite{bilge2009all} created two attacks - profile cloning
-and cross-site profile cloning, targeting five social network sites including
-Facebook and LinkedIn. The iCloner system was created to automate these attacks.
-
-In profile cloning, iCloner uses publicly available information to automatically
-create clones of the victim's profiles. iCloner then sends friend requests from
-the cloned profile to the friends of the victim. The fact that the victim may
-have many friends that they do not contact very often, e.g. friend from primary
-school living in another country, makes this attack highly effective. The
-authors found that the acceptance rate for cloned profiles was over 60\%. Much
-higher than the acceptance rate of 30\% for fictitious profiles. Once the
-friendship is established, it is possible to extract private information that is
-not available publicly and perform identity theft.
-
-The idea of cross-site profile cloning is similar, except the cloned profile is
-created on another social network site that the victim does not yet use. Once
-the profile is cloned, iCloner attempts to identify friends of the
-victim and begins sending friend requests. Similarly, 56\% of the friend
-requests were accepted. 
-
-More recently, Boshmaf et el. created SbN (Socialbot Network), which targets
-Facebook~\cite{boshmaf2011socialbot}. Each socialbot is a sybil created by the
-attacker, it controls a forged profile and mimics human behaviour to avoid
-detection. The attacker is the botmaster who coordinates the socialbots to
-achieve a common objective such as infiltrating the target OSN by creating
-friend relationships with real users. The authors found that infiltration
-success rate was as high as 80\% and the FIS (Facebook Immune
-System~\cite{stein2011facebook}) was not sufficient to prevent the attack. Once
-the relationships are established, the botmaster can command the socialbots to
-start gathering private information which can then be used for identity theft.
-
-% authors also said that Sybil detection based on attack edges is not effective
-% because it's easy to create trust relationships with strangers
-
-These examples demonstrate that the carelessness of users and the ability to
-create sybils makes OSN vulnerable to identity theft. Moreover, identity theft
-is only an entry point. Once trust relationships are established, the attacker
-can perform many other types of attacks such as spamming, phishing or
-astroturfing to gain advantage.
-
-\subsubsection{Astroturfing}
-Astroturfing is an act of creating grassroot movement that are in reality
-carried out by a single entity, effectively spreading misinformation to
-legitimate users. It relies on the ability to create sybils in the underlying
-social network. This type of attack is especially effective in social networks
-such as Twitter where a lot of the social interaction such as sending messages
-happen in the public.
-
-In the 2010 Massachusetts senate race, Mustafaraj and Metaxas found evidence
-that Republican campaigners created fake Twitter accounts and used them to send
-spam. The spam caused Google real-time search results to tip in their favour
-thus causing a spread of misinformation~\cite{mustafaraj2010obscurity}.
-Ratkiewicz et el. suggest that this type of attack can be mounted cheaply and
-may have a larger influence than traditional
-advertising~\cite{ratkiewicz2011truthy}.
-
-The Truthy system~\cite{ratkiewicz2011truthy} is a web service that perform
-real-time analysis of Twitter to detect political astroturfing. In the 2010
-U.S. midterm election, the authors found accounts which generated a lot of
-retweets but no original tweets. More importantly, they uncovered a network of
-bot accounts that injected thousands of tweets to smear the Democratic candidate.
-
-In 2012, Wang et el. investigated two of the largest crowdturfing (crowdsourced
-astroturfing) platforms in China---Zhubajie and Sandaha. One of their services
-is to perform astroturfing on Weibo\footnote{The Chinese Twitter
-  (\texttt{http://weibo.com/}.)}. The authors found that the 5364 sellers
-collectively own 14151 Weibo accounts and the top 1\% of the sellers own over
-100 accounts. Furthermore, the business is growing and more than \$4 million
-have been spent on these two platforms over five years\cite{wang2012serf}.
-
-\subsubsection{Spamming}
-Spamming, much like in the context of email, is the act of sending unsolicited
-or undesired messages (spam). The goal of the attacker varies from advertisement
-to phishing and spreading malicious software~\cite{twittermalware1,
-  twittermalware2}. Many studies have characterised the behaviour of the
+For social networks, many studies have characterised the behaviour of the
 spammers and found that many spammers are in fact automated
 sybils~\cite{stringhini2010detecting, yang2012analyzing, grier2010spam,
   jiang2015understanding}. More importantly, spamming is possibly the most
-common attack in OSN. Jiang et el. analysed the malicious activities of the
-sybils on Renren and found propagating advertisement (at 32.8\%) is the most
-common one~\cite{jiang2015understanding}. Some authors have worked with the
-service provide to close the spam accounts, but it is clearly not sufficient as
-we described in \autoref{sec:motivation}.
+common attack. Jiang et el. analysed the malicious activities of the sybils on
+Renren\footnote{One of the largest social network in China
+  (\texttt{http://renren.com/}).} and found propagating advertisement (at
+32.8\%) is the most common one~\cite{jiang2015understanding}. Some authors have
+worked with the service provide to close the spam accounts, but it is clearly
+not sufficient as we described in \autoref{sec:motivation}.
+
+In a very different application---cryptocurrencies, the spammer's goal is to
+waste system resources rather than advertisements such as in social networks.
+Block sizes in Bitcoin is fixed to 1 MB and block generation takes about 10
+minutes. Thus, there is an upper bound for the number of transactions that the
+Bitcoin network can handle per second (approximately 7 at the time of
+writing~\cite{bitcointps}). Flooding the network with useless transactions will
+cause its performance to drop. Decreasing the scalability even more.
+Fortunately, Bitcoin incorporates a transaction fee, so spammers cannot abuse
+the network indefinitely~\cite{bitcoinspam}.
 
 
-\subsection{The Sybil Attack in File Sharing Networks}
-File sharing networks are often P2P, where peers connect to other peers to
-download and/or upload files without a central server (for the most part).
-BitTorrent~\cite{bep3} is likely the most popular P2P network at the time of
-writing. Unlike social networks where there is a trust relationship between
-peers, P2P networks are much more open and distributed, making them much more
-vulnerable to the sybil attack.
+\subsection{Slandering}
+The goal of a slandering attack is to illegitimately produce negative feedback
+to undermine the reputation of the target. It is mostly found in reputation
+systems where users are rewarded for their positive behaviour and penalised for
+their bad behaviour. The attack is difficult to prevent when the feedback is not
+authenticated. Furthermore, an attacker who uses a group of sybils can make the
+attack much more effective~\cite{hoffman2009survey}.
 
-P2P networks often implement a DHT (distributed hash table). The DHT in
-BitTorrent is called Mainline-DHT, based on
-Kademlia~\cite{maymounkov2002kademlia}. Keys are the infohashes (file
-identifiers) and values are the metadata of the files, these are distributed
-across all the participating peers. Every node also stores a routing table, the
-entries in the table is precise for the closer nodes and coarse for node that
-are further away. Requests to search for a key are routed iteratively, every
-iteration the request gets closer to the destination node. Finally, the value is
-returned if it is found~\cite{bep5}.
+Mike Hearn suggests that Google has observed the attack in AdWords. The
+attackers would submit false reports on AdWords advertisements to give them a
+bad reputation and gain an advantage over their competitors~\cite{adwords}.
+% Having a negative feedback may harm the target's ability to do
+% business~\cite{ba2002evidence}.
 
-\subsubsection{Index Poisoning}
-\label{sec:index-poisoning}
-The goal of index poisoning is to corrupt routing table so that
-honest peers fail to find the values they want. It can be mounted by injecting
-sybils into the DHT that do not follow the protocol. Wang and Kangasharju
-created honeypots in the BitTorrent network and detected as many as 300,000
-sybils in 2012~\cite{wang2012real}. Similar attacks are possible in other P2P networks
-such as Overnet~\cite{liang2006index}.
+Slandering also exist in wireless ad-hoc networks. Nodes in the network need to
+exchange information with each other to satisfy the underlying requirements of
+the application. Some common tasks are data aggregation and voting. With enough
+sybils, it is possible to manipulate the aggregated data or the poll to benefit
+the attacker. For example, sensor networks may use a ballot to detect
+misbehaving nodes, the attack could use its sybils to claim that an honest node
+is misbehaving and have the other nodes expel it from the
+network~\cite{newsome2004sybil}.
 
-% There are no concrete proof of malicious activities, but the Sybils can easily
-% sabotage the DHT if they choose to.
-
-% \subsubsection{Unfair Use of Resources}
-% creating sybils with ``strategic'' missing pieces
-
-% Gnutella?
-% \cite{daswani2002query}
-% \cite{daswani2004pong}
-
-\subsubsection{Eclipse Attack}
-Steiner et al. mounted an Eclipse attack on a Kademlia based DHT for P2P file
-sharing known as KAD, it is used in P2P networks Overnet and
-eMule~\cite{steiner2007exploiting}. The Eclipse Attack~\cite{singh2006eclipse}
-is a special form of targeted sybil attack. Sybils are arranged in the network
-such that they \emph{eclipse} the victim from the rest of the network. The
-victim can either be an identity or an object such as a key in DHT. The authors
-mounted the latter variation, and they show it is possible to eclipse a key
-using only 32 sybils in a DHT with 1.5 million users and 42,000 key.
-
-\subsubsection{Denial of Service}
-By using sybils and exploiting vulnerabilities in the BitTorrent network, denial
-of service attack can be directed at any machine connected to the internet, not
-just machines in the network~\cite{sia2006ddos}. The main idea is to report the
-victim as the tracker (a server that coordinates the peers). El Defrawy, Gjoka
-and Markopoulou created a small scale proof-of-concept attack. Using only one
-machine, they could generate enough traffic to cripple small organisations and
-home users. The authors suggested that if sybils are created to perform the same
-attack aimed at a single victim, then it could easily throttle links with much
-higher bandwidth~\cite{el2007bottorrent}.
-
-Steiner et al. also succeeded in mounting a DDoS attack but in the context of
-the aforementioned KAD DHT~\cite{steiner2007exploiting}. Instead of replying the
-correct list of peers to DHT queries, the sybils always respond with the IP
-address of the target peer in an attempt to overwhelm the target. The authors
-show evidence that real-world malicious DDoS attacks involving more than 300,000
-peers are mounted using P2P networks.
-
-\subsubsection{Spying}
-Many authors have used sybils to monitor a P2P file sharing network that uses
-DHT~\cite{holz2008measurements, steiner2007exploiting}, but such techniques can
-be directly applied to spy on users. In essence, the authors created a lot of
-light-weight sybils and tricked all the honest peers to store them in their
-routing table, a form of index poisoning. The sybils are light-weight because
-they do not follow the DHT protocol and perform much simpler operations, a
-single machine can have thousands of sybils running simultaneously. Finally, DHT
-requests would ``traverse through'' the sybils due to the poisoned routing
-table, and the requests are stored in a database for further analysis.
-
-\subsubsection{Whitewashing}
-Whitewashing is the act of joining the network under a new identity, usually for
-when the previous identity have acquired a lot of negative reports. It can be
-performed very easily if it is cheap to create new sybils. In file sharing
-networks that involve a central component for policing the users, whitewashing
-is often a problem. Many studies have found penalising selfish behaviours
-(free-riding) encourages whitewashing~\cite{feldman2004free, yang2005empirical}.
-
-\subsection{The Sybil Attack in Reputation Systems}
-\label{sec:reputation-attack}
-Reputation systems cultivate collaborative behaviour by allowing entities to
-trust each other based on community feedback, usually in the form of a
-reputation score. Entities decide whom to trust based on the reputation scores,
-thus entities are also incentivised to behave honestly. Reputation systems are
-found in many contexts. In e-commerce, namely eBay, researchers found that the
-merchant's reputation ``is a statistically and economically significant
-determinant of auction prices''~\cite{houser2006reputation}, and ``buyers are
-willing to pay 8.1\% more'' for goods sold buy a reputable
-merchant~\cite{resnick2006value}. The file sharing peer-to-peer network
-BitTorrent uses tit-for-tat as an ephemeral reputation system to encourage peers
-to upload in exchange for better download speeds~\cite{cohen2003incentives}.
-PageRank~\cite{page1999pagerank} is also a reputation system, used for ranking
-websites in Google's search results.
-
-Reputation systems are also vulnerable to the sybil attack. Worryingly, there
-appears to an industry built around it, and their products are easily accessible
-in the clearnet. In this section, we describe practical attacks on reputation
-systems.
-
-\subsubsection{Self-promoting}
+\subsection{Self-promoting}
 In self-promotion, the goal of the attacker is to illegitimately raise its own
-reputation. A common way to perform self-promotion is to create sybils and have
-them create positive reputation for the attacker's main identity.
+reputation. It is also found in reputation systems, but it does not need to have
+penalisation property (e.g. the number of likes on a Facebook page or the number
+of followers on a Twitter account). A common way to perform self-promotion is to
+create sybils and have them create positive reputation for the attacker's main
+identity.
 
 \begin{comment}
 Dini and Spagnolo studied the economics of buying reputation on eBay. The
@@ -258,26 +98,259 @@ revenues of those two marketplaces are estimated to be at \$1.3 million and
 authors did not investigate the properties of the fake followers, there is
 little doubt that many of accounts used in these services are sybils.
 
-\subsubsection{Slandering}
-The goal of a slandering attack is to illegitimately produce negative feedback
-to undermine the reputation of the target. It is easy to imagine the improvement
-in effectiveness when using multiple sybils. Many have suggested it is a
-feasible attack~\cite{hoffman2009survey, koutrouli2012taxonomy}, but from the
-best of our knowledge, there are no published studies on real-world slandering.
-On the other hand, a mailing list post by Mike Hearn suggest attackers
-would submit false reports on advertisements provided by AdWords to gain an
-advantage over their competitors~\cite{adwords}. Research has shown having a
-negative feedback may harm the target's ability to do
-business~\cite{ba2002evidence}.
+In the same vein as the slandering attack, wireless ad-hoc networks also suffer
+from the self-promoting attack. Nodes in the network often have limited
+resources such as bandwidth of the radio channels. Resources such as these must
+be shared between the neighbours using time slices. When the neighbours are
+sybils, then the attacker can receive an unfair amount of resource allocation,
+giving it a much higher privilege~\cite{newsome2004sybil}. This works even when
+the sybils are themselves following the protocol.
 
-\subsubsection{Whitewashing}
-In whitewashing for reputation systems, attackers abuse the reputation system
-for temporary gain and then escape the consequences by joining the reputation
-system under a new identity to shed their bad reputation. Clearly, whitewashing
-is only possible when the sybil attack is possible. Again, there are no studies
-on whitewashing in the real-world. But many have suggested that it is feasible
-attack\cite{hoffman2009survey, marti2006taxonomy}.
+\subsection{Whitewashing}
+Whitewashing is when attackers abuse the reputation system for temporary gain
+and then escape the consequences by joining the reputation system under a new
+identity to shed their bad reputation~\cite{marti2006taxonomy}. For example, a
+Reddit user may delete his or her account when it accumulates a lot of negative
+karma, and then create a new account. The attack can be performed very easily if
+it is cheap to create sybils~\cite{hoffman2009survey}.
 
+Whitewashing is a problem in file sharing networks that involve a central
+component to act as a reputation system. To prevent and penalise selfish
+behaviour such as free-riding, a reputation system must be used. But many
+studies have found that the reputation system in fact encourages
+whitewashing~\cite{feldman2004free, yang2005empirical}.
+
+\subsection{Routing Disruption}\label{sec:routing-disruption}
+The aim of the attacker in routing disruption is to stop honest nodes from
+sending or receiving the correct data by maliciously modifying its intermediate
+routes.
+
+In file sharing DHTs, routing disruption is commonly accomplished by index
+poisoning. That is when the attacker corrupts the routing tables so that honest
+peers fail to find the values they want. It can be mounted by injecting sybils
+into the DHT that do not follow the protocol. Wang and Kangasharju created
+honeypots in the BitTorrent network and detected as many as 300,000 sybils may
+be performing such an attack~\cite{wang2012real}. Similar attacks are possible
+in other P2P networks such as Overnet~\cite{liang2006index}.
+
+In wireless ad-hoc networks, an important routing technique is multipath
+routing, where data is routed using multiple paths in the network for better
+fault-tolerance and bandwidth. However, if sybils are present in the network,
+then the different paths may in fact go through the sybils owned by a single
+attacker, nullifying the advantages. Another technique is geographic routing,
+nodes route data depending on the geographic location of their neighbours.
+Sybils in the network can pretend to be in more than one place at a time, thus
+significant disrupting the routing algorithm\cite{karlof2003secure}.
+
+\subsection{Eclipse Attack}
+In the eclipse attack, sybils are arranged in the network such that they
+\emph{eclipse} the victim from the rest of the network. The victim can either be
+an identity or an object such as a key in a DHT (distributed hash
+table)~\cite{singh2006eclipse}.
+
+Steiner et al. mounted an Eclipse attack on the KAD DHT, it is used in P2P file
+sharing networks Overnet and eMule~\cite{steiner2007exploiting}. The sybils are
+deliberately crafted such that they automatically position themselves as the
+neighbours of the target. The authors show it is possible to eclipse a key using
+only 32 sybils in the DHT with 1.5 million users and 42,000 key.
+
+Attacker can eclipse Bitcoin nodes to gain various unfair
+advantages~\cite{heilman2015eclipse}. Bitcoin has no authentication, so nodes
+receive unsolicited messages about the IP addresses of other nodes, these
+addresses are stored in an internal table. The attacker essentially sends bogus
+messages to the target that only contains the IP address of the attacker's
+sybils, or ``rubbish'' addresses. This technique eclipses the target because it
+can only connect to the attacker's IP address. This causes a lot of
+consequences. (1) Engineering block races, when two nodes discover the next
+block at the same time, the eclipsed block will not be able to receive the
+reward. (2) Eclipsing a large portion of the network can cause a 51\% attack,
+where a single party gain complete control of the network. (3) Selfish-mining is
+when the attacker do not publish the latest block immediately after discovery
+but aims to publish 2 or more blocks at the same time to gain a lead; this
+results in many orphaned blocks for the other miners and the attacker can use
+the eclipse attack to drop newly discovered blocks by other miners to make the
+attack more effective. (4) Double spending, the eclipse attack allows the
+attacker to double spend his Bitcoins to eclipse nodes because they don't have
+an accurate view of the whole network.
+
+\subsection{Denial of Service}
+DoS (denial of service) attack is where the attacker seeks to deny the target
+from doing work for its intended users. A common type of DoS is DDoS
+(distributed denial of service), where the attacker makes use of multiple
+identities to mount the attack.
+
+In the BitTorrent network, DoS attack can be directed at any machine connected
+to the internet, not just machines. It uses a vulnerability in the network and a
+lot of sybils. The main idea is to report the victim as the tracker (a server
+that coordinates the peers) such that peers that are looking for a particular
+file would all query the victim~\cite{sia2006ddos}
+
+El Defrawy, Gjoka and Markopoulou created a small scale proof-of-concept attack.
+Using only one machine, they could generate enough traffic to cripple small
+organisations and home users. The authors suggested that if sybils are created
+to perform the same attack aimed at a single victim, then it could easily
+throttle links with much higher bandwidth~\cite{el2007bottorrent}.
+
+Steiner et al. also succeeded in mounting a DDoS attack but in the context of
+the aforementioned KAD DHT~\cite{steiner2007exploiting}. Instead of replying the
+correct list of peers to DHT queries, the sybils always respond with the IP
+address of the target peer in an attempt to overwhelm the target. The authors
+show evidence that real-world malicious DDoS attacks involving more than 300,000
+peers are mounted using P2P networks.
+
+\subsection{Eavesdropping}
+Eavesdropping is the act of secretly recording the activities of one or more
+nodes. It is made harder by the nature of distributed systems, because there is
+no longer a central point of control. But sybils can be useful to overcome this
+problem.
+
+Many authors have used sybils to monitor a P2P file sharing network that uses
+DHT~\cite{holz2008measurements, steiner2007exploiting}, such techniques can also
+be directly applied to eavesdrop users. In essence, the authors created a lot of
+light-weight sybils and tricked all the honest peers to store their addresses in
+their routing table, a form of index poisoning. The sybils are light-weight
+because they do not follow the DHT protocol and perform much simpler operations.
+A single machine can have thousands of sybils running simultaneously. Finally,
+DHT requests would ``traverse through'' the sybils due to the poisoned routing
+table, and the requests are stored in a database for further analysis.
+
+\subsection{Identity Theft}
+Identity theft is the intentional use of the victim's identity to gain an
+advantage. Authors of~\cite{bilge2009all} created two attacks - profile cloning
+and cross-site profile cloning, targeting five social network sites including
+Facebook and LinkedIn. The iCloner system was created to automate these attacks.
+
+In profile cloning, iCloner uses publicly available information to automatically
+create clones of the victim's profiles. iCloner then sends friend requests from
+the cloned profile to the friends of the victim. The fact that the victim may
+have many friends that they do not contact very often, e.g. friend from primary
+school living in another country, makes this attack highly effective. The
+authors found that the acceptance rate for cloned profiles was over 60\%. Much
+higher than the acceptance rate of 30\% for fictitious profiles. Once the
+friendship is established, it is possible to extract private information that is
+not available publicly and perform identity theft.
+
+The idea of cross-site profile cloning is similar, except the cloned profile is
+created on another social network site that the victim does not yet use. Once
+the profile is cloned, iCloner attempts to identify friends of the
+victim and begins sending friend requests. Similarly, 56\% of the friend
+requests were accepted. 
+
+More recently, Boshmaf et el. created SbN (Socialbot Network), which targets
+Facebook~\cite{boshmaf2011socialbot}. Each socialbot is a sybil created by the
+attacker, it controls a forged profile and mimics human behaviour to avoid
+detection. The attacker is the botmaster who coordinates the socialbots to
+achieve a common objective such as infiltrating the target social network by creating
+friend relationships with real users. The authors found that infiltration
+success rate was as high as 80\% and the FIS (Facebook Immune
+System~\cite{stein2011facebook}) was not sufficient to prevent the attack. Once
+the relationships are established, the botmaster can command the socialbots to
+start gathering private information which can then be used for identity theft.
+
+% authors also said that Sybil detection based on attack edges is not effective
+% because it's easy to create trust relationships with strangers
+
+These examples demonstrate that the carelessness of users and the ability to
+create sybils makes social networks vulnerable to identity theft. Moreover,
+identity theft is only an entry point. Once trust relationships are established,
+the attacker can perform many other types of attacks such as spamming, phishing
+or astroturfing to gain advantage.
+
+\subsection{Astroturfing}
+Astroturfing is an act of creating grassroot movement that are in reality
+carried out by a single entity, effectively spreading misinformation to
+legitimate users. It relies on the ability to create sybils in the underlying
+social network. This type of attack is especially effective in social networks
+such as Twitter where a lot of the social interaction such as sending messages
+happen in the public.
+
+In the 2010 Massachusetts senate race, Mustafaraj and Metaxas found evidence
+that Republican campaigners created fake Twitter accounts and used them to send
+spam. The spam caused Google real-time search results to tip in their favour
+thus causing a spread of misinformation~\cite{mustafaraj2010obscurity}.
+Ratkiewicz et el. suggest that this type of attack can be mounted cheaply and
+may have a larger influence than traditional
+advertising~\cite{ratkiewicz2011truthy}.
+
+The Truthy system~\cite{ratkiewicz2011truthy} is a web service that perform
+real-time analysis of Twitter to detect political astroturfing. In the 2010
+U.S. midterm election, the authors found accounts which generated a lot of
+retweets but no original tweets. More importantly, they uncovered a network of
+bot accounts that injected thousands of tweets to smear the Democratic candidate.
+
+In 2012, Wang et el. investigated two of the largest crowdturfing (crowdsourced
+astroturfing) platforms in China---Zhubajie and Sandaha. One of their services
+is to perform astroturfing on Weibo\footnote{The Chinese Twitter
+  (\texttt{http://weibo.com/}.)}. The authors found that the 5364 sellers
+collectively own 14151 Weibo accounts and the top 1\% of the sellers own over
+100 accounts. Furthermore, the business is growing and more than \$4 million
+have been spent on these two platforms over five years\cite{wang2012serf}.
+
+\begin{comment}
+\subsection{The Sybil Attack in OSN}
+OSN (online social networks) are vulnerable to the sybil attack even when most
+of them use a central, trusted authority. Users create
+profiles and form relationships with friends. In contrast with real world
+relationships, it is much easier to create relationships in OSN even with
+strangers. In 2008, Sophos conducted an experiment where they created a Facebook
+profile and send friend requests to 200 random users, and 41\% of the users
+accepted the friend request~\cite{sophos}.
+
+Many OSN in fact have a large number of sybils. A report by Facebook at the end
+of 2011 stated 5-6\% of their accounts are fake~\cite{facebookfake}. Jiang et
+el. analysed data from Renren, they discovered 2440 sybil groups which
+totals to about 1 million sybils \cite{jiang2015understanding}.
+
+Attackers leverage the ability to fool users into becoming one of their sybil's
+friend and the ability to create a large number of sybils to mount a large
+variety of attacks on the user. We outline the different types of attack in this
+section. Note that online social networks often have a reputation aspect as
+well, for example a Facebook page with a lot of fans may be considered to be
+more reputable than pages with a lower number of fans. We discuss attacks
+specific to OSN in this section and attacks on reputation in
+\autoref{sec:reputation-attack}
+
+
+
+\subsection{The Sybil Attack in File Sharing Networks}
+File sharing networks are often P2P, where peers connect to other peers to
+download and/or upload files without a central server (for the most part).
+BitTorrent~\cite{bep3} is likely the most popular P2P network at the time of
+writing. Unlike social networks where there is a trust relationship between
+peers, P2P networks are much more open and distributed, making them much more
+vulnerable to the sybil attack.
+
+P2P networks often implement a DHT (distributed hash table). The DHT in
+BitTorrent is called Mainline-DHT, based on
+Kademlia~\cite{maymounkov2002kademlia}. Keys are the infohashes (file
+identifiers) and values are the metadata of the files, these are distributed
+across all the participating peers. Every node also stores a routing table, the
+entries in the table is precise for the closer nodes and coarse for node that
+are further away. Requests to search for a key are routed iteratively, every
+iteration the request gets closer to the destination node. Finally, the value is
+returned if it is found~\cite{bep5}.
+
+
+\subsection{The Sybil Attack in Reputation Systems}
+\label{sec:reputation-attack}
+Reputation systems cultivate collaborative behaviour by allowing entities to
+trust each other based on community feedback, usually in the form of a
+reputation score. Entities decide whom to trust based on the reputation scores,
+thus entities are also incentivised to behave honestly. Reputation systems are
+found in many contexts. In e-commerce, namely eBay, researchers found that the
+merchant's reputation ``is a statistically and economically significant
+determinant of auction prices''~\cite{houser2006reputation}, and ``buyers are
+willing to pay 8.1\% more'' for goods sold buy a reputable
+merchant~\cite{resnick2006value}. The file sharing peer-to-peer network
+BitTorrent uses tit-for-tat as an ephemeral reputation system to encourage peers
+to upload in exchange for better download speeds~\cite{cohen2003incentives}.
+PageRank~\cite{page1999pagerank} is also a reputation system, used for ranking
+websites in Google's search results.
+
+Reputation systems are also vulnerable to the sybil attack. Worryingly, there
+appears to an industry built around it, and their products are easily accessible
+in the clearnet. In this section, we describe practical attacks on reputation
+systems.
 % TODO
 % \subsubsection{Denial of Service}
 % The denial of service attack highly depends on the structure of the reputation
@@ -295,35 +368,6 @@ that use a global ledger.
 % \subsubsection{Denial of Service}
 % TODO~\cite{vasek2014empirical}
 
-\subsubsection{Eclipse Attack}
-Attacker can eclipse Bitcoin nodes to gain various unfair
-advantages~\cite{heilman2015eclipse}. Nodes receive unsolicited messages for IP
-addresses of other nodes, the IP addresses are stored in an internal table. The
-attacker essentially sends bogus messages to the target that only contains the
-IP address of the attacker's sybils or ``rubbish'' addresses. This technique
-eclipses the target because it can only connect to the attacker's IP address.
-There are many consequences. (1) Engineering block races, when two nodes
-discover the next block at the same time, the eclipsed block will not be able to
-receive the reward. (2) Eclipsing a large portion of the network can cause a
-51\% attack, where a single party gain complete control of the network. (3)
-Selfish-mining is when the attacker do not publish the latest block immediately
-after discovery but aims to publish 2 or more blocks at the same time to gain a
-lead; this results in many orphaned blocks for the other miners and the attacker
-can use the eclipse attack to drop newly discovered blocks by other miners to
-make the attack more effective. (4) Double spending, the eclipse attack allows
-the attacker to double spend his Bitcoins to eclipse nodes because they don't
-have an accurate view of the whole network.
-
-\subsubsection{Spamming}
-In Bitcoin, the spammer's goal is to waste system resources rather than
-advertisements such as in social networks. Block sizes is fixed to 1 MB and
-block generation takes about 10 minutes. Thus, there is an upper bound for the
-number of transactions that the Bitcoin network can handle per second
-(approximately 7 at the time of writing~\cite{bitcointps}). Flooding the network
-with useless transactions will cause its performance to drop. Decreasing the
-scalability even more. Fortunately, Bitcoin incorporates a transaction fee, so
-spammers cannot abuse the network indefinitely~\cite{bitcoinspam}.
-
 \subsection{The Sybil Attack in WANET}
 WANET (wireless ad-hoc networks) is a dynamic, self-configuring, self-healing
 wireless network. Ad-hoc in this case means it does not rely on existing
@@ -339,33 +383,7 @@ same attacks from \autoref{sec:reputation-attack} applies here. In this section
 we describe the WANET specific attacks. From the best of our knowledge WANET are
 not widely deployed in practice, thus there is little research on real-world
 attacks.
-
-\subsubsection{Unfair Resource Allocation}
-Nodes in WANET often have limited resources such as bandwidth of the radio
-channels. Resources such as these must be shared between the neighbours using
-time slices. When the neighbours are sybils, then the attacker can receive an
-unfair amount of resource allocation and denies resources for the honest
-nodes\cite{newsome2004sybil}. In contrast with the other attacks, this works
-even when the sybils are not behaving maliciously.
-
-\subsubsection{Routing Disruption}
-An important routing technique is multipath routing, data is routed using
-multiple paths in the network for better fault-tolerance and bandwidth. However,
-if sybils are present in the network, then the different paths may in fact go
-through the sybils owned by a single attacker, nullifying the advantages.
-Another technique is geographic routing, nodes route data depending on the
-geographic location of their neighbours. Sybils in the network can pretend to be
-in more than one place at a time, thus significant disrupting the routing
-algorithm\cite{karlof2003secure}.
-
-\subsubsection{Spreading False Information}
-Nodes often need to exchange information with each other to satisfy the
-underlying requirements of the application. Some common tasks are data
-aggregation and voting. With enough sybils, it is possible to manipulate the
-aggregated data or the poll to benefit the attacker. For example, sensor
-networks may use a ballot to detect misbehaving nodes, the attack could use its
-sybils to claim that an honest node is misbehaving and have the other nodes expel
-it from the network\cite{newsome2004sybil}.
+\end{comment}
 
 %%% Local Variables:
 %%% mode: latex
