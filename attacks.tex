@@ -9,8 +9,8 @@ alarming consequences of the sybil attack.
 Spamming is the act of sending unsolicited or undesired messages (spam). The
 goal of the attacker varies from advertisement to phishing and spreading
 malicious software~\cite{twittermalware1, twittermalware2}. Although spam can
-originate from a single account, but it is much more difficul to detect and
-prevent when it is from a group of sybils. In the context of email, spam can be
+originate from a single account, it is much more difficul to detect and prevent
+when it is from a group of sybils. In the context of email, spam can be
 prevented in most cases when a large service provide is involved, such as
 Gmail~\cite{adwords}. The same is not true in other applications.
 
@@ -26,14 +26,14 @@ worked with the service provide to close the spam accounts, but it is clearly
 not sufficient as we described in \autoref{sec:motivation}.
 
 In a very different application---cryptocurrencies, the spammer's goal is to
-waste system resources rather than advertisements such as in social networks.
-Block sizes in Bitcoin is fixed to 1 MB and block generation takes about 10
-minutes. Thus, there is an upper bound for the number of transactions that the
-Bitcoin network can handle per second (approximately 7 at the time of
-writing~\cite{bitcointps}). Flooding the network with useless transactions will
-cause its performance to drop. Decreasing the scalability even more.
-Fortunately, Bitcoin incorporates a transaction fee, so spammers cannot abuse
-the network indefinitely~\cite{bitcoinspam}.
+waste system resources rather than advertisements. Block sizes in Bitcoin is
+fixed to 1 MB and block generation takes about 10 minutes. Thus, there is an
+upper bound for the number of transactions that the Bitcoin network can handle
+per second (approximately 7 at the time of writing~\cite{bitcointps}). Flooding
+the network with useless transactions will cause its performance to drop.
+Decreasing the scalability even more. Fortunately, Bitcoin incorporates a
+transaction fee, so spammers cannot abuse the network
+indefinitely~\cite{bitcoinspam}.
 
 
 \subsection{Slandering}
@@ -143,10 +143,10 @@ Sybils in the network can pretend to be in more than one place at a time, thus
 significant disrupting the routing algorithm\cite{karlof2003secure}.
 
 \subsection{Eclipse Attack}
-In the eclipse attack, sybils are arranged in the network such that they
-\emph{eclipse} the victim from the rest of the network. The victim can either be
-an identity or an object such as a key in a DHT (distributed hash
-table)~\cite{singh2006eclipse}.
+The eclipse attack is closely related routing disruption, sybils in this case
+are arranged in the network such that they \emph{eclipse} the victim from the
+rest of the network. The victim can either be an identity or an object such as a
+key in a DHT (distributed hash table)~\cite{singh2006eclipse}.
 
 Steiner et al. mounted an Eclipse attack on the KAD DHT, it is used in P2P file
 sharing networks Overnet and eMule~\cite{steiner2007exploiting}. The sybils are
@@ -173,11 +173,10 @@ attack more effective. (4) Double spending, the eclipse attack allows the
 attacker to double spend his Bitcoins to eclipse nodes because they don't have
 an accurate view of the whole network.
 
-\subsection{Denial of Service}
-DoS (denial of service) attack is where the attacker seeks to deny the target
-from doing work for its intended users. A common type of DoS is DDoS
-(distributed denial of service), where the attacker makes use of multiple
-identities to mount the attack.
+\subsection{Distributed Denial of Service}
+The DDoS (distributed denial of service) attack is where the attacker uses
+multiple identities to overload the target and deny it from doing work for its
+intended users.
 
 In the BitTorrent network, DoS attack can be directed at any machine connected
 to the internet, not just machines. It uses a vulnerability in the network and a
@@ -198,7 +197,7 @@ address of the target peer in an attempt to overwhelm the target. The authors
 show evidence that real-world malicious DDoS attacks involving more than 300,000
 peers are mounted using P2P networks.
 
-\subsection{Eavesdropping}
+\subsection{Distributed Eavesdropping}
 Eavesdropping is the act of secretly recording the activities of one or more
 nodes. It is made harder by the nature of distributed systems, because there is
 no longer a central point of control. But sybils can be useful to overcome this
@@ -214,7 +213,7 @@ A single machine can have thousands of sybils running simultaneously. Finally,
 DHT requests would ``traverse through'' the sybils due to the poisoned routing
 table, and the requests are stored in a database for further analysis.
 
-\subsection{Identity Theft}
+\subsection{Automated Identity Theft}
 Identity theft is the intentional use of the victim's identity to gain an
 advantage. Authors of~\cite{bilge2009all} created two attacks - profile cloning
 and cross-site profile cloning, targeting five social network sites including
@@ -260,10 +259,11 @@ or astroturfing to gain advantage.
 Astroturfing is an act of creating grassroot movement that are in reality
 carried out by a single entity, effectively spreading misinformation to
 legitimate users. It relies on the ability to create sybils in the underlying
-social network. This type of attack is especially effective in social networks
-such as Twitter where a lot of the social interaction such as sending messages
-happen in the public.
+social network. 
+The 2010 Massachusetts senate race mentioned in the introduction is an example
+of such an attack.
 
+\begin{comment}
 In the 2010 Massachusetts senate race, Mustafaraj and Metaxas found evidence
 that Republican campaigners created fake Twitter accounts and used them to send
 spam. The spam caused Google real-time search results to tip in their favour
@@ -271,12 +271,14 @@ thus causing a spread of misinformation~\cite{mustafaraj2010obscurity}.
 Ratkiewicz et el. suggest that this type of attack can be mounted cheaply and
 may have a larger influence than traditional
 advertising~\cite{ratkiewicz2011truthy}.
+\end{comment}
 
-The Truthy system~\cite{ratkiewicz2011truthy} is a web service that perform
-real-time analysis of Twitter to detect political astroturfing. In the 2010
-U.S. midterm election, the authors found accounts which generated a lot of
-retweets but no original tweets. More importantly, they uncovered a network of
-bot accounts that injected thousands of tweets to smear the Democratic candidate.
+Shortly after, Ratkiewicz et el. published their work on the Truthy
+system~\cite{ratkiewicz2011truthy}---a web service that perform real-time
+analysis of Twitter to detect political astroturfing in the 2010 U.S. midterm
+election. The authors found accounts which generated a lot of retweets but no
+original tweets. More importantly, they uncovered a network of bot accounts that
+injected thousands of tweets to smear the Democratic candidate.
 
 In 2012, Wang et el. investigated two of the largest crowdturfing (crowdsourced
 astroturfing) platforms in China---Zhubajie and Sandaha. One of their services

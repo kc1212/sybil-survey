@@ -2,10 +2,10 @@ The sybil attack is coined by Douceur\cite{douceur2002sybil} in 2002 in the
 context of P2P (peer-to-peer) systems. But people were well aware of it before
 2002. For instance in 2001, Friedman and Resnick used the term ``cheap
 pseudonyms'' to describe sybils~\cite{resnick2001social}. In this section, we
-introduce the key theoretical results and the definitions used in the remainder
-of this survey.
+introduce the models and definitions used in the remainder of this survey, as
+well as some key theoretical results.
 
-\subsection{Theoretical Results}\label{sec:sybil-theory}
+\subsection{Definitions}
 Douceur defined the sybil attack as forging multiple identities under the same
 entity\cite{douceur2002sybil}. An entity can be for example a physical user of
 the system and identities are how entities present themselves to the system.
@@ -16,49 +16,17 @@ Byzantine fault\cite{lamport1982byzantine}. In this work, we use identity, node
 and peer interchangeably.
 % We use these terms in the remainder of the survey.
 
-The author modelled the system as a general distributed computing environment
-where there is no constraint on the topology, every node has limited
-computational resources and messages are guaranteed to be delivered. Under this
-model, the author proved that the sybil attack is always possible without a
-central, trusted authority.
+\subsection{Anonymous P2P Model}
+The first model is proposed by Douceur, the system is modelled as a general
+distributed computing environment where there is no constraint on the topology,
+every node has limited computational resources and messages are guaranteed to be
+delivered~\cite{douceur2002sybil}. Only some techniques are able to defend
+against sybils under this model, we describe them in \autoref{sec:network-flow}
 
-% Preventing the sybil attack is in fact a lot
-% more difficult because peer-to-peer systems often do not have a central, trusted
-% authority.
-
-Cheng and Friedman proved a similar result in the context of reputation
-systems\cite{cheng2005sybilproof}. Reputation systems are commonly used in
-e-commerce websites and the internet in general, where identities are rewarded
-by their good behaviour or usefulness. Google's PageRank\cite{page1999pagerank}
-is an example of a reputation system, where many links to a website makes it
-more reputable. It was formally proven that peer-to-peer reputation systems
-cannot be made to prevent the sybil attack, it is only possible prevent it by
-using trusted parties.
-
-% Cheng and Friedman proved an important result regarding the sybil attack in
-% reputation systems\cite{cheng2005sybilproof}. Reputation systems are commonly
-% used in MANET, e-commerce and the internet in general, where entities are
-% rewarded by their good behaviour and penalised otherwise. Google's
-% PageRank\cite{page1999pagerank} is an example of a reputation system, where a
-% large number of links to a website makes it more reputable. Cheng and Friedman
-% classified reputation systems into two categories,
-% \begin{enumerate}
-% \item symmetric reputation systems where the reputation score only depends on
-%   the network topology, popular reputation mechanisms such as
-%   PageRank\cite{page1999pagerank} and EigenTrust\cite{kamvar2003eigentrust} are
-%   examples of symmetric reputation systems, and
-%     \item asymmetric reputation systems where there some nodes are trusted and
-%       reputation scores are propagated through the trusted nodes, most OSN are
-%       examples of asymmetric reputation systems.
-% \end{enumerate}
-% The authors formally proved that symmetric reputation systems are vulnerable to
-% the sybil attack. But in the asymmetric case, it is possible to construct a
-% sybil-proof reputation system.
-
-\subsection{Model and Definitions}
-One of the common models, especially in the context of online social networks,
-is shown in \autoref{fig:attack-edge}. It is first introduced by the authors of
-SybilGuard\cite{yu2006sybilguard}. Nodes inside the left region are identities
+\subsection{Social Network Model}
+The more common model, especially in the context of social networks, is shown in
+\autoref{fig:attack-edge}. It is first introduced by the authors of
+SybilGuard~\cite{yu2006sybilguard}. Nodes inside the left region are identities
 created by honest entities, the edges connecting those nodes are real-world
 trust relationships. The right region contains the sybils and they are connected
 with fake relationships. The edges connecting the two regions are called
@@ -81,10 +49,40 @@ describe in \autoref{sec:defences}.
   \label{fig:attack-edge}
 \end{figure}
 
-A less common model is the aforementioned P2P network model \cite{douceur2002sybil}.
-It does not have a notion of friendship, so sybils are free to attach themselves
-with any node in the network. Only some techniques are able to defend against
-sybils under this model, we describe them in \autoref{sec:network-flow}.
+\subsection{Theoretical Results}\label{sec:sybil-theory}
+Under the anonymous P2P model, Douceur show that preventing the sybil attack is
+in fact a lot more difficult because P2P systems often do not have a central,
+trusted authority. In fact, the author prove that is it impossible to completely
+prevent the sybil attack in a pure P2P environment.
+
+Cheng and Friedman proved a very similar result in the context of reputation
+systems~\cite{cheng2005sybilproof}. Reputation systems are commonly used in
+e-commerce websites and the internet in general, where identities are rewarded
+by their good behaviour or usefulness. Google's PageRank~\cite{page1999pagerank}
+is an example of a reputation system, where many links to a website makes it
+more reputable. It was formally proven that P2P reputation systems cannot be
+made to prevent the sybil attack, it is only possible prevent it by using a
+central, trusted authority.
+
+% Cheng and Friedman proved an important result regarding the sybil attack in
+% reputation systems\cite{cheng2005sybilproof}. Reputation systems are commonly
+% used in MANET, e-commerce and the internet in general, where entities are
+% rewarded by their good behaviour and penalised otherwise. Google's
+% PageRank\cite{page1999pagerank} is an example of a reputation system, where a
+% large number of links to a website makes it more reputable. Cheng and Friedman
+% classified reputation systems into two categories,
+% \begin{enumerate}
+% \item symmetric reputation systems where the reputation score only depends on
+%   the network topology, popular reputation mechanisms such as
+%   PageRank\cite{page1999pagerank} and EigenTrust\cite{kamvar2003eigentrust} are
+%   examples of symmetric reputation systems, and
+%     \item asymmetric reputation systems where there some nodes are trusted and
+%       reputation scores are propagated through the trusted nodes, most OSN are
+%       examples of asymmetric reputation systems.
+% \end{enumerate}
+% The authors formally proved that symmetric reputation systems are vulnerable to
+% the sybil attack. But in the asymmetric case, it is possible to construct a
+% sybil-proof reputation system.
 
 %%% Local Variables:
 %%% mode: latex

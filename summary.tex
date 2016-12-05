@@ -3,20 +3,20 @@ sybil attack. We demonstrate the severeness of the sybil attack by showing the
 harm it is causing in the real world. Social networks are flooded with sybils
 making real news and fake news almost indistinguishable. Users of Tor are
 monitored by sybils hidden in the network trying to reveal their real identity.
-Then we define the sybil attack using its original definition from
-Douceur~\cite{douceur2002sybil} and introduce one of the most common
-models---the social graph. Next, we zoom into five different systems---online
-social networks, file sharing networks, reputation systems, wireless ad-hoc
-networks and the Bitcoin network---and look the various types of attacks that
-can be mounted. There are a number of alarming attacks, for instance automated
-identity theft, self-promotion and so on. The main part of our work summarises
-the defence mechanisms. Earlier defence mechanisms primarily work by limiting
-the number of identities or the rate at which they are created. The introduction
-of BarterCast inspired many network-flow based techniques for limiting the
-influence of sybils. Similarly, the introduction of SybilGuard stimulated a lot
-of work on random-walk based techniques for identifying sybils. Hybrids are also
-available, for instance GateKeeper is a hybrid of the two aforementioned
-techniques. Finally, we compare and contrast our work with existing surveys.
+We illustrate the severity of the attack further by demonstrating the simplicity
+of purchasing thousands of fake Twitter followers. Next, we define the sybil
+attack using its original definition from Douceur~\cite{douceur2002sybil} and
+introduce one of the most common models---the social graph. With the necessary
+background, we describe the derivatives of the sybil attack, some alarming
+attack include self-promoting and identity theft. The main part of our work
+summarises the defence mechanisms. Earlier defence mechanisms primarily work by
+limiting the number of identities or the rate at which they are created. The
+introduction of BarterCast inspired many network-flow based techniques for
+limiting the influence of sybils. Similarly, the introduction of SybilGuard
+stimulated a lot of work on random-walk based techniques for identifying sybils
+in social networks. Hybrids are also available, for instance GateKeeper is a
+hybrid of the two aforementioned techniques. Finally, we compare and contrast
+our work with existing surveys.
 
 We hope this work demonstrates the alarming consequences of the sybil attack and
 many ingenious ways to defend against it. However, there does not exist a
@@ -25,9 +25,9 @@ assumptions in order to perform well. When the assumptions are violated, which
 can be the case due to the dynamic structure of real networks, they become
 ineffective (demonstrated in~\cite{liu2016smartwalk}). Moreover, almost no
 defence mechanisms considers the temporal dynamics~\cite{liu2015exploiting},
-i.e. the attacker may modify the attack edges or its the social graph in the
-sybil region over time. Lin et el. show the attacker can ``greatly undermine the
-security guarantees'' of many defence mechanisms~\cite{liu2015exploiting}.
+that is when the attacker may modify the attack edges or its the social graph in
+the sybil region over time. Lin et el. show the attacker can ``greatly undermine
+the security guarantees'' of many defence mechanisms~\cite{liu2015exploiting}.
 
 Without a doubt, much work still needs to be done in order for the cyberspace to
 be free of the sybil attack. We hope this work serves as a cornerstone for the
