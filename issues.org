@@ -1,0 +1,24 @@
+* Structure
+** Should the experiment have its own section or under another subsection?
+** Model and definition section (3) is before the attacks section (4) but it is more relevant to the defences section (5) .
+* Experiment
+** The current experiment does not give novel results.
+** But if it did, then consider extending the experiment and moving it to a separate paper.
+** Consider looking at the graph properties of a much larger set of sybils or potential sybils.
+*** What's the clustering coefficient like?
+*** Does the node degrees follow the power law?
+*** Strongly connect components?
+** Find the accounts which the sybils are following or retweeting and look at those properties.
+*** This can be done by taking the set difference between known sybils and the accounts that the sybils are following.
+*** Do sybils follow and retweet famous/popular people?
+*** Is there an intersection between the followers of the famous/popuplar accounts the sybils in our set?
+* Methodology
+** How are the attacks/defences selected?
+** Is it reproducible?
+** For example, search on Scopus for papers under some keyword between some time period.
+* Storyline
+** Why did I do this work? 
+** Saying there does not exist a survey that covers both attacks and defences is not sufficient.
+* Take-home message
+** What is the take-home message, even if the reader did not read everything?
+** Should we recommend a particular defence mechanism?
