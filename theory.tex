@@ -1,11 +1,13 @@
+In this section, we introduce the models and definitions used to describe ths
+sybil attack, we use these in the remainder of the survey. Further, we give a
+few impossibility results to illustrate the difficulty of the sybil attack
+
+\subsection{Definitions}
 The sybil attack is coined by Douceur\cite{douceur2002sybil} in 2002 in the
 context of P2P (peer-to-peer) systems. But people were well aware of it before
 2002. For instance in 2001, Friedman and Resnick used the term ``cheap
-pseudonyms'' to describe sybils~\cite{resnick2001social}. In this section, we
-introduce the models and definitions used in the remainder of this survey, as
-well as some key theoretical results.
+pseudonyms'' to describe sybils~\cite{resnick2001social}. 
 
-\subsection{Definitions}
 Douceur defined the sybil attack as forging multiple identities under the same
 entity\cite{douceur2002sybil}. An entity can be for example a physical user of
 the system and identities are how entities present themselves to the system.
@@ -17,11 +19,14 @@ and peer interchangeably.
 % We use these terms in the remainder of the survey.
 
 \subsection{Anonymous P2P Model}
-The first model is proposed by Douceur, the system is modelled as a general
-distributed computing environment where there is no constraint on the topology,
-every node has limited computational resources and messages are guaranteed to be
-delivered~\cite{douceur2002sybil}. Only some techniques are able to defend
-against sybils under this model, we describe them in \autoref{sec:network-flow}
+The very first model on the sybil attack is proposed by Douceur. The system
+under attack is modelled as a general distributed computing environment where
+there is no constraint on the topology, every node has limited computational
+resources and messages are guaranteed to be delivered~\cite{douceur2002sybil}.
+Defending against the sybil attack is difficult under this model because nodes
+can communicate with any other node without authentication or authorisation.
+Only some techniques are able to defend against sybils under this model, we
+describe them in \autoref{sec:network-flow}.
 
 \subsection{Social Network Model}
 The more common model, especially in the context of social networks, is shown in
@@ -33,11 +38,13 @@ with fake relationships. The edges connecting the two regions are called
 \emph{attack edges}. These can be created by tricking an honest user to befriend
 a sybil, stealing an honest user's account and so on. We call the nodes in the
 honest region that has one or more attack edges \emph{gullible nodes} or
-\emph{victim nodes}. If malicious users create too many sybils, then the graph
-will begin to have a quotient cut\footnote{Removing the attack edges will
-  disconnect a large number of nodes from the social graph.}. Many sybil defence
-mechanisms rely on the fact that attack edges are difficult to create as we will
-describe in \autoref{sec:defences}.
+\emph{victim nodes}. An important property of this model is that the number of
+attack edges is not proportional to the number of sybils, but they are
+proportional to the number of honest nodes. So if attackers create too many
+sybils, then the graph will begin to have a quotient cut\footnote{Removing the
+  attack edges will disconnect a large number of nodes from the social graph.}.
+Many sybil defence mechanisms rely on the fact that attack edges are difficult
+to create as we will describe in \autoref{sec:defences}.
 
 \begin{figure}
   \centering
@@ -49,7 +56,7 @@ describe in \autoref{sec:defences}.
   \label{fig:attack-edge}
 \end{figure}
 
-\subsection{Theoretical Results}\label{sec:sybil-theory}
+\subsection{Impossibility Results}\label{sec:sybil-theory}
 Under the anonymous P2P model, Douceur show that preventing the sybil attack is
 in fact a lot more difficult because P2P systems often do not have a central,
 trusted authority. In fact, the author prove that is it impossible to completely
