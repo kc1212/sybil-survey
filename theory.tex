@@ -2,6 +2,16 @@ In this section, we introduce the models and definitions used to describe ths
 sybil attack, we use these in the remainder of the survey. Further, we give a
 few impossibility results to illustrate the difficulty of the sybil attack
 
+\begin{figure}
+  \centering
+  \includegraphics[width=\linewidth]{attack_edges}
+  \caption{The model in many sybil defence mechanisms can be seen as a social
+    graph that is partitioned into a sybil region and an honest region. The two
+    regions are connected by \emph{attack edges}. Note that in general there may
+    be multiple honest regions multiple sybil region. }
+  \label{fig:attack-edge}
+\end{figure}
+
 \subsection{Definitions}
 The sybil attack is coined by Douceur\cite{douceur2002sybil} in 2002 in the
 context of P2P (peer-to-peer) systems. But people were well aware of it before
@@ -45,16 +55,6 @@ sybils, then the graph will begin to have a quotient cut\footnote{Removing the
   attack edges will disconnect a large number of nodes from the social graph.}.
 Many sybil defence mechanisms rely on the fact that attack edges are difficult
 to create as we will describe in \autoref{sec:defences}.
-
-\begin{figure}
-  \centering
-  \includegraphics[width=\linewidth]{attack_edges}
-  \caption{The model in many sybil defence mechanisms can be seen as a social
-    graph that is partitioned into a sybil region and an honest region. The two
-    regions are connected by \emph{attack edges}. Note that in general there may
-    be multiple honest regions multiple sybil region. }
-  \label{fig:attack-edge}
-\end{figure}
 
 \subsection{Impossibility Results}\label{sec:sybil-theory}
 Under the anonymous P2P model, Douceur show that preventing the sybil attack is

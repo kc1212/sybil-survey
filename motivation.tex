@@ -1,7 +1,10 @@
 We begin our survey by showing some alarming sybil attacks happening in the
-real-world. Social network and micro-blogging websites are popular platforms for
-organisations to improve public relations and their reputation, but they are
-also platforms to spread propaganda. 
+real-world. First, we summarise a few amusing results from external studies,
+specifically on the convenience and the scale of the sybil attack. Next, we
+describe our experimental study on fake Twitter accounts.
+
+\subsection{External Studies}
+\label{sec:external-studies}
 
 \begin{figure}
   \centering
@@ -32,14 +35,14 @@ services.
 SadBotTrue and its related website Socialpuncher publishes studies on social
 media fraud. Two of their studies are particularly useful for demonstrating the
 scale of the sybil attack and the obliviousness of Twitter. Firstly, there exist
-a botnet that consist of 3 million accounts. Since their creation, they
+a sybil group that consist of 3 million accounts. Since their creation, they
 generated 2.6 billion tweets. Surprisingly, all the 3 million accounts were
 created on the same day---22/10/2013, and the account names are simply numbered
 sequentially~\cite{sadbottrue}. Such an obvious activity should be easily
 detectable by Twitter, but these accounts are still not closed at the time of
 writing. Secondly, the top-100 Twitter users have 523 million unique followers
-between them, but 310 million are bots, that is almost
-60\%~\cite{socialpuncher}. Suppose the bots all belong to the same attacker,
+between them, but 310 million are sybils, that is almost
+60\%~\cite{socialpuncher}. Suppose the sybils all belong to the same attacker,
 then they can effectively suppress the opinions of the real users.
 
 Clearly, the defence mechanisms employed by popular social network websites are
@@ -49,82 +52,105 @@ our right to freedom of speech.
 
 Speaking of censorship, around a million~\cite{tormetric} people use Tor (The
 Onion Router)~\cite{dingledine2004tor} to access the uncensored internet when
-living in authoritarian regimes such as China, or uphold their privacy from
-illegal mass surveillance by intelligence agencies. Unfortunately, Tor suffered
-a sybil attack. In January 2014, 115 bogus relays joined the Tor network. Six months
-later, it was discovered that those relays were using a protocol vulnerability
-to deanonymise users and find the location of hidden services. It is unclear to
-the Tor developers which users are affected or what information was retrieved,
-thus it is assumed that users who used Tor between that period are all
-affected~\cite{torsybil}. In fact, Tor depends on the fact that majority of the
-relays are good to guarantee anonymity with a high probability. If the network
-is infiltrated by numerous of sybils then users can be easily
-deanonymised.
+living in authoritarian regimes such as China, or wish to uphold their privacy
+from illegal mass surveillance by intelligence agencies. Unfortunately, Tor
+suffered a sybil attack. In January 2014, 115 bogus relays joined the Tor
+network. Six months later, it was discovered that those relays were using a
+protocol vulnerability to deanonymise users and find the location of hidden
+services. It is unclear to the Tor developers which users are affected or what
+information was retrieved, thus it is assumed that users who used Tor between
+that period are all affected~\cite{torsybil}. In fact, Tor depends on the fact
+that majority of the relays are good to guarantee anonymity with a high
+probability. If the network contains a large proportion of sybils, then users
+can be easily deanonymised.
 
+\subsection{Experiment}
+In this section, we report our experience with buying fake Twitter accounts and
+also the properties of those accounts. Twitter is selected for two reasons, (1)
+it is one of the most popular social networks, (2) it is vulnerabile to the
+sybil attack as described in \autoref{sec:external-studies}.
+
+% We crawled Twitter to gain first-hand knowledge on the real-world sybils.
+% Twitter was selected because it has an easy-to-use API and it is one of the
+% major targets of sybils as mentioned at the top of this section.
+
+\subsubsection{Buying Experience}
+Before we can purchase sybils, we needed our own accounts. One was created on
+the 25th of November 2016. We made sure our account has 0 tweets and is not
+advertised in any other medium over the duration of this experiment. This
+guarantees that all of its followers are sybils.
+
+We purchased the ``1,000 Followers'' product from
+CoinCrack\footnote{\texttt{https://coincrack.com/}} for \$9. No information was
+asked except for an email address for them to deliver the receipt. Followers
+started coming in almost immediately after we made our purchase. This is
+especially interesting because we made the purchase using Bitcoin, but CoinCrack
+did not wait for 10 minutes for our transaction to be confirmed. No more than 1
+hour later, our brand new account with 0 tweets have accumulated 1,300
+followers. These followers are certainly sybils because on CoinCrack's website
+they state ``We broker followers in real time from dozens of engineers across
+the globe who specilize in creating/maintaining large amounts of Twitter
+profiles''.
+
+\subsubsection{Sybil Properties}
+Sybils themselves often form relationships so that they look like real users. To
+find these relationships, we crawled our followers recursively for 72 hours
+using
+\verb!tweetf0rm!\footnote{\texttt{https://github.com/bianjiang/tweetf0rm}}. We
+obtained 3 million nodes and 6 million edges at the end of the crawl. Every node
+represents an account and every edge represents a ``following'' relationship. It
+is certainly untrue that all 3 million nodes are sybils. But real users are
+unlikely to follow fake accounts that do not create interesting or original
+content, so for this work we assume the majority of them are sybils.
+
+\autoref{fig:twitter-dd} shows the degree distribution graph. The majority of
+the nodes, between $10^4$ and $10^6$ on the $y$-axis, have less than 10
+followers. But a few accounts have a large number of followers, some of them are
+in the order of 100,000. This raises the following question. Are these
+``popular'' accounts truely sybils? To answer this, we inspect a few of these
+accounts manually. What we discovered was that these ``popular'' accounts have
+no meaningful or original tweets. Furthermore, they are created very recently,
+some of them are as recent as November 2016. For instance,
+\verb!@gf1av!\footnote{\texttt{https://twitter.com/gf1av}} joined Twitter in
+November 2016 and has over 174K followers at the time of writing. Its tweets are
+either retweets or meaningless sentences such as ``I love twitter so much''. In
+fact, it is one of the followers of our account, so it must be a sybil. This is
+evidence that ``popular'' accounts can also be sybils.
+
+Now we switch our attention to the shape of the graph. It is a log-log graph,
+where the ``straight'' line is the best fit line using the function $p(x) =
+ax^k$, which is a power-law function. The degree distribution certainly does not
+follow $p(x)$ closely. But to a first approximation, they do share some similar
+properties, for example the decreasing trend. Note that the points with few
+followers have little to no effect on $a$ or $k$ of $p(x)$, because the squared
+residuals are low\footnote{The curve fitting is done in gnuplot, it uses the
+  least-squares method, which uses squared residuals.}. Having a power-law
+degree distribution is an indication that it is a real-world network. Since many
+other networks such as the World-Wide Web, biological networks and other social
+networks also have the same property~\cite{girvan2002community}. We do not have
+a verifiable explination for this property, but we speculate that it is because
+the attackers want to avoid detection, so they structure their sybil group in a
+way that look like a group of real users.
+
+% transitivity = 1
+% we only show a small portion of all the sybils
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\linewidth]{twitter_dd}
+  \caption{Graph of degree distribution for a graph with 3,248,093 nodes and
+    6,062,427 edges. The average degree is 3.7. The number of nodes greater than
+    the average is 120,075. The ``straight'' line is a best fit line, computed
+    using gnuplot.}
+  \label{fig:twitter-dd}
+\end{figure}
+
+\subsection{Summary}
 We hope these examples demonstrate a big problem with the popular social network
 websites and anonymous communication tool we use today, where a lot of sybils
 controlled by an attacker can censor content and track user behaviour. In
 \autoref{sec:attacks}, we zoom in on the practical attacks and explain them in
 further detail.
-
-\subsection{Experiment}
-We crawled Twitter to gain first-hand knowledge on the real-world sybils.
-Twitter was selected because it has an easy-to-use API and it is one of the
-major targets of sybils as mentioned at the top of this section.
-
-\subsubsection{Setup}
-A Twitter account was created on 25th of November 2016. We purchased the ``1,000
-Followers'' product from CoinCrack\footnote{\texttt{https://coincrack.com/}} for
-\$9. We made sure our account has 0 tweets and is not advertised in any other
-medium, this guarantees that all of its followers are sybils. Followers started
-coming in almost immediately after we made our purchase. No more than 1 hour
-later, our brand new account with 0 tweets have accumulated 1,300 followers. To
-find their relationships, we crawled the followers of sybils for 72 hours using
-\verb!tweetf0rm!\footnote{\texttt{https://github.com/bianjiang/tweetf0rm}}
-recursively for a depth of three---more than enough for our analysis below.
-% We did not crawl 
-
-\subsubsection{Results and Analysis}
-We obtained 3 million nodes and 6 million edges by the end of crawling period.
-We only consider the known sybils (the followers of our account) for two reasons.
-(1) There is no guarantee how many of those 3 million nodes are actually sybils.
-(2) Graph visualisation software cannot handle this volume of data under a
-reasonable amount of time and computational resources.
-% (3) hair-ball
-\autoref{fig:twitter-graph} shows the result visualised using
-Gephi~\cite{bastian2009gephi}. In particular, we use the OpenOrd layout
-algorithm~\cite{martin2011openord} to capture the overall structure of the
-graph. It structures the layout using hierarchical clustering so that we can
-clearly see the communities. We observe the following properties.
-\begin{enumerate}
-  \item Many sybils are connected with each other, and many of them form a large
-    community. This is most likely because the sybils need to be made to look like
-    humans so that they can avoid detection. An account that follows thousands of
-    users but has 0 followers would look suspicious.
-  \item There exist 4 ``super sybils'' (large purple nodes at the centre of the
-    graph) and they each have over 1000 followers, so they are connected to
-    almost all the other sybils. One of them is
-    \verb!@gf1av!\footnote{\texttt{https://twitter.com/gf1av}}, it also joined
-    in November 2016 and has over 174K followers at the time of writing. We do
-    not know the exact reason for this property, it may be another strategy to
-    avoid detection.
-  \item The ``1,000 Followers'' service is the cheapest Twitter service, so the
-    attacker has many more sybils than what is pictured. Hence, the smaller
-    communities may be in fact parts of a larger community.
-\end{enumerate}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=\linewidth]{twitter_graph}
-  \caption{Visualisation of the relationships of the sybils. Dark/light nodes
-    are nodes with a high/low degree.}
-  \label{fig:twitter-graph}
-\end{figure}
-
-From the results we see the sybils do not have the same characteristics, and
-more importantly they form communities within themselves. In
-\autoref{sec:defences}, we describe how to leverage the community property to
-detect sybils or create sybil-resistant applications.
 
 %%% Local Variables:
 %%% mode: latex
