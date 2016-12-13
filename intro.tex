@@ -15,24 +15,24 @@ privacy, it also opens an alleyway for attackers.
 A recent article in the Atlantic describes how fake Twitter accounts are shaping
 the 2016 US presidential election~\cite{atlantictwitterbots}. Over a third of
 pro-Trump tweets and almost a fifth of pro-Clinton tweets, totalling at about 1
-million, came from bots. These cases date back to 2010. In the 2010
-Massachusetts senate race, researchers found evidence that Republican
-campaigners also used fake accounts to manipulate Google real-time search
-results to tip in their favour, effectively causing a spread of
-misinformation~\cite{mustafaraj2010obscurity}. These are examples of the sybil
-attacks and they are a threat to democracy because opinions of real users are
-eclipsed by an overwhelming number of fake accounts.
+million, came from sybils\footnote{In this work we use ``sybil'' as a noun to
+  mean a fake identity.}. Even earlier, in the 2010 Massachusetts senate race,
+researchers found evidence that Republican campaigners also used fake accounts
+to manipulate Google real-time search results to tip in their favour,
+effectively causing a spread of misinformation~\cite{mustafaraj2010obscurity}.
+These are examples of the sybil attacks and they are a threat to democracy
+because opinions of real users are eclipsed by an overwhelming number of fake
+accounts.
 
 The sybil attack, first described by Douceur~\cite{douceur2002sybil}, is an
-attack where an entity can assume multiple identities or sybils\footnote{In this
-  work we use ``sybil'' as a noun to mean a fake identity.}, and then attack
-either another entity or undermine the whole system. For example, a malicious
-Twitter user can create many fake identities and have them follow his real
-identity, thus creating a false reputation. It is one of the most important
-attacks because it leads to numerous consequences including but not limited to
-spreading false information, identity theft~\cite{bilge2009all} and ballot
-stuffing~\cite{bhattacharjee2005avoiding}. Furthermore, to the best of our
-knowledge, there is no general solution for preventing the sybil attack.
+attack where an entity can assume multiple identities, or sybils, and then
+attack either another entity or undermine the whole system. For example, a
+malicious Twitter user can create many fake identities and have them follow his
+real identity, thus creating a false sense reputation. It is one of the most
+important attacks because it leads to numerous consequences including but not
+limited to spreading false information, identity theft~\cite{bilge2009all} and
+ballot stuffing~\cite{bhattacharjee2005avoiding}. Furthermore, to the best of
+our knowledge, there is no general solution for preventing the sybil attack.
 
 There has been over a decade of work on the sybil attack from both
 perspective---attackers and defenders. Many previous surveys focus only on the

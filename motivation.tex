@@ -3,9 +3,6 @@ real-world. First, we summarise a few amusing results from external studies,
 specifically on the convenience and the scale of the sybil attack. Next, we
 describe our experimental study on fake Twitter accounts.
 
-\subsection{External Studies}
-\label{sec:external-studies}
-
 \begin{figure}
   \centering
   \includegraphics[width=\linewidth]{boostlikes}
@@ -20,6 +17,9 @@ describe our experimental study on fake Twitter accounts.
   \label{fig:socialformulae}
 \end{figure*}
 
+\subsection{External Studies}
+\label{sec:external-studies}
+
 In the introduction we showed how Twitter is used to manipulate public opinion
 in elections. But this capability is not only accessible to campaigners with a
 large budget. There are marketplaces where anybody can purchase false reputation
@@ -27,9 +27,7 @@ scores such as Twitter followers. BoostLikes shown in~\autoref{fig:boostlikes}
 is a professionally presented website, it offers a large range of services
 including Facebook likes, Twitter followers, Instagram followers and YouTube
 views. SocialFormulae (\autoref{fig:socialformulae}) is a similar service but at
-a much lower price point, one thousand Twitter followers is only \$9.99. There
-can be little doubt that those companies use automated bots to provide their
-services.
+a much lower price point, one thousand Twitter followers is only \$9.99. 
 % one thousand likes cost \$71 at the time of writing. 
 
 SadBotTrue and its related website Socialpuncher publishes studies on social
@@ -40,7 +38,7 @@ generated 2.6 billion tweets. Surprisingly, all the 3 million accounts were
 created on the same day---22/10/2013, and the account names are simply numbered
 sequentially~\cite{sadbottrue}. Such an obvious activity should be easily
 detectable by Twitter, but these accounts are still not closed at the time of
-writing. Secondly, the top-100 Twitter users have 523 million unique followers
+writing. Secondly, the top--100 Twitter users have 523 million unique followers
 between them, but 310 million are sybils, that is almost
 60\%~\cite{socialpuncher}. Suppose the sybils all belong to the same attacker,
 then they can effectively suppress the opinions of the real users.
@@ -114,8 +112,8 @@ some of them are as recent as November 2016. For instance,
 \verb!@gf1av!\footnote{\texttt{https://twitter.com/gf1av}} joined Twitter in
 November 2016 and has over 174K followers at the time of writing. Its tweets are
 either retweets or meaningless sentences such as ``I love twitter so much''. In
-fact, it is one of the followers of our account, so it must be a sybil. This is
-evidence that ``popular'' accounts can also be sybils.
+fact, it is one of the followers of our account. These are evidences that
+``popular'' accounts can also be sybils.
 
 Now we switch our attention to the shape of the graph. It is a log-log graph,
 where the ``straight'' line is the best fit line using the function $p(x) =

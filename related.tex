@@ -12,31 +12,30 @@ time is to use a certificate authority. The surveyed defence mechanisms
 approximately cover sections \ref{sec:cert-authority},
 \ref{sec:resource-testing} and \ref{sec:registration-fee} in this work.
 
-Many more surveys were published after the introduction of OSN based sybil
-defences beginning with SybilGuard. Mohaisen and Kim surveyed certificate
-authority, resource testing and OSN (random walk) based
+Many more surveys were published after the introduction of social network and
+random walk based sybil defences beginning with SybilGuard. Mohaisen and Kim
+surveyed certificate authority, resource testing and social network based
 approaches~\cite{mohaisen2013sybil}. They also compare the assumptions,
 performance and many other properties. Rakesh et el. made a similar
 survey~\cite{rakesh2014survey}, they discuss six types of attacks in addition to
 describing the defence mechanisms. Our work can be seen as an extended work of
 these surveys---in terms of the possible attacks, and the defence mechanisms.
 
-Koll et el. surveyed 8 defence mechanisms for OSN and analysed them in much more
-depth~\cite{koll2014state}. The authors experimentally show that increasing the
-number of attack edges indeed makes the defence mechanisms less effective. More
-interestingly, sybil tolerance systems\footnote{Sybil tolerance systems are
-  those that are designed to limit the effectiveness of the sybils rather than
-  detecting them.} such as Ostra (discussed in \autoref{sec:content-based}) and
-SumUp (discussed in \autoref{sec:network-flow}) can still be effective when the
-number of attack edges increase. The authors advise future defence mechanism
-designers to use information in addition to simply the graph structure to detect
-or tolerate sybils. In comparison, our work do not go into the same level of
-depth, but provide a much broader spectrum of defence mechanisms.
+Koll et el. surveyed 8 defence mechanisms for social networks and analysed them
+in much more depth~\cite{koll2014state}. The authors experimentally show that
+increasing the number of attack edges indeed makes the defence mechanisms less
+effective. More interestingly, sybil tolerance systems such as Ostra (discussed
+in \autoref{sec:content-based}) and SumUp (discussed in
+\autoref{sec:network-flow}) can still be effective when the number of attack
+edges increase. The authors advise future defence mechanism designers to use
+information in addition to simply the graph structure to detect or tolerate
+sybils. In comparison, our work do not go into the same level of depth, but
+provide a much broader spectrum of defence mechanisms.
 
 Surveys of reputation often cover sybil attacks too~\cite{marti2006taxonomy,
   hoffman2009survey, koutrouli2012taxonomy, selvaraj2012survey}. Although they
-do not cover sybil attack in depth, these surveys provide a lot of insight from
-a different perspective, especially for the possible attacks in reputation
+do not cover the sybil attack in depth, these surveys provide a lot of insight
+from a different perspective, especially for the possible attacks in reputation
 systems.
 
 %%% Local Variables:

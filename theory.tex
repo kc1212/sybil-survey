@@ -13,19 +13,19 @@ few impossibility results to illustrate the difficulty of the sybil attack
 \end{figure}
 
 \subsection{Definitions}
-The sybil attack is coined by Douceur\cite{douceur2002sybil} in 2002 in the
+The sybil attack is coined by Douceur~\cite{douceur2002sybil} in 2002 in the
 context of P2P (peer-to-peer) systems. But people were well aware of it before
 2002. For instance in 2001, Friedman and Resnick used the term ``cheap
-pseudonyms'' to describe sybils~\cite{resnick2001social}. 
+pseudonyms'' to describe sybils~\cite{resnick2001social}.
 
-Douceur defined the sybil attack as forging multiple identities under the same
-entity\cite{douceur2002sybil}. An entity can be for example a physical user of
-the system and identities are how entities present themselves to the system.
-Thus, a local entity has no direct knowledge of remote entities, only their
-identities. The forged identities do not necessarily follow the protocol
-specified by the underlying network, i.e. they assume the characteristics of
-Byzantine fault\cite{lamport1982byzantine}. In this work, we use identity, node
-and peer interchangeably.
+Douceur defined the sybil attack as forging multiple \emph{identities} under the
+same \emph{entity}~\cite{douceur2002sybil}. An entity can be for example a
+physical user of the system and identities are how entities present themselves
+to the system. Thus, a local entity has no direct knowledge of remote entities,
+only their identities. The forged identities do not necessarily follow the
+protocol specified by the underlying network, i.e. they assume the
+characteristics of Byzantine fault~\cite{lamport1982byzantine}. In this work, we
+use identity, node and peer interchangeably.
 % We use these terms in the remainder of the survey.
 
 \subsection{Anonymous P2P Model}
@@ -35,8 +35,8 @@ there is no constraint on the topology, every node has limited computational
 resources and messages are guaranteed to be delivered~\cite{douceur2002sybil}.
 Defending against the sybil attack is difficult under this model because nodes
 can communicate with any other node without authentication or authorisation.
-Only some techniques are able to defend against sybils under this model, we
-describe them in \autoref{sec:network-flow}.
+% Only some techniques are able to defend against sybils under this model, we
+% describe them in \autoref{sec:network-flow}.
 
 \subsection{Social Network Model}
 The more common model, especially in the context of social networks, is shown in
@@ -51,16 +51,16 @@ honest region that has one or more attack edges \emph{gullible nodes} or
 \emph{victim nodes}. An important property of this model is that the number of
 attack edges is not proportional to the number of sybils, but they are
 proportional to the number of honest nodes. So if attackers create too many
-sybils, then the graph will begin to have a quotient cut\footnote{Removing the
-  attack edges will disconnect a large number of nodes from the social graph.}.
-Many sybil defence mechanisms rely on the fact that attack edges are difficult
-to create as we will describe in \autoref{sec:defences}.
+sybils, then the graph will begin to have a quotient cut, that is removing the
+attack edges will disconnect a large number of nodes from the social graph. Many
+sybil defence mechanisms rely on the fact that attack edges are difficult to
+create as we will describe in \autoref{sec:defences}.
 
 \subsection{Impossibility Results}\label{sec:sybil-theory}
 Under the anonymous P2P model, Douceur show that preventing the sybil attack is
-in fact a lot more difficult because P2P systems often do not have a central,
-trusted authority. In fact, the author prove that is it impossible to completely
-prevent the sybil attack in a pure P2P environment.
+a lot more difficult because P2P systems often do not have a central, trusted
+authority. In fact, the author prove that is it impossible to completely prevent
+the sybil attack in a pure P2P environment~\cite{douceur2002sybil}.
 
 Cheng and Friedman proved a very similar result in the context of reputation
 systems~\cite{cheng2005sybilproof}. Reputation systems are commonly used in
