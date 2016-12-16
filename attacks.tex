@@ -55,9 +55,12 @@ fixed to 1 MB and block generation takes about 10 minutes. Thus, there is an
 upper bound for the number of transactions that the Bitcoin network can handle
 per second (approximately 7 at the time of writing~\cite{bitcointps}). Flooding
 the network with useless transactions will cause its performance to drop.
-Decreasing the scalability even more. Fortunately, Bitcoin incorporates a
-transaction fee, so spammers cannot abuse the network
-indefinitely~\cite{bitcoinspam}.
+Decreasing the scalability even more. This exact attack was observed in 2015,
+the attacker performed numerous small transactions which resulted in a queue of
+88,000 transactions in the memory of many Bitcoin nodes, this then caused the
+total number of Bitcoin nodes to drop by 10\% because some nodes ran out of
+memory~\cite{bitcoinspam2015}. Fortunately, Bitcoin incorporates a transaction
+fee, so spammers cannot abuse the network indefinitely~\cite{bitcoinspam}.
 
 
 \subsection{Slandering}
