@@ -6,7 +6,8 @@ describe our experimental study on fake Twitter accounts.
 \begin{figure}
   \centering
   \includegraphics[width=\linewidth]{boostlikes}
-  \caption{Screenshot of the Facebook likes service page of boostlikes.com.}
+  \caption{Screenshot of a commmercial service for buying fake Facebook likes
+    called boostlikes.com.}
   \label{fig:boostlikes}
 \end{figure}
 
@@ -52,7 +53,7 @@ Speaking of censorship, around a million~\cite{tormetric} people use Tor (The
 Onion Router)~\cite{dingledine2004tor} to access the uncensored internet when
 living in authoritarian regimes such as China, or wish to uphold their privacy
 from illegal mass surveillance by intelligence agencies. Unfortunately, Tor
-suffered a sybil attack. In January 2014, 115 bogus relays joined the Tor
+suffered from a sybil attack. In January 2014, 115 bogus relays joined the Tor
 network. Six months later, it was discovered that those relays were using a
 protocol vulnerability to deanonymise users and find the location of hidden
 services. It is unclear to the Tor developers which users are affected or what
@@ -62,11 +63,11 @@ that majority of the relays are good to guarantee anonymity with a high
 probability. If the network contains a large proportion of sybils, then users
 can be easily deanonymised.
 
-\subsection{Experiment}
-In this section, we report our experience with buying fake Twitter accounts and
-also the properties of those accounts. Twitter is selected for two reasons, (1)
-it is one of the most popular social networks, (2) it is vulnerabile to the
-sybil attack as described in \autoref{sec:external-studies}.
+\subsection{Small Experiment}
+We show it takes less than one hour to obtain over 1000 sybils and investigate
+the properties of those sybils. Twitter is selected for two reasons, (1) it is
+one of the most popular social networks, (2) it is vulnerabile to the sybil
+attack as described in \autoref{sec:external-studies}.
 
 % We crawled Twitter to gain first-hand knowledge on the real-world sybils.
 % Twitter was selected because it has an easy-to-use API and it is one of the
@@ -84,49 +85,37 @@ asked except for an email address for them to deliver the receipt. Followers
 started coming in almost immediately after we made our purchase. This is
 especially interesting because we made the purchase using Bitcoin, but CoinCrack
 did not wait for 10 minutes for our transaction to be confirmed. No more than 1
-hour later, our brand new account with 0 tweets have accumulated 1,300
-followers. These followers are certainly sybils because on CoinCrack's website
-they state ``We broker followers in real time from dozens of engineers across
-the globe who specilize in creating/maintaining large amounts of Twitter
-profiles''.
+hour later, our fresh account with 0 tweets has accumulated 1,300 followers.
+These followers are sybils, because CoinCrack's website states ``We broker
+followers in real time from dozens of engineers across the globe who specilize
+in creating/maintaining large amounts of Twitter profiles''.
 
 \subsubsection{Sybil Properties}
-Sybils themselves often form relationships so that they look like real users. To
+Sybils themselves often form relationships in order to emulate real users. To
 find these relationships, we crawled our followers recursively for 72 hours
 using
 \verb!tweetf0rm!\footnote{\texttt{https://github.com/bianjiang/tweetf0rm}}. We
 obtained 3 million nodes and 6 million edges at the end of the crawl. Every node
-represents an account and every edge represents a ``following'' relationship. It
-is certainly untrue that all 3 million nodes are sybils. But real users are
-unlikely to follow fake accounts that do not create interesting or original
-content, so for this work we assume the majority of them are sybils.
+represents an account and every edge represents a ``following'' relationship.
+For example, if $A$ follows $B$ then $A$ has a directed edge to $B$. It is
+unlikely that all 3 million nodes are sybils. A reasonable assumption is that
+real users are unlikely to follow fake accounts because they do not create
+interesting or original content. Thus in this work we assume the majority of the
+3 million accounts are sybils.
 
-\autoref{fig:twitter-dd} shows the degree distribution graph. The majority of
-the nodes, between $10^4$ and $10^6$ on the $y$-axis, have less than 10
-followers. But a few accounts have a large number of followers, some of them are
-in the order of 100,000. This raises the following question. Are these
-``popular'' accounts truely sybils? To answer this, we inspect a few of these
-accounts manually. What we discovered was that these ``popular'' accounts have
-no meaningful or original tweets. Furthermore, they are created very recently,
-some of them are as recent as November 2016. For instance,
-\verb!@gf1av!\footnote{\texttt{https://twitter.com/gf1av}} joined Twitter in
-November 2016 and has over 174K followers at the time of writing. Its tweets are
-either retweets or meaningless sentences such as ``I love twitter so much''. In
-fact, it is one of the followers of our account. These are evidences that
-``popular'' accounts can also be sybils.
-
-Now we switch our attention to the shape of the graph. It is a log-log graph,
-where the ``straight'' line is the best fit line using the function $p(x) =
-ax^k$, which is a power-law function. The degree distribution certainly does not
-follow $p(x)$ closely. But to a first approximation, they do share some similar
-properties, for example the decreasing trend. Note that the points with few
-followers have little to no effect on $a$ or $k$ of $p(x)$, because the squared
-residuals are low\footnote{The curve fitting is done in gnuplot, it uses the
-  least-squares method, which uses squared residuals.}. Having a power-law
-degree distribution is an indication that it is a real-world network. Since many
-other networks such as the World-Wide Web, biological networks and other social
-networks also have the same property~\cite{girvan2002community}. We do not have
-a verifiable explination for this property, but we speculate that it is because
+Faloutsos et el.~\cite{faloutsos1999power} analysed the internet topology in
+1999 using log-log plots where the $x$-axis is the out-degree and the $y$-axis
+is the frequency. We use the a similar methodology to analyse the Twitter graph.
+The result is shown in \autoref{fig:twitter-outdeg}. The regression line (green)
+is in the form of $p(x) = ax^k$, which is a power-law function. To determine the
+goodness-of-fit, we compute the coefficient of determination $R^2$. $R^2$ is a
+value between 0 and 1, where 0 indicates no correlation and 1 indicates that the
+regression line perfectly fits the data. In this case $R^2 = 0.86$, which is an
+indication that the Twitter graph does have some properties of a power-law
+network. This is an interesting observation because many other networks such as
+the World-Wide Web, biological networks and other social networks also have the
+same property~\cite{faloutsos1999power, girvan2002community}. We do not have a
+verifiable explination for this property, but we speculate that it is because
 the attackers want to avoid detection, so they structure their sybil group in a
 way that look like a group of real users.
 
@@ -135,20 +124,11 @@ way that look like a group of real users.
 
 \begin{figure}
   \centering
-  \includegraphics[width=\linewidth]{twitter_dd}
-  \caption{Graph of degree distribution for a graph with 3,248,093 nodes and
-    6,062,427 edges. The average degree is 3.7. The number of nodes greater than
-    the average is 120,075. The ``straight'' line is a best fit line, computed
-    using gnuplot.}
-  \label{fig:twitter-dd}
+  \includegraphics[width=\linewidth]{twitter_outdeg}
+  \caption{Graph of out-degree distribution for a graph with 3,248,093 nodes and
+    6,062,427 edges.}
+  \label{fig:twitter-outdeg}
 \end{figure}
-
-\subsection{Summary}
-We hope these examples demonstrate a big problem with the popular social network
-websites and anonymous communication tool we use today, where a lot of sybils
-controlled by an attacker can censor content and track user behaviour. In
-\autoref{sec:attacks}, we zoom in on the practical attacks and explain them in
-further detail.
 
 %%% Local Variables:
 %%% mode: latex

@@ -29,12 +29,12 @@ use identity, node and peer interchangeably.
 % We use these terms in the remainder of the survey.
 
 \subsection{Anonymous P2P Model}
-The very first model on the sybil attack is proposed by Douceur. The system
-under attack is modelled as a general distributed computing environment where
-there is no constraint on the topology, every node has limited computational
-resources and messages are guaranteed to be delivered~\cite{douceur2002sybil}.
-Defending against the sybil attack is difficult under this model because nodes
-can communicate with any other node without authentication or authorisation.
+The system under attack is modelled as a general distributed computing
+environment where there is no constraint on the topology, every node has limited
+computational resources and messages are guaranteed to be
+delivered~\cite{douceur2002sybil}. Defending against the sybil attack is
+difficult under this model because nodes can communicate with any other node
+without authentication or authorisation.
 % Only some techniques are able to defend against sybils under this model, we
 % describe them in \autoref{sec:network-flow}.
 
@@ -62,14 +62,17 @@ a lot more difficult because P2P systems often do not have a central, trusted
 authority. In fact, the author prove that is it impossible to completely prevent
 the sybil attack in a pure P2P environment~\cite{douceur2002sybil}.
 
-Cheng and Friedman proved a very similar result in the context of reputation
+Cheng and Friedman proved two results in the context of reputation
 systems~\cite{cheng2005sybilproof}. Reputation systems are commonly used in
 e-commerce websites and the internet in general, where identities are rewarded
 by their good behaviour or usefulness. Google's PageRank~\cite{page1999pagerank}
 is an example of a reputation system, where many links to a website makes it
-more reputable. It was formally proven that P2P reputation systems cannot be
-made to prevent the sybil attack, it is only possible prevent it by using a
-central, trusted authority.
+more reputable. The first result is that symmetric reputation systems---that is
+when the reputation score does not depend on the names of the identities (this
+preserves anonymity)---cannot be made to prevent the sybil attack. The second
+result is for asymmetric reputation systems---that is when the reputation score
+for a node may be different depending on which node computed it---can be made to
+be sybil-resistent.
 
 % Cheng and Friedman proved an important result regarding the sybil attack in
 % reputation systems\cite{cheng2005sybilproof}. Reputation systems are commonly
