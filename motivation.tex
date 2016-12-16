@@ -110,14 +110,15 @@ The result is shown in \autoref{fig:twitter-outdeg}. The regression line (green)
 is in the form of $p(x) = ax^k$, which is a power-law function. To determine the
 goodness-of-fit, we compute the coefficient of determination $R^2$. $R^2$ is a
 value between 0 and 1, where 0 indicates no correlation and 1 indicates that the
-regression line perfectly fits the data. In this case $R^2 = 0.86$, which is an
-indication that the Twitter graph does have some properties of a power-law
-network. This is an interesting observation because many other networks such as
-the World-Wide Web, biological networks and other social networks also have the
-same property~\cite{faloutsos1999power, girvan2002community}. We do not have a
-verifiable explination for this property, but we speculate that it is because
-the attackers want to avoid detection, so they structure their sybil group in a
-way that look like a group of real users.
+regression line perfectly fits the data. In this case $R^2 = 0.86$, which
+indicates that the Twitter graph fits $p(x)$ reasonably well. We can also see
+this visually where the frequency is monotonically decreasing with respect to
+the out-degree. This is an interesting observation because many other networks
+such as the World-Wide Web, biological networks and other social networks also
+have the same property~\cite{faloutsos1999power, girvan2002community}. We do not
+have a verifiable explination for this property, but we speculate that it is
+because the attackers want to avoid detection, so they structure their sybil
+group in a way that look like a group of real users.
 
 % transitivity = 1
 % we only show a small portion of all the sybils
