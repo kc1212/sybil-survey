@@ -54,6 +54,13 @@
 \pagenumbering{arabic}
 \graphicspath{{./figures/}}
 
+% rotate column heading
+% https://tex.stackexchange.com/questions/32683/rotated-column-titles-in-tabular
+\usepackage{booktabs}
+\usepackage{xparse}
+% Rotation: \rot[<angle>][<width>]{<stuff>}
+\NewDocumentCommand{\rot}{O{90} O{1em} m}{\makebox[#2][l]{\rotatebox{#1}{#3}}}%
+
 % remove copyright
 % https://tex.stackexchange.com/questions/21536/how-to-remove-the-copyright-box-on-a-paper-that-uses-the-acm-sig-alternate-cls-c
 \makeatletter

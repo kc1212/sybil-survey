@@ -1,60 +1,57 @@
 % TODO expand, better intro
 The sybil attack clearly has a lot of consequences, some of them are severe and
 may cause financial losses or undermine freedom of speech. In this section we
-categorise various defence techniques against the sybil-attack. We classify them
+categorise various defence techniques against the sybil attack. We classify them
 on their main idea, and state explicitly when the mechanism is application
 specific. An overview sorted by the year of first publication is provided on
-\autoref{tab:defences}.
+\autoref{tab:defences}. The articles are selected based on their impact (e.g.
+the number of citations, and the usefulness in the real world) and novelty. We
+attempt to include all the seminal work in this area.
 % Many techniques are also hybrids, we explain these 
 
-\begin{table}[]
+\begin{table*}[]
 \centering
-\caption{Overview of the defence mechanisms surveyed in this work. Keys for
-  class (section headings)---RS: reputation system, CA: certificate authority,
-  RT: resource testing, RF: registration fee, NF: network flow, SN: random walk
-  in social network, CD: community detection, ML: machine learning, CB: content
-  based, Misc: Miscellaneous. Keys for type---C: the defence mechanism makes it
-  harder to create sybils, D: the defence mechanism is able to detect existing
-  sybils in the network, P: the defence mechanism makes it harder for sybils to
-  participate and get value out of the network.}
+\caption{Overview of the defence mechanisms surveyed in this work.}
 \label{tab:defences}
-\begin{tabular}{llll}
-  Year & Class  & Mechanism & Type \\
-  1999 & RS     & PageRank~\cite{page1999pagerank} & P  \\
-  2001 & RF     & Once-in-a-lifetime Identity~\cite{resnick2001social} & C  \\
-  2002 & CA     & X.509~\cite{housley2002internet} & C  \\
-  2002 & RT     & Test IP Address~\cite{freedman2002tarzan} & C  \\
-  2003 & RF     & CAPCHA~\cite{von2003captcha} & C  \\
-  2004 & CA     & Trusted Hardware~\cite{newsome2004sybil} & C  \\
-  2004 & RF     & Adaptive Stranger~\cite{feldman2004robust} & P  \\
-  2005 & RT     & Test CPU - Puzzle~\cite{aspnes2005exposing} & P \\
-  2005 & Misc   & Trust Transfer~\cite{seigneur2005trust} & P  \\
-  2006 & SN     & SybilGuard~\cite{yu2006sybilguard} & D  \\
-  2008 & RT     & Test CPU - Bitcoin~\cite{nakamoto2008bitcoin} & P \\
-  2008 & SN     & SybilLimit~\cite{yu2008sybillimit} & D  \\
-  2008 & CB     & Ostra~\cite{mislove2008ostra} & P  \\
-  2009 & NF     & BarterCast~\cite{meulpolder2009bartercast} & P  \\
-  2009 & NF     & SumUp~\cite{tran2009sybil} & P  \\
-  2009 & SN     & SybilInfer~\cite{danezis2009sybilinfer} & D  \\
-  2009 & Misc   & DSybil~\cite{yu2009dsybil} & P  \\
-  2009 & Misc   & SyMon~\cite{jyothi2009symon} & D  \\
-  2010 & SN     & Wh\={a}nau~\cite{lesniewski2010whanau} & P  \\
-  2010 & CD     & Mislove's Algorithm~\cite{viswanath2010analysis} & D  \\
-  2010 & ML     & Stringhini et el.~\cite{stringhini2010detecting} & D  \\
-  2011 & NF     & DropEdge~\cite{seuken2011sybil} & P  \\
-  2011 & NF     & Sparse Cut~\cite{kurve2011sybil} & D  \\
-  2011 & SN, NF & GateKeeper~\cite{tran2011optimal} & P  \\
-  2012 & NF     & SybilRes~\cite{delaviz2012sybilres} & P  \\
-  2012 & SN     & SybilDefender~\cite{wei2012sybildefender} & D  \\
-  2012 & SN     & SybilRank~\cite{cao2012aiding} & D  \\
-  2013 & SN     & SybilShield~\cite{shi2013sybilshield} & D  \\
-  2013 & CB     & VoteTrust~\cite{xue2013votetrust} & P  \\
-  2015 & ML, SN & Integro~\cite{boshmaf2015integro} & D  \\
-  2016 & SN, ML & SmartWalk~\cite{liu2016smartwalk} & D  \\
-  2016 & CD     & SybilExposer~\cite{misra2016sybilexposer} & D
+\begin{tabular}{||l||l||c|c|c||c|c|c|c|c|c|c|c|c|c||}
+  \toprule
+  &           & \multicolumn{3}{|c|}{Type} & \multicolumn{10}{|c|}{Classification} \\ \midrule
+  Year & Mechanism & \rot{Restrict sybil creation} & \rot{Perform sybil detection} & \rot{Restrict sybil participation} & \rot{Reputation system} & \rot{Certificate authority} & \rot{Resource testing} & \rot{Registration fee} & \rot{Network flow} & \rot{Social networks} & \rot{Community detection} & \rot{Content based} & \rot{Machine learning} & \rot{Miscellaneous} \\ \midrule \midrule
+  1999 & PageRank~\cite{page1999pagerank}                     &           &           & $\bullet$ & $\bullet$ &           &           &           &           &           &           &           &           &           \\ \hline
+  2001 & Once-in-a-lifetime Identity~\cite{resnick2001social} & $\bullet$ &           &           &           &           &           & $\bullet$ &           &           &           &           &           &           \\ \hline
+  2002 & X.509~\cite{housley2002internet}                     & $\bullet$ &           &           &           & $\bullet$ &           &           &           &           &           &           &           &           \\ \hline
+  2002 & Test IP Address~\cite{freedman2002tarzan}            & $\bullet$ &           &           &           &           & $\bullet$ &           &           &           &           &           &           &           \\ \hline
+  2003 & CAPCHA~\cite{von2003captcha}                         & $\bullet$ &           &           &           &           &           & $\bullet$ &           &           &           &           &           &           \\ \hline
+  2004 & Trusted Hardware~\cite{newsome2004sybil}             & $\bullet$ &           &           &           & $\bullet$ &           &           &           &           &           &           &           &           \\ \hline
+  2004 & Adaptive Stranger~\cite{feldman2004robust}           &           &           & $\bullet$ &           &           &           & $\bullet$ &           &           &           &           &           &           \\ \hline
+  2005 & Test CPU - Puzzle~\cite{aspnes2005exposing}          &           &           & $\bullet$ &           &           & $\bullet$ &           &           &           &           &           &           &           \\ \hline
+  2005 & Trust Transfer~\cite{seigneur2005trust}              &           &           & $\bullet$ &           &           &           &           &           &           &           &           &           & $\bullet$ \\ \hline
+  2006 & SybilGuard~\cite{yu2006sybilguard}                   &           & $\bullet$ &           &           &           &           &           &           &           &           &           &           &           \\ \hline
+  2008 & Test CPU - Bitcoin~\cite{nakamoto2008bitcoin}        &           &           & $\bullet$ &           &           & $\bullet$ &           &           &           &           &           &           &           \\ \hline
+  2008 & SybilLimit~\cite{yu2008sybillimit}                   &           & $\bullet$ &           &           &           &           &           &           & $\bullet$ &           &           &           &           \\ \hline
+  2008 & Ostra~\cite{mislove2008ostra}                        &           &           & $\bullet$ &           &           &           &           &           &           &           & $\bullet$ &           &           \\ \hline
+  2009 & BarterCast~\cite{meulpolder2009bartercast}           &           &           & $\bullet$ &           &           &           &           & $\bullet$ &           &           &           &           &           \\ \hline
+  2009 & SumUp~\cite{tran2009sybil}                           &           &           & $\bullet$ &           &           &           &           & $\bullet$ &           &           &           &           &           \\ \hline
+  2009 & SybilInfer~\cite{danezis2009sybilinfer}              &           & $\bullet$ &           &           &           &           &           &           & $\bullet$ &           &           &           &           \\ \hline
+  2009 & DSybil~\cite{yu2009dsybil}                           &           &           & $\bullet$ &           &           &           &           &           &           &           &           &           & $\bullet$ \\ \hline
+  2009 & SyMon~\cite{jyothi2009symon}                         &           & $\bullet$ &           &           &           &           &           &           &           &           &           &           & $\bullet$ \\ \hline
+  2010 & Wh\={a}nau~\cite{lesniewski2010whanau}               &           &           & $\bullet$ &           &           &           &           &           & $\bullet$ &           &           &           &           \\ \hline
+  2010 & Mislove's Algorithm~\cite{viswanath2010analysis}     &           & $\bullet$ &           &           &           &           &           &           &           & $\bullet$ &           &           &           \\ \hline
+  2010 & Stringhini et el.~\cite{stringhini2010detecting}     &           & $\bullet$ &           &           &           &           &           &           &           &           &           & $\bullet$ &           \\ \hline
+  2011 & DropEdge~\cite{seuken2011sybil}                      &           &           & $\bullet$ &           &           &           &           & $\bullet$ &           &           &           &           &           \\ \hline
+  2011 & Sparse Cut~\cite{kurve2011sybil}                     &           & $\bullet$ &           &           &           &           &           & $\bullet$ &           &           &           &           &           \\ \hline
+  2011 & GateKeeper~\cite{tran2011optimal}                    &           &           & $\bullet$ &           &           &           &           & $\bullet$ & $\bullet$ &           &           &           &           \\ \hline
+  2012 & SybilRes~\cite{delaviz2012sybilres}                  &           &           & $\bullet$ &           &           &           &           & $\bullet$ &           &           &           &           &           \\ \hline
+  2012 & SybilDefender~\cite{wei2012sybildefender}            &           & $\bullet$ &           &           &           &           &           &           & $\bullet$ &           &           &           &           \\ \hline
+  2012 & SybilRank~\cite{cao2012aiding}                       &           & $\bullet$ &           &           &           &           &           &           & $\bullet$ &           &           &           &           \\ \hline
+  2013 & SybilShield~\cite{shi2013sybilshield}                &           & $\bullet$ &           &           &           &           &           &           & $\bullet$ &           &           &           &           \\ \hline
+  2013 & VoteTrust~\cite{xue2013votetrust}                    &           &           & $\bullet$ &           &           &           &           &           &           &           & $\bullet$ &           &           \\ \hline
+  2015 & Integro~\cite{boshmaf2015integro}                    &           & $\bullet$ &           &           &           &           &           &           & $\bullet$ &           &           & $\bullet$ &           \\ \hline
+  2016 & SmartWalk~\cite{liu2016smartwalk}                    &           & $\bullet$ &           &           &           &           &           &           & $\bullet$ &           &           & $\bullet$ &           \\ \hline
+  2016 & SybilExposer~\cite{misra2016sybilexposer}            &           & $\bullet$ &           &           &           &           &           &           &           & $\bullet$ &           &           &           \\ \bottomrule
 \end{tabular}
-\end{table}
-
+\end{table*}
+                                                                                                   
 \subsection{Reputation Systems}
 Some reputation systems exhibit the ability to resist sybils. The canonical
 reputation system is PageRank~\cite{page1999pagerank}. In the context of world
