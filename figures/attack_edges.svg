@@ -11,11 +11,11 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="635.14911mm"
-   height="371.22366mm"
-   viewBox="0 0 2250.5283 1315.3594"
+   height="392.39035mm"
+   viewBox="0 0 2250.5283 1390.3595"
    id="svg2"
    version="1.1"
-   inkscape:version="0.91 r13725"
+   inkscape:version="0.92pre3 r"
    sodipodi:docname="attack_edges.svg">
   <defs
      id="defs4">
@@ -30,9 +30,9 @@
     <inkscape:perspective
        sodipodi:type="inkscape:persp3d"
        inkscape:vp_x="0 : 526.18105 : 1"
-       inkscape:vp_y="0 : 999.99986 : 0"
-       inkscape:vp_z="744.09447 : 526.18105 : 1"
-       inkscape:persp3d-origin="372.04723 : 350.78736 : 1"
+       inkscape:vp_y="0 : 999.99985 : 0"
+       inkscape:vp_z="744.09444 : 526.18105 : 1"
+       inkscape:persp3d-origin="372.04722 : 350.78736 : 1"
        id="perspective3338" />
   </defs>
   <sodipodi:namedview
@@ -43,17 +43,17 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.41848543"
-     inkscape:cx="1072.463"
-     inkscape:cy="479.45325"
+     inkscape:cx="966.47538"
+     inkscape:cy="719.45335"
      inkscape:document-units="px"
-     inkscape:current-layer="layer2"
+     inkscape:current-layer="layer1"
      showgrid="false"
      showborder="true"
      showguides="true"
      inkscape:guide-bbox="true"
      inkscape:connector-spacing="10"
      inkscape:window-width="1920"
-     inkscape:window-height="1019"
+     inkscape:window-height="1016"
      inkscape:window-x="0"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
@@ -64,7 +64,7 @@
      units="mm"
      borderlayer="false">
     <sodipodi:guide
-       position="1249.8908,16.487483"
+       position="1249.8907,91.487515"
        orientation="0,1"
        id="guide4324" />
   </sodipodi:namedview>
@@ -401,24 +401,22 @@
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:80px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="96.479561"
-       y="1011.943"
-       id="text4308"
-       sodipodi:linespacing="125%"><tspan
+       y="1086.943"
+       id="text4308"><tspan
          sodipodi:role="line"
          x="96.479561"
-         y="1011.943"
+         y="1086.943"
          id="tspan4312">Sybil Region</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:80px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="-1384.6084"
-       y="1012.4172"
-       id="text4316"
-       sodipodi:linespacing="125%"><tspan
+       y="1087.4172"
+       id="text4316"><tspan
          sodipodi:role="line"
          id="tspan4318"
          x="-1384.6084"
-         y="1012.4172">Honest Region</tspan></text>
+         y="1087.4172">Honest Region</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
@@ -436,8 +434,7 @@
        style="font-style:normal;font-weight:normal;font-size:80px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="-594.74585"
        y="842.91089"
-       id="text4320"
-       sodipodi:linespacing="125%"><tspan
+       id="text4320"><tspan
          sodipodi:role="line"
          id="tspan4322"
          x="-594.74585"
