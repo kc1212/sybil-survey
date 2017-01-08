@@ -16,7 +16,7 @@ also attempt to include all the seminal work.
 \begin{tabular}{||l||l||c|c|c||c|c|c|c|c|c|c|c|c|c||}
   \toprule
   &           & \multicolumn{3}{|c|}{Type} & \multicolumn{10}{|c|}{Classification} \\ \midrule
-  Year & Mechanism & \rot{Restrict sybil creation} & \rot{Perform sybil detection} & \rot{Restrict sybil participation} & \rot{Reputation system} & \rot{Certificate authority} & \rot{Resource testing} & \rot{Registration fee} & \rot{Network flow} & \rot{Social networks} & \rot{Community detection} & \rot{Content based} & \rot{Machine learning} & \rot{Miscellaneous} \\ \midrule \midrule
+  Year & Mechanism & \rot{Restrict sybil creation} & \rot{Perform sybil detection} & \rot{Restrict sybil participation} & \rot{Reputation system} & \rot{Certificate authority} & \rot{Resource testing} & \rot{Registration fee} & \rot{Network flow} & \rot{Random walk} & \rot{Community detection} & \rot{Content based} & \rot{Machine learning} & \rot{Miscellaneous} \\ \midrule \midrule
   1999 & PageRank~\cite{page1999pagerank}                     &           &           & $\bullet$ & $\bullet$ &           &           &           &           &           &           &           &           &           \\ \hline
   2001 & Once-in-a-lifetime Identity~\cite{resnick2001social} & $\bullet$ &           &           &           &           &           & $\bullet$ &           &           &           &           &           &           \\ \hline
   2002 & X.509~\cite{housley2002internet}                     & $\bullet$ &           &           &           & $\bullet$ &           &           &           &           &           &           &           &           \\ \hline
@@ -47,7 +47,8 @@ also attempt to include all the seminal work.
   2013 & SybilShield~\cite{shi2013sybilshield}                &           & $\bullet$ &           &           &           &           &           &           & $\bullet$ &           &           &           &           \\ \hline
   2013 & VoteTrust~\cite{xue2013votetrust}                    &           &           & $\bullet$ &           &           &           &           &           &           &           & $\bullet$ &           &           \\ \hline
   2015 & Integro~\cite{boshmaf2015integro}                    &           & $\bullet$ &           &           &           &           &           &           & $\bullet$ &           &           & $\bullet$ &           \\ \hline
-  2016 & SybilExposer~\cite{misra2016sybilexposer}            &           & $\bullet$ &           &           &           &           &           &           &           & $\bullet$ &           &           &           \\ \hline
+  2015 & EscapeLimit~\cite{gkorou2015trust}                   &           &           & $\bullet$ &           &           &           &           &           & $\bullet$ &           &           & $\bullet$ &           \\ \hline
+  2016 & SybilExposer~\cite{misra2016sybilexposer}            &           & $\bullet$ &           &           &           &           &           &           & $\bullet$ &           &           &           &           \\ \hline
   2016 & SmartWalk~\cite{liu2016smartwalk}                    &           & $\bullet$ &           &           &           &           &           &           & $\bullet$ &           &           & $\bullet$ &           \\ \bottomrule
 \end{tabular}
 \end{table*}
@@ -475,6 +476,23 @@ $V$ knows that it has made a mistake, otherwise $S$ is indeed a sybil.
   \label{fig:community}
 \end{figure}
 
+
+\subsubsection{EscapeLimit}
+EscapeLimit~\cite{gkorou2015trust} uses a variation of random walk - random walk
+with restart to collect information in a P2P network and avoid sybils. That is,
+there exist a probability where the random walk will restart from the initiator.
+It does not require the existance of a social network, its assumption is that
+there exist some quantifiable interaction between nodes. For example the number
+of bytes exchanged in file sharing networks. Like the other mechanisms, it
+assumes that the number of attack edges does not depend on the number of sybils.
+Honest nodes act as initiators and perform EscapeLimit. The result is a
+subjective graph which the honest nodes use to compute reputation scores of
+other nodes. The restart behaviour restricts the initiator from ``walking'' into
+the sybil region, thus the reputation score is unlikely to be influenced by the
+sybils. The restart probability is set according to the expected length of hops
+between nodes that interact with each other. Gkorou et el. found that to be 3
+for real-world graphs and that translates to a restart probability of 0.25.
+
 \subsubsection{SmartWalk}
 All the techniques so far use fixed length random walks. Recently, Liu et el.
 argue that fixed length random walks is not adequate because social graphs can
@@ -482,11 +500,11 @@ have communities of different sizes, nodes in a large community that is well
 connected may have a lower mixing time than nodes in a smaller community. A
 longer than desired random walk length will result in a growing number of false
 negatives. To solve this problem, the authors created
-SmartWalk~\cite{liu2016smartwalk} which uses adaptive random walks. There are two
-steps to SmartWalk. The first step uses machine learning to predict the local
-mixing time given a node. The second step performs the random walk using the
-local mixing time as the starting length, but on every hop the number of hops
-remaining is also updated depending on the intermediate node's local mixing
+SmartWalk~\cite{liu2016smartwalk} which uses adaptive random walks. There are
+two steps to SmartWalk. The first step uses machine learning to predict the
+local mixing time given a node. The second step performs the random walk using
+the local mixing time as the starting length, but on every hop the number of
+hops remaining is also updated depending on the intermediate node's local mixing
 time. Finally, the sybils can be detected using the same method as SybilLimit,
 i.e. node is accepted when their tails meet. The authors evaluated SmartWalk
 using real-world social graphs. In particular, the false positive rate for a
